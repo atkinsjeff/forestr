@@ -1,12 +1,21 @@
+#' Make PCL matrix for higher level complexity measures
+#'
+#' \code{make matrix} imports and processes a single PCL transect.
+#'
 
-##########################################
-##########################################
-# This section creates the matrix that is
-# required to claculate what we need
-##########################################
-##########################################
-##########################################
-##########################################
+#'
+#'
+#' @examples
+#' data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
+#' filename <- "oldgrowth_one.csv"  #name of PCL transect to be processed
+#' process_pcl(data_directory, filename)
+#'
+#'process_pcl("./data/PCL_transects/", "oldgrowth_one.csv" )
+#'
+#' \dontrun{
+#'
+#' }
+
 
 
 make_matrix_part_one <- function(df) {
@@ -22,7 +31,7 @@ make_matrix_part_one <- function(df) {
   # l <- setNames(aggregate(index ~ xbin, data = df, FUN = length), c("xbin", "lidar.pulses"))
   #print(l)
   # number of return per x,z bin in the canopy
-  m <- setNames(aggregate(return_distance ~ xbin + zbin, data = df, FUN = length), c("xbin", "zbin","bin.hits"))
+  m <- setNames(aggregate(return_distance ~ xbin + zbin, data = df, FUN = length), c("xbin", "zbin", "bin.hits"))
   m <- m[!m$zbin < 0, ]
 
   # number of sky.hits per column (x)

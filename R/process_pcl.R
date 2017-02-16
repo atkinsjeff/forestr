@@ -30,12 +30,13 @@ process_pcl<- function(data_dir, filename, user_height){
   # main binning and process script
   bin_pcl(test.data, user_height)
 
+  combine_variables <- function(variable.list, csc.metrics, rumple, clumping.index){
 
+    output.variables <- cbind(variable.list, csc.metrics, rumple, clumping.index)
+    return(output.variables)
 
-  #get filename first
-  plot.filename <- file_path_sans_ext(filename)
-
-  plot.file.path <- file.path(paste(output_directory, plot.filename, ".png", sep = ""))
+  }
+  t.file.path <- file.path(paste(output_directory, plot.filename, ".png", sep = ""))
 
   vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
   x11(width = 8, height = 6)
