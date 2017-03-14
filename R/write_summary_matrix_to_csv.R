@@ -18,8 +18,9 @@
 #'
 
 write_summary_matrix_to_csv <- function(m, filename) {
+  output_directory <- "./output/output/"
 
-  filename2 <- paste(filename, "_summary_matrix.csv", sep="")
+   filename2 <- paste(filename, "_summary_matrix.csv", sep="")
   write.csv(m, file.path(output_directory, filename2))
 }
 

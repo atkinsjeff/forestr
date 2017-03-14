@@ -752,7 +752,7 @@ combine_variables <- function(variable.list, csc.metrics, rumple, clumping.index
 write.pcl.to.csv <- function(output.variables, filename) {
 
      filename2 <- paste(filename, ".csv", sep="")
-     write.csv(output.variables,file.path(output_directory, filename2))
+     write.csv(output.variables, file.path(output_directory, filename2))
 }
 
 write.summary.matrix.to.csv <- function(m, filename) {
