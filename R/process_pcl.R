@@ -36,7 +36,7 @@ process_pcl<- function(data_dir, filename, user_height, marker.spacing){
   df<- read_pcl(data_dir, filename)
 
   #calculate transect length
-  transect.length <- get_transect_length(df)
+  transect.length <- get_transect_length(df, marker.spacing)
 
   # code hits for sky or canopy
   df <- code_hits(df)
