@@ -1,5 +1,20 @@
 #' Calculate gap fraction
 #'
+#' \code{calc_gap_fraction} imports and processes a single PCL transect.
+#'
+#' This is a specific function that works using the adjusted matrix to calculate gap fraction through the canopy.
+#'
+#' @param m the matrix of adjusted values
+#'
+#' @keywords gap fraction
+#' @export
+#' @examples
+#' calc_gap_fraction()
+#'
+#' @examples
+#' \dontrun{
+#'
+#' }
 
 calc_gap_fraction <- function(m){
   transect.length <- max(m$xbin)

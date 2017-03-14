@@ -1,11 +1,15 @@
 #' Calculate vegetation area index (VAI) from normalized PCL data matrix
 #'
 #' \code{calc_vai} imports and processes a single PCL transect.
-
 #'
+#' @param df data frame of pcl data that has been corrected for light extinction
+#'
+#' @keywords vai
+#' @return a matrix of vai by x, z in the canopy
+#' @export
 #'
 #' @examples
-#'
+#' calc_vai()
 #' \dontrun{
 #'
 #' }

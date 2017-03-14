@@ -5,8 +5,16 @@
 #' This makes a dataframe that is as long as a transect is. If the
 #' transect is 40 m, this data frame has 40 rows.
 #'
+#'#' This function allows you to express your love of cats.
+#' @param df sorted data frame of processed PCL data
+#' @param m matrix of PCL hit density with x and z coordinates
 #'
+#' @keywords summary matrix
+#' @return a matrix of summary stats by each x and z coordinate position
 #'
+#' @export
+#' @examples
+#' make_summary_matrix()
 #'
 #' @examples
 #'

@@ -4,9 +4,9 @@
 #'
 #' This function specificially reads in PCL files that are in .csv format, standard format for that data type.
 #'
-#' @param ... Numeric, complex, or logical vectors.
-#' @param na.rm A logical scalar. Should missing values (including NaN)
-#'   be removed?
+#' @param data_dir directory where PCL data .csv files are stored
+#' @param filename name of file to be imported
+#'
 #' @return If all inputs are integer and logical, then the output
 #'   will be an integer. If integer overflow
 #'   \url{http://en.wikipedia.org/wiki/Integer_overflow} occurs, the output

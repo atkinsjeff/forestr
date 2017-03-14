@@ -7,10 +7,15 @@
 #' input of file into command so there will be no need to specify both directory and file.
 #'
 #'
+#' @param df data frame of processed pcl data
 #'
+#' @keywords rumple
+#' @return rumple for the canopy based on 2-D transect
 #'
 #' @examples
+#' calc_rumple()
 #'
+#' @examples
 #' \dontrun{
 #'
 #' }

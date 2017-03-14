@@ -5,7 +5,9 @@
 #' This is a specific function that works using the input of a data directory of .csv
 #' files where the function cycles through the files there.
 #'
-#'
+#' @param data_dir directory where PCL .csv files are stored
+#' @param user_height height of laser from ground based on user in meters
+#' @param marker.spacing space between markers in the PCL data, in meters
 #'
 #'
 #' @examples
@@ -19,7 +21,7 @@
 #' \dontrun{
 #'
 #' }
-process_multi_pcl <- function(data_dir, user_height){
+process_multi_pcl <- function(data_dir, user_height, marker.spacing){
 
 
 
@@ -29,12 +31,8 @@ process_multi_pcl <- function(data_dir, user_height){
   for(i in 1:length(file.names)){
     filename <- file.names[i]
 
-    write_out <- FALSE
 
-
-    test.data <- read_pcl(data_dir, filename)
-
-    bin_pcl(test.data, user_height)
+    process_pcl(data_dir, filename, user_height, marker.spacing)
 
 
 
@@ -44,7 +42,7 @@ process_multi_pcl <- function(data_dir, user_height){
     plot.file.path <- file.path(paste(output_directory, plot.filename, ".png", sep = ""))
 
     vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
-    x11(width = 8, height = 6)
+    #x11(width = 8, height = 6)
     hit.grid <- ggplot(m5, aes(x = xbin, y = zbin))+
       geom_tile(aes(fill = vai))+
       scale_fill_gradient(low="white", high="dark green",
@@ -68,5 +66,25 @@ process_multi_pcl <- function(data_dir, user_height){
       theme(plot.title = element_text(lineheight=.8, face="bold"))
 
     ggsave(plot.file.path, hit.grid)
+
+
+    write.pcl.to.csv <- function(output.variables, filename) {
+
+      filename2 <- paste(filename, ".csv", sep="")
+      write.csv(output.variables,file.path(output_directory, filename2))
+    }
+
+    write.summary.matrix.to.csv <- function(m, filename) {
+
+      filename2 <- paste(filename, "_summary_matrix.csv", sep="")
+      write.csv(m, file.path(output_directory, filename2))
+    }
+
+    write.hit.matrix.to.csv <- function(m, filename) {
+      m <- m[, c("xbin", "zbin", "vai")]
+
+      filename2 <- paste(filename, "_hit_matrix.csv", sep="")
+      write.csv(m, file.path(output_directory, filename2))
+    }
   }
 }

@@ -6,10 +6,14 @@
 #' and a filename in that directory.Future versions of this will allow for direct
 #' input of file into command so there will be no need to specify both directory and file.
 #'
+#' @param df data frame of pcl hit density
 #'
+#' @keywords light
+#' @return a data frame of PCL hit density corrected for light saturation and attentuation based on Beer's Law
 #'
-#'
+#' @export
 #' @examples
+#' normalize_pcl()
 #'
 #' \dontrun{
 #'

@@ -7,6 +7,14 @@
 #' input of file into command so there will be no need to specify both directory and file.
 #'
 #'
+#' @param data_dir the data directory where files are stored
+#' @param filename  the name of the filename to input
+#' @param user_height the height of the laser off the ground as mounted on the user in meters
+#' @param marker.spacing distance between markers, typically 10 m
+#' @return writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
+#'
+#' @keywords pcl processing
+#' @export
 #'
 #'
 #' @examples
@@ -22,21 +30,66 @@
 #'
 #' }
 
-process_pcl<- function(data_dir, filename, user_height){
+process_pcl<- function(data_dir, filename, user_height, marker.spacing){
 
-  # This section calls the read_pcl function from the main functions
-  test.data <- read_pcl(data_dir, filename)
+  # Read in PCL transect
+  df<- read_pcl(data_dir, filename)
 
-  # main binning and process script
-  bin_pcl(test.data, user_height)
+  #calculate transect length
+  transect.length <- get_transect_length(df)
 
+  # code hits for sky or canopy
+  df <- code_hits(df)
+
+  #adjusts by the height of the  user to account for difference in laser height to ground in meters
+  df <- adjust_by_user(df, user_height)
+
+  #not to split transects from code
+  test.data.binned <- split_transects_from_pcl(df, transect.length, 10)
+
+  csc.metrics <- csc_metrics(test.data.binned, filename)
+
+  m1 <- make_matrix(test.data.binned)
+
+  m2 <- normalize_pcl_one(m1)
+  m3 <- normalize_pcl_two(m2)
+  m4 <- normalize_pcl_three(m3)
+
+  m5 <- calc_vai(m4)
+
+
+  summary.matrix <- make_summary_matrix(test.data.binned, m5)
+  rumple <- calc_rumple(summary.matrix)
+  clumping.index <- calc_gap_fraction(m5)
+
+  variable.list <- calc_rugosity(summary.matrix, m5, filename)
+
+  output.variables <- combine_variables(variable.list, csc.metrics, rumple, clumping.index)
+  print(output.variables)
+
+  #output procedure for variables
+  outputname = substr(filename,1,nchar(filename)-4)
+  outputname <- paste(outputname, "output", sep = "_")
+  dir.create("output", showWarnings = FALSE)
+  output_directory <- "./output/"
+
+  write_pcl_to_csv(output.variables, outputname)
+  write_summary_matrix_to_csv(summary.matrix, outputname)
+  write_hit_matrix_to_csv(m5, outputname)
+
+#combining and formatting variables for output
   combine_variables <- function(variable.list, csc.metrics, rumple, clumping.index){
 
     output.variables <- cbind(variable.list, csc.metrics, rumple, clumping.index)
     return(output.variables)
 
   }
-  t.file.path <- file.path(paste(output_directory, plot.filename, ".png", sep = ""))
+
+
+  #get filename first
+  plot.filename <- file_path_sans_ext(filename)
+
+  plot.file.path <- file.path(paste(output_directory, plot.filename, ".png", sep = ""))
 
   vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
   x11(width = 8, height = 6)

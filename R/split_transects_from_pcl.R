@@ -11,7 +11,11 @@
 #' # frame of pcl data, but this can
 #' # optionally also write out the results
 #' # to csv if a path and name are given
-#'
+#' @param pcl_data data frame of unprocessed PCL data
+#' @param transect.length total transect length
+#' @param marker.spacing distance between markers in meters within the PCL data
+#' @param data_dir directory where PCL data .csv are stored
+#' @param output_file_name old code relic
 #'
 #' @examples
 #'
@@ -31,7 +35,7 @@
 # to csv if a path and name are given
 ##########################################
 ##########################################
-split_transects_from_pcl <- function(pcl_data, transect.length, marker.distance, DEBUG = FALSE, write_out = FALSE, data_dir, output_file_name) {
+split_transects_from_pcl <- function(pcl_data, transect.length, marker.spacing, DEBUG = FALSE, write_out = FALSE, data_dir, output_file_name) {
 
   # Initialize count for segments (expecting 4 segments per transect)
   # Some returns before beginning of first segment and some after last
@@ -50,7 +54,7 @@ split_transects_from_pcl <- function(pcl_data, transect.length, marker.distance,
       segment_num <- segment_num + 1
 
     }
-    if (segment_num == ((transect.length/marker.distance) + 1)) {
+    if (segment_num == ((transect.length/marker.spacing) + 1)) {
       break
     }
   }
@@ -76,7 +80,7 @@ split_transects_from_pcl <- function(pcl_data, transect.length, marker.distance,
 
     # Make sure we didn't make too many chunks in any segment
     stopifnot(max(results$chunk_num) < 11)
-    stopifnot(max(results$seg_num) < ((transect.length/marker.distance) + 1))
+    stopifnot(max(results$seg_num) < ((transect.length/marker.spacing) + 1))
   }
   # Code segment to create zbin and xbin
   results$xbin <- ((results$seg_num * 10) - 10)  + results$chunk_num

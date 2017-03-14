@@ -6,8 +6,9 @@
 #' and a filename in that directory.Future versions of this will allow for direct
 #' input of file into command so there will be no need to specify both directory and file.
 #'
-#'
-#'
+#' @param df data frame of unprocessed PCL data
+#' @param marker.spacing distance between transect markers, typically 10 m
+#' @return length of transect
 #'
 #' @examples
 #'

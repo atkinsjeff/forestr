@@ -1,6 +1,23 @@
 #' Calculate rugosity and other higher level complexity metrics
-#'BEGIN COMPLEXITY METRIC CALCS
-#
+#'
+#' \code{calc_rugosity} imports and processes a single PCL transect.
+#'
+#' This is a specific function calculates canopy rugosity and other metrics
+#'
+#' @param df of adjusted pcl data
+#' @param m matrix of light adjusted vai values
+#' @param filename the name of the file currently being processed
+#'
+#' @keywords rugosity
+#' @return a slew of metrics...need to fully outline later
+#' @export
+#' @examples
+#' calc_rugosity()
+#'
+#' @examples
+#' \dontrun{
+#'
+#' }
 
 # RUGOSITY
 calc_rugosity <- function(df, m, filename) {

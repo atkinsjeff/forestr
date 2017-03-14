@@ -6,9 +6,12 @@
 #' and a filename in that directory.Future versions of this will allow for direct
 #' input of file into command so there will be no need to specify both directory and file.
 #'
+#' @param df data frame of light saturation corrected PCL data
+#' @param filename name of file currently being processed
 #'
-#'
-#'
+#' @keywords csc, structure, rugosity
+#' @export
+#' @return slew of canopy structure metrics
 #' @examples
 #'
 #' \dontrun{

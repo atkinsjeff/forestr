@@ -2,8 +2,12 @@
 #'
 #' \code{make matrix} imports and processes a single PCL transect.
 #'
-
+#' @param df data frame of unprocessed PCL data
 #'
+#' @keywords matrix
+#' @return sorted matrix with z and x coordinates in meters
+#'
+#' @export
 #'
 #' @examples
 #' data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
