@@ -17,6 +17,7 @@
 #' @param data_dir directory where PCL data .csv are stored
 #' @param output_file_name old code relic
 #'
+#' @import
 #' @examples
 #'
 #' \dontrun{
@@ -93,6 +94,6 @@ split_transects_from_pcl <- function(pcl_data, transect.length, marker.spacing, 
   # Write out if write parameter is set at top
   if (write_out) write.csv(results, paste0(data_dir, output_file_name, ".with_categories.csv"), row.names = FALSE)
 
-  results <- distinct(results, index, .keep_all = TRUE)
+  results <- dplyr::distinct(results, index, .keep_all = TRUE)
   results
 }

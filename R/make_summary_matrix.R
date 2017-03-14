@@ -58,7 +58,7 @@ make_summary_matrix <- function(df, m) {
 
 
   # this section joins all these guys together
-  p <- join_all(list(a, b, c, d, e, f, h), by = "xbin", type = "full")
+  p <- plyr::join_all(list(a, b, c, d, e, f, h), by = "xbin", type = "full")
   p <- p[with(p, order(xbin)), ]
   p <- cbind(p, g)
 
