@@ -7,7 +7,6 @@
 #' input of file into command so there will be no need to specify both directory and file.
 #'
 #'
-#' @param data_dir the data directory where files are stored
 #' @param filename  the name of the filename to input
 #' @param user_height the height of the laser off the ground as mounted on the user in meters
 #' @param marker.spacing distance between markers, typically 10 m
@@ -30,10 +29,10 @@
 #'
 #' }
 
-process_pcl<- function(data_dir, filename, user_height, marker.spacing){
+process_pcl<- function(filename, user_height, marker.spacing){
 
   # Read in PCL transect
-  df<- read_pcl(data_dir, filename)
+  df<- read_pcl(filename)
 
   #calculate transect length
   transect.length <- get_transect_length(df, marker.spacing)

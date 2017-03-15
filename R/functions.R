@@ -4,7 +4,7 @@
 
 ######################3
 # Import PCL data function
-read.pcl <- function(data_dir, filename) {
+read_pcl <- function(data_dir, filename) {
      f <- file.path(data_dir, filename)
      df <- read.csv(f, header=FALSE, col.names = c("return_distance", "intensity"), blank.lines.skip = FALSE)      #was originally false
      df$index <- as.numeric(rownames(df))
@@ -862,7 +862,7 @@ process.multiple.transects <- function(data_dir){
           write_out <- FALSE
 
 
-          test.data <- read.pcl(data_dir, filename)
+          test.data <- read_pcl_multi(data_dir, filename)
           transect.length <- get.transect.length(test.data)
           test.2 <- code_hits(test.data)
 
