@@ -8,6 +8,7 @@
 #'
 #' @keywords gap fraction
 #' @export
+#'
 #' @examples
 #' calc_gap_fraction()
 #'

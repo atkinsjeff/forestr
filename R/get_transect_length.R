@@ -9,7 +9,7 @@
 #' @param df data frame of unprocessed PCL data
 #' @param marker.spacing distance between transect markers, typically 10 m
 #' @return length of transect
-#'
+#' @export
 #' @examples
 #'
 #' \dontrun{

@@ -4,10 +4,10 @@
 \alias{read_pcl}
 \title{\code{read_pcl} imports PCL or portable canopy LiDAR files into the workspace and formats them.}
 \usage{
-read_pcl(filename)
+read_pcl(f)
 }
 \arguments{
-\item{filename}{name of file currently being processed}
+\item{f}{name of file currently being processed}
 }
 \description{
 This function specificially reads in PCL files that are in .csv format, standard format for that data type.

@@ -17,7 +17,7 @@
 #' @param data_dir directory where PCL data .csv are stored
 #' @param output_file_name old code relic
 #'
-#' @import
+#'
 #' @examples
 #'
 #' \dontrun{

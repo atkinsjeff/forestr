@@ -9,7 +9,7 @@
 #' @param user_height height of laser from ground based on user in meters
 #' @param marker.spacing space between markers in the PCL data, in meters
 #'
-#'
+#' @export
 #' @examples
 #' data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
 #' process_multi_pcl(data_directory)

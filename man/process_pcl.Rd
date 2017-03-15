@@ -36,6 +36,7 @@ process_pcl("./data/PCL_transects/", "oldgrowth_one.csv" )
 
 }
 }
+\keyword{#@export}
 \keyword{pcl}
 \keyword{processing}
 

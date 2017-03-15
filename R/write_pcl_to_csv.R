@@ -18,8 +18,6 @@
 #'
 write_pcl_to_csv <- function(output.variables, outputname, output_directory) {
 
-
-
   filename2 <- paste(outputname, ".csv", sep="")
   write.csv(output.variables, file.path(output_directory, filename2))
 }
