@@ -87,7 +87,7 @@ process_pcl<- function(data_dir, filename, user_height, marker.spacing){
 
 
   #get filename first
-  plot.filename <- file_path_sans_ext(filename)
+  plot.filename <- tools::file_path_sans_ext(filename)
 
   plot.file.path <- file.path(paste(output_directory, plot.filename, ".png", sep = ""))
 
