@@ -100,20 +100,20 @@ process_pcl<- function(data_dir, filename, user_height, marker.spacing){
                         name=vai.label)+
     #scale_y_continuous(breaks = seq(0, 20, 5))+
     # scale_x_continuous(minor_breaks = seq(0, 40, 1))+
-    ggplot2::theme(axis.line = element_line(colour = "black"),
-          panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
+    ggplot2::theme(axis.line = ggplot2::element_line(colour = "black"),
+          panel.grid.major = ggplot2::element_blank(),
+          panel.grid.minor = ggplot2::element_blank(),
           panel.background = element_blank(),
-          axis.text.x= element_text(size = 14),
-          axis.text.y = element_text(size = 14),
-          axis.title.x = element_text(size = 20),
-          axis.title.y = element_text(size = 20))+
+          axis.text.x = ggplot2::element_text(size = 14),
+          axis.text.y = ggplot2::element_text(size = 14),
+          axis.title.x = ggplot2::element_text(size = 20),
+          axis.title.y = ggplot2::element_text(size = 20))+
     ggplot2::xlim(0,transect.length)+
     ggplot2::ylim(0,41)+
     ggplot2::xlab("Distance along transect (m)")+
     ggplot2::ylab("Height above ground (m)")+
     ggplot2::ggtitle(filename)+
-    ggplot2::theme(plot.title = element_text(lineheight=.8, face="bold"))
+    ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
 
   ggplot2::ggsave(plot.file.path, hit.grid)
 }
