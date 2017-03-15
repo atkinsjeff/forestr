@@ -77,13 +77,13 @@ process_pcl<- function(data_dir, filename, user_height, marker.spacing){
   write_summary_matrix_to_csv(summary.matrix, outputname, output_directory)
   write_hit_matrix_to_csv(m5, outputname, output_directory)
 
-#combining and formatting variables for output
-  combine_variables <- function(variable.list, csc.metrics, rumple, clumping.index){
-
-    output.variables <- cbind(variable.list, csc.metrics, rumple, clumping.index)
-    return(output.variables)
-
-  }
+# #combining and formatting variables for output
+#   combine_variables <- function(variable.list, csc.metrics, rumple, clumping.index){
+#
+#     output.variables <- cbind(variable.list, csc.metrics, rumple, clumping.index)
+#     return(output.variables)
+#
+#   }
 
 
   #get filename first
@@ -93,8 +93,8 @@ process_pcl<- function(data_dir, filename, user_height, marker.spacing){
 
   vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
   x11(width = 8, height = 6)
-  hit.grid <- ggplot2::ggplot(m5, aes(x = xbin, y = zbin))+
-    ggplot2::geom_tile(aes(fill = vai))+
+  hit.grid <- ggplot2::ggplot(m5, ggplot2::aes(x = xbin, y = zbin))+
+    ggplot2::geom_tile(ggplot2::aes(fill = vai))+
     scale_fill_gradient(low="white", high="dark green",
                         limits=c(0,8.5),
                         name=vai.label)+
