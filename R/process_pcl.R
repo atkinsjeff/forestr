@@ -94,7 +94,7 @@ process_pcl<- function(data_dir, filename, user_height, marker.spacing){
   vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
   x11(width = 8, height = 6)
   hit.grid <- ggplot2::ggplot(m5, aes(x = xbin, y = zbin))+
-    geom_tile(aes(fill = vai))+
+    ggplot2::geom_tile(aes(fill = vai))+
     scale_fill_gradient(low="white", high="dark green",
                         limits=c(0,8.5),
                         name=vai.label)+
@@ -112,8 +112,8 @@ process_pcl<- function(data_dir, filename, user_height, marker.spacing){
     ylim(0,41)+
     xlab("Distance along transect (m)")+
     ylab("Height above ground (m)")+
-    ggtitle(filename)+
+    ggplot2::ggtitle(filename)+
     theme(plot.title = element_text(lineheight=.8, face="bold"))
 
-  ggsave(plot.file.path, hit.grid)
+  ggplot2::ggsave(plot.file.path, hit.grid)
 }
