@@ -93,7 +93,7 @@ process_pcl<- function(data_dir, filename, user_height, marker.spacing){
 
   vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
   x11(width = 8, height = 6)
-  hit.grid <- ggplot(m5, aes(x = xbin, y = zbin))+
+  hit.grid <- ggplot2::ggplot(m5, aes(x = xbin, y = zbin))+
     geom_tile(aes(fill = vai))+
     scale_fill_gradient(low="white", high="dark green",
                         limits=c(0,8.5),
