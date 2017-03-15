@@ -74,6 +74,8 @@ process_pcl<- function(f, user_height, marker.spacing){
   outputname <- paste(outputname, "output", sep = "_")
   dir.create("output", showWarnings = FALSE)
   output_directory <- "./output/"
+  print(outputname)
+  print(output_directory)
 
   write_pcl_to_csv(output.variables, outputname, output_directory)
   write_summary_matrix_to_csv(summary.matrix, outputname, output_directory)

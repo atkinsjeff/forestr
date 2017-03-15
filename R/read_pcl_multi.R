@@ -6,6 +6,7 @@
 #' @param data_directory directory where files are stored
 #' @param filename name of file to be imported
 #'
+#' @export
 #' @return If all inputs are integer and logical, then the output
 #'   will be an integer. If integer overflow
 #'   \url{http://en.wikipedia.org/wiki/Integer_overflow} occurs, the output
