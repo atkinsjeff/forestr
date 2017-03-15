@@ -4,7 +4,8 @@
 #'
 #' This is a specific function that writes the output variables to disk in .csv format
 #' @param m matrix of VAI with z and x coordinates
-#' @param filename name of file currently being processed
+#' @param outputname name of file currently being processed
+#' @param output_directory directory where output goes
 #' @keywords hit matrix
 #'
 #' @export
@@ -17,9 +18,9 @@
 #' }
 #'
 #'
-write_hit_matrix_to_csv <- function(m, filename, output_directory) {
+write_hit_matrix_to_csv <- function(m, outputname, output_directory) {
   m <- m[, c("xbin", "zbin", "vai")]
 
-  filename2 <- paste(filename, "_hit_matrix.csv", sep="")
+  filename2 <- paste(outputname, "_hit_matrix.csv", sep="")
   write.csv(m, file.path(output_directory, filename2))
 }

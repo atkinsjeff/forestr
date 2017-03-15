@@ -4,12 +4,14 @@
 \alias{write_summary_matrix_to_csv}
 \title{Writes csc metrics and output variables to .csv}
 \usage{
-write_summary_matrix_to_csv(m, filename, output_directory)
+write_summary_matrix_to_csv(m, outputname, output_directory)
 }
 \arguments{
 \item{m}{summary matrix}
 
-\item{filename}{name of file currently being processed}
+\item{outputname}{name of file currently being processed}
+
+\item{output_directory}{directory where output goes}
 }
 \description{
 \code{write_summary_matrix_to_csv} writes summary matrix to .csv format

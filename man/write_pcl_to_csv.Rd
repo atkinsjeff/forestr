@@ -4,12 +4,14 @@
 \alias{write_pcl_to_csv}
 \title{Writes csc metrics and output variables to .csv}
 \usage{
-write_pcl_to_csv(output.variables, filename, output_directory)
+write_pcl_to_csv(output.variables, outputname, output_directory)
 }
 \arguments{
 \item{output.variables}{list of concatenated output variables}
 
-\item{filename}{name of file currently being processed}
+\item{outputname}{name of file currently being processed}
+
+\item{output_directory}{directory where output goes}
 }
 \description{
 \code{write_pcl_to_csv} writes csc metrics and varialbes to .csv format

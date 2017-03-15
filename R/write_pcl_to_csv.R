@@ -4,8 +4,8 @@
 #'
 #' This is a specific function that writes the output variables to disk in .csv format
 #' @param output.variables list of concatenated output variables
-#' @param filename name of file currently being processed
-#'
+#' @param outputname name of file currently being processed
+#' @param output_directory directory where output goes
 #' @keywords output variables
 #' @export
 #' @examples
@@ -16,11 +16,11 @@
 #'
 #' }
 #'
-write_pcl_to_csv <- function(output.variables, filename, output_directory) {
+write_pcl_to_csv <- function(output.variables, outputname, output_directory) {
 
 
 
-  filename2 <- paste(filename, ".csv", sep="")
+  filename2 <- paste(outputname, ".csv", sep="")
   write.csv(output.variables, file.path(output_directory, filename2))
 }
 
