@@ -73,9 +73,9 @@ process_pcl<- function(data_dir, filename, user_height, marker.spacing){
   dir.create("output", showWarnings = FALSE)
   output_directory <- "./output/"
 
-  write_pcl_to_csv(output.variables, outputname)
-  write_summary_matrix_to_csv(summary.matrix, outputname)
-  write_hit_matrix_to_csv(m5, outputname)
+  write_pcl_to_csv(output.variables, outputname, output_directory)
+  write_summary_matrix_to_csv(summary.matrix, outputname, output_directory)
+  write_hit_matrix_to_csv(m5, outputname, output_directory)
 
 #combining and formatting variables for output
   combine_variables <- function(variable.list, csc.metrics, rumple, clumping.index){

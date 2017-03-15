@@ -17,8 +17,7 @@
 #' }
 #'
 #'
-write_hit_matrix_to_csv <- function(m, filename) {
-  output_directory <- "./output/output"
+write_hit_matrix_to_csv <- function(m, filename, output_directory) {
   m <- m[, c("xbin", "zbin", "vai")]
 
   filename2 <- paste(filename, "_hit_matrix.csv", sep="")
