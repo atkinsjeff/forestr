@@ -4,28 +4,18 @@
 #'
 #' This function specificially reads in PCL files that are in .csv format, standard format for that data type.
 #'
-#' @param filename name of file to be imported
+#' @param filename name of file currently being processed
 #'
-#' @return If all inputs are integer and logical, then the output
-#'   will be an integer. If integer overflow
-#'   \url{http://en.wikipedia.org/wiki/Integer_overflow} occurs, the output
-#'   will be NA with a warning. Otherwise it will be a length-one numeric or
-#'   complex vector.
-#'
-#'   Zero-length vectors have sum 0 by definition. See
-#'   \url{http://en.wikipedia.org/wiki/Empty_sum} for more details.
+#' @keywords read pcl input
+#' @export
 #' @examples
-#' read_pcl(data_directory, )
-#' sum(1:5, 6:10)
-#' sum(F, F, F, T, T)
+#' read_pcl()
 #'
-#' sum(.Machine$integer.max, 1L)
-#' sum(.Machine$integer.max, 1)
-#'
+#' @examples
 #' \dontrun{
-#' sum("a")
+#'
 #' }
-
+#'
 
 read_pcl <- function(filename) {
   df <- read.csv(f, header=FALSE, col.names = c("return_distance", "intensity"), blank.lines.skip = FALSE)

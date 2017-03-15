@@ -7,7 +7,7 @@
 #' input of file into command so there will be no need to specify both directory and file.
 #'
 #'
-#' @param filename  the name of the filename to input
+#' @param f  the name of the filename to input
 #' @param user_height the height of the laser off the ground as mounted on the user in meters
 #' @param marker.spacing distance between markers, typically 10 m
 #' @return writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
@@ -29,10 +29,13 @@
 #'
 #' }
 
-process_pcl<- function(filename, user_height, marker.spacing){
+process_pcl<- function(f, user_height, marker.spacing){
 
   # Read in PCL transect
-  df<- read_pcl(filename)
+  df<- read_pcl(f)
+
+  #cuts off the directory info to give just the filename
+  filename <- sub(".*/", "", f)
 
   #calculate transect length
   transect.length <- get_transect_length(df, marker.spacing)

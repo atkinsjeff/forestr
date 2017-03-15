@@ -4,7 +4,7 @@
 \alias{write_hit_matrix_to_csv}
 \title{Writes hit matrix to csv for further analysis}
 \usage{
-write_hit_matrix_to_csv(m, filename)
+write_hit_matrix_to_csv(m, filename, output_directory)
 }
 \arguments{
 \item{m}{matrix of VAI with z and x coordinates}

@@ -4,7 +4,7 @@
 \alias{write_summary_matrix_to_csv}
 \title{Writes csc metrics and output variables to .csv}
 \usage{
-write_summary_matrix_to_csv(m, filename)
+write_summary_matrix_to_csv(m, filename, output_directory)
 }
 \arguments{
 \item{m}{summary matrix}

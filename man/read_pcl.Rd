@@ -4,36 +4,19 @@
 \alias{read_pcl}
 \title{\code{read_pcl} imports PCL or portable canopy LiDAR files into the workspace and formats them.}
 \usage{
-read_pcl(data_dir, filename)
+read_pcl(filename)
 }
 \arguments{
-\item{data_dir}{directory where PCL data .csv files are stored}
-
-\item{filename}{name of file to be imported}
-}
-\value{
-If all inputs are integer and logical, then the output
-  will be an integer. If integer overflow
-  \url{http://en.wikipedia.org/wiki/Integer_overflow} occurs, the output
-  will be NA with a warning. Otherwise it will be a length-one numeric or
-  complex vector.
-
-  Zero-length vectors have sum 0 by definition. See
-  \url{http://en.wikipedia.org/wiki/Empty_sum} for more details.
+\item{filename}{name of file currently being processed}
 }
 \description{
 This function specificially reads in PCL files that are in .csv format, standard format for that data type.
 }
 \examples{
-read_pcl(data_directory, )
-sum(1:5, 6:10)
-sum(F, F, F, T, T)
+read_pcl()
 
-sum(.Machine$integer.max, 1L)
-sum(.Machine$integer.max, 1)
-
-\dontrun{
-sum("a")
 }
-}
+\keyword{input}
+\keyword{pcl}
+\keyword{read}
 

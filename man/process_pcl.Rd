@@ -4,12 +4,10 @@
 \alias{process_pcl}
 \title{Process single PCL transects.}
 \usage{
-process_pcl(data_dir, filename, user_height, marker.spacing)
+process_pcl(f, user_height, marker.spacing)
 }
 \arguments{
-\item{data_dir}{the data directory where files are stored}
-
-\item{filename}{the name of the filename to input}
+\item{f}{the name of the filename to input}
 
 \item{user_height}{the height of the laser off the ground as mounted on the user in meters}
 
