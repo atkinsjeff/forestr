@@ -103,7 +103,7 @@ process_pcl<- function(data_dir, filename, user_height, marker.spacing){
     ggplot2::theme(axis.line = ggplot2::element_line(colour = "black"),
           panel.grid.major = ggplot2::element_blank(),
           panel.grid.minor = ggplot2::element_blank(),
-          panel.background = element_blank(),
+          panel.background = ggplot2::element_blank(),
           axis.text.x = ggplot2::element_text(size = 14),
           axis.text.y = ggplot2::element_text(size = 14),
           axis.title.x = ggplot2::element_text(size = 20),
