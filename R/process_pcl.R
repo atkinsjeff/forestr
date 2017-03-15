@@ -13,7 +13,7 @@
 #' @return writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
 #'
 #' @keywords pcl processing
-#' #@export
+#' @export
 #'
 #'
 #' @examples
