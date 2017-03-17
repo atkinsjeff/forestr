@@ -7,11 +7,11 @@
 process_pcl(f, user_height, marker.spacing)
 }
 \arguments{
-\item{f}{the name of the filename to input}
+\item{f}{the name of the filename to input <character> or a data frame <data frame>.}
 
-\item{user_height}{the height of the laser off the ground as mounted on the user in meters}
+\item{user_height}{the height of the laser off the ground as mounted on the user in meters. default is 1 m}
 
-\item{marker.spacing}{distance between markers, typically 10 m}
+\item{marker.spacing}{distance between markers, defaults is 10 m}
 }
 \value{
 writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
@@ -20,17 +20,19 @@ writes the hit matrix, summary matrix, and output variables to csv in an output 
 \code{process_pcl} imports and processes a single PCL transect.
 }
 \details{
-This is a specific function that works using the input of a data directory
-and a filename in that directory.Future versions of this will allow for direct
-input of file into command so there will be no need to specify both directory and file.
+This is function works on either files or existing data frames in the environment. It processes raw PCL data
+through a workflow that cuts the data into 1 meter segments with z and x positions and vertically normalizes data based on
+light extinction assumptions from the Beer-Lambert Law to account for light saturation. Data are then
+summarized, metrics of canopy structure complexity are calculated, and then output data saved to an output directory.
+A hit grid plot is also saved to this same directory.
 }
 \examples{
-data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
-filename <- "oldgrowth_one.csv"  #name of PCL transect to be processed
-process_pcl(data_directory, filename)
+# with designated file
+process_pcl("pcl_data.csv", 10, 1.05)
 
-process_pcl("./data/PCL_transects/", "oldgrowth_one.csv" )
 
+# with data frame
+process_pcl(osbs, 10, 1.05)
 
 \dontrun{
 

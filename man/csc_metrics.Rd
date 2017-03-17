@@ -2,25 +2,24 @@
 % Please edit documentation in R/csc_metrics.R
 \name{csc_metrics}
 \alias{csc_metrics}
-\title{CSC metrics basic}
+\title{Cover and sky fraction estimates}
 \usage{
 csc_metrics(df, filename)
 }
 \arguments{
-\item{df}{data frame of light saturation corrected PCL data}
+\item{df}{data frame of uncorrected PCL data}
 
 \item{filename}{name of file currently being processed}
 }
 \value{
-slew of canopy structure metrics
+slew of cover and sky fraction metrics
 }
 \description{
 \code{csc_metrics} imports and processes a single PCL transect.
 }
 \details{
 This is a specific function that works using the input of a data directory
-and a filename in that directory.Future versions of this will allow for direct
-input of file into command so there will be no need to specify both directory and file.
+and a filename or a single data frame in that directory.
 }
 \examples{
 
@@ -28,7 +27,11 @@ input of file into command so there will be no need to specify both directory an
 
 }
 }
+\keyword{canopy}
 \keyword{csc,}
-\keyword{rugosity}
+\keyword{fraction}
+\keyword{fraction,}
+\keyword{rugosity,}
+\keyword{sky}
 \keyword{structure,}
 

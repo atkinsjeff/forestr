@@ -2,14 +2,16 @@
 #'
 #' \code{process_pcl} imports and processes a single PCL transect.
 #'
-#' This is a specific function that works using the input of a data directory
-#' and a filename in that directory.Future versions of this will allow for direct
-#' input of file into command so there will be no need to specify both directory and file.
+#' This is function works on either files or existing data frames in the environment. It processes raw PCL data
+#' through a workflow that cuts the data into 1 meter segments with z and x positions and vertically normalizes data based on
+#' light extinction assumptions from the Beer-Lambert Law to account for light saturation. Data are then
+#' summarized, metrics of canopy structure complexity are calculated, and then output data saved to an output directory.
+#' A hit grid plot is also saved to this same directory.
 #'
 #'
-#' @param f  the name of the filename to input
-#' @param user_height the height of the laser off the ground as mounted on the user in meters
-#' @param marker.spacing distance between markers, typically 10 m
+#' @param f  the name of the filename to input <character> or a data frame <data frame>.
+#' @param user_height the height of the laser off the ground as mounted on the user in meters. default is 1 m
+#' @param marker.spacing distance between markers, defaults is 10 m
 #' @return writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
 #'
 #' @keywords pcl processing
@@ -17,13 +19,12 @@
 #'
 #'
 #' @examples
-#' data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
-#' filename <- "oldgrowth_one.csv"  #name of PCL transect to be processed
-#' process_pcl(data_directory, filename)
+#' # with designated file
+#' process_pcl("pcl_data.csv", 10, 1.05)
 #'
-#'process_pcl("./data/PCL_transects/", "oldgrowth_one.csv" )
 #'
-
+#' # with data frame
+#' process_pcl(osbs, 10, 1.05)
 #'
 #' \dontrun{
 #'
@@ -31,35 +32,55 @@
 
 process_pcl<- function(f, user_height, marker.spacing){
 
-  # Read in PCL transect
+  # If missing user height default is 1 m.
+  if(missing(user_height)){
+    user_height = 1
+  }
+
+  # If missing marker.spacing, default is 10 m.
+  if(missing(marker.spacing)){
+    marker.spacing = 10
+  }
+
+  if(is.character(f) == TRUE) {
+  # Read in PCL transect.
   df<- read_pcl(f)
 
-  #cuts off the directory info to give just the filename
+  # Cuts off the directory info to give just the filename.
   filename <- sub(".*/", "", f)
+  } else if(is.data.frame(f) == TRUE){
+    df <- f
+  }
 
-  #calculate transect length
+  # Calculate transect length.
   transect.length <- get_transect_length(df, marker.spacing)
 
-  # code hits for sky or canopy
+  # Desginates a LiDAR pulse as either a sky hit or a canopy hit
   df <- code_hits(df)
 
-  #adjusts by the height of the  user to account for difference in laser height to ground in meters
+  # Adjusts by the height of the  user to account for difference in laser height to ground in meters==default is 1 m.
   df <- adjust_by_user(df, user_height)
 
-  #not to split transects from code
-  test.data.binned <- split_transects_from_pcl(df, transect.length, 10)
+  # Splits transects from code into segments (distances between markers as designated by marker.spacing
+  # and chunks (1 m chunks in each marker).
+  test.data.binned <- split_transects_from_pcl(df, transect.length, marker.spacing)
 
+  # First-order metrics of sky and cover fraction.
   csc.metrics <- csc_metrics(test.data.binned, filename)
 
+  # Makes matrix of z and x coordinated pcl data.
   m1 <- make_matrix(test.data.binned)
 
+  # Normalizes date by column based on assumptions of Beer-Lambert Law of light extinction vertically
+  # through the canopy.
   m2 <- normalize_pcl_one(m1)
   m3 <- normalize_pcl_two(m2)
   m4 <- normalize_pcl_three(m3)
 
+  # Calculates VAI (vegetation area index m^ 2 m^ -2).
   m5 <- calc_vai(m4)
 
-
+  # Summary matrix.
   summary.matrix <- make_summary_matrix(test.data.binned, m5)
   rumple <- calc_rumple(summary.matrix)
   clumping.index <- calc_gap_fraction(m5)
@@ -67,7 +88,7 @@ process_pcl<- function(f, user_height, marker.spacing){
   variable.list <- calc_rugosity(summary.matrix, m5, filename)
 
   output.variables <- combine_variables(variable.list, csc.metrics, rumple, clumping.index)
-  print(output.variables)
+  #print(output.variables)
 
   #output procedure for variables
   outputname = substr(filename,1,nchar(filename)-4)
@@ -81,13 +102,7 @@ process_pcl<- function(f, user_height, marker.spacing){
   write_summary_matrix_to_csv(summary.matrix, outputname, output_directory)
   write_hit_matrix_to_csv(m5, outputname, output_directory)
 
-# #combining and formatting variables for output
-#   combine_variables <- function(variable.list, csc.metrics, rumple, clumping.index){
-#
-#     output.variables <- cbind(variable.list, csc.metrics, rumple, clumping.index)
-#     return(output.variables)
-#
-#   }
+
 
 
   #get filename first
@@ -96,7 +111,7 @@ process_pcl<- function(f, user_height, marker.spacing){
   plot.file.path <- file.path(paste(output_directory, plot.filename, ".png", sep = ""))
 
   vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
-  x11(width = 8, height = 6)
+  #x11(width = 8, height = 6)
   hit.grid <- ggplot2::ggplot(m5, ggplot2::aes(x = xbin, y = zbin))+
     ggplot2::geom_tile(ggplot2::aes(fill = vai))+
     ggplot2::scale_fill_gradient(low="white", high="dark green",
@@ -119,5 +134,5 @@ process_pcl<- function(f, user_height, marker.spacing){
     ggplot2::ggtitle(filename)+
     ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
 
-  ggplot2::ggsave(plot.file.path, hit.grid)
+  ggplot2::ggsave(plot.file.path, hit.grid, width = 8, height = 6, units = c("in"))
 }

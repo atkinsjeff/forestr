@@ -1,17 +1,16 @@
-#' CSC metrics basic
+#' Cover and sky fraction estimates
 #'
 #' \code{csc_metrics} imports and processes a single PCL transect.
 #'
 #' This is a specific function that works using the input of a data directory
-#' and a filename in that directory.Future versions of this will allow for direct
-#' input of file into command so there will be no need to specify both directory and file.
+#' and a filename or a single data frame in that directory.
 #'
-#' @param df data frame of light saturation corrected PCL data
+#' @param df data frame of uncorrected PCL data
 #' @param filename name of file currently being processed
 #'
-#' @keywords csc, structure, rugosity
+#' @keywords csc, structure, rugosity, sky fraction, canopy fraction
 #' @export
-#' @return slew of canopy structure metrics
+#' @return slew of cover and sky fraction metrics
 #' @examples
 #'
 #' \dontrun{
@@ -20,6 +19,10 @@
 #####Canopy metrics before matrix creations
 
 csc_metrics <- function(df, filename) {
+  if (missing(filename)) {
+    filename <- as.character(c(""))
+  }
+
   z <- df
   z <- subset(z, return_distance >= 0)
 
@@ -27,11 +30,11 @@ csc_metrics <- function(df, filename) {
   correction.coef <- length(which((df$return_distance <= -9999)))
 
   mean.return.ht = mean(z$return_distance, na.rm = TRUE)
-  message("Mean Return Height (m) -- meanHeight in old code")
+  message("Mean Return Height (m) of raw data -- meanHeight in old code")
   print(mean.return.ht)
 
   sd.ht = sd(z$return_distance, na.rm = TRUE)
-  message("Standard Deviation of Canopy Height returns-- meanStd in old code")
+  message("Standard Deviation of raw  Canopy Height returns-- meanStd in old code")
   print(sd.ht)
 
   sky.fraction = (1 - (length(which(df$can_hit == TRUE)) / (length(df$return_distance) - correction.coef) )) * 100
