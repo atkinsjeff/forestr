@@ -2,15 +2,15 @@
 #'
 #' \code{split_transects_from_pcl} imports and processes a single PCL transect.
 #'
-#' # Function to add two additional columns
-#' # to the pcl dataset, one for the segment
+#' Function to add two additional columns
+#' to the pcl dataset, one for the segment
 #'  (which should only be from 1-4) and is
-#' # designated by a -99999999 value in the
-#' # return_distance column
-#' # The only required parameter is the data
-#' # frame of pcl data, but this can
-#' # optionally also write out the results
-#' # to csv if a path and name are given
+#' designated by a -99999999 value in the
+#' return_distance column
+#' The only required parameter is the data
+#' frame of pcl data, but this can
+#' optionally also write out the results
+#' to csv if a path and name are given
 #' @param pcl_data data frame of unprocessed PCL data
 #' @param transect.length total transect length
 #' @param marker.spacing distance between markers in meters within the PCL data

@@ -1,6 +1,6 @@
 #' Process multiplie PCL transects.
 #'
-#' \code{process_multi_pcl} imports and processes a single PCL transect.
+#' \code{process_multi_pcl} imports and processes mutiple PCL transect.
 #'
 #' This is a specific function that works using the input of a data directory of .csv
 #' files where the function cycles through the files there.
@@ -21,8 +21,18 @@
 #' \dontrun{
 #'
 #' }
+#'
 process_multi_pcl <- function(data_dir, user_height, marker.spacing){
 
+  # If missing user height default is 1 m.
+  if(missing(user_height)){
+    user_height = 1
+  }
+
+  # If missing marker.spacing, default is 10 m.
+  if(missing(marker.spacing)){
+    marker.spacing = 10
+  }
 
 
   file.names <- dir(data_dir, pattern =".CSV")
@@ -42,7 +52,7 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing){
     plot.file.path <- file.path(paste(output_directory, plot.filename, ".png", sep = ""))
 
     vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
-    #x11(width = 8, height = 6)
+
     hit.grid <- ggplot(m5, aes(x = xbin, y = zbin))+
       geom_tile(aes(fill = vai))+
       scale_fill_gradient(low="white", high="dark green",
@@ -65,7 +75,7 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing){
       ggtitle(filename)+
       theme(plot.title = element_text(lineheight=.8, face="bold"))
 
-    ggsave(plot.file.path, hit.grid)
+    ggsave(plot.file.path, hit.grid, width = 8, height = 6,  units = c("in"))
 
 
     write.pcl.to.csv <- function(output.variables, filename) {
