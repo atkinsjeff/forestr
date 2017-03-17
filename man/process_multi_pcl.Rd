@@ -14,7 +14,7 @@ process_multi_pcl(data_dir, user_height, marker.spacing)
 \item{marker.spacing}{space between markers in the PCL data, in meters}
 }
 \description{
-\code{process_multi_pcl} imports and processes a single PCL transect.
+\code{process_multi_pcl} imports and processes mutiple PCL transect.
 }
 \details{
 This is a specific function that works using the input of a data directory of .csv
@@ -30,5 +30,6 @@ process_multi_pcl("./data/PCL_transects/")
 \dontrun{
 
 }
+
 }
 

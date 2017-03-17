@@ -50,6 +50,7 @@ process_pcl<- function(f, user_height, marker.spacing){
   filename <- sub(".*/", "", f)
   } else if(is.data.frame(f) == TRUE){
     df <- f
+    filename <- deparse(substitute(f))
   }
 
   # Calculate transect length.

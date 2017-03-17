@@ -17,10 +17,12 @@ write_pcl_to_csv(output.variables, outputname, output_directory)
 \code{write_pcl_to_csv} writes csc metrics and varialbes to .csv format
 }
 \details{
-This is a specific function that writes the output variables to disk in .csv format
+This is a specific function that writes the output variables to disk in .csv format. It is enclosed with
+in the process_pcl function.
 }
 \examples{
-write.pcl.to.csv()
+
+write.pcl.to.csv(output_variables, outputname, output_directory)
 
 }
 \keyword{output}
