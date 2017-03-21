@@ -132,8 +132,6 @@ $(document).ready(function () {
 <h2>Installation</h2>
 <p>To install the development version</p>
 <pre class="r"><code>devtools::install_github(&quot;atkinsjeff/forestr&quot;)</code></pre>
-<pre><code>## Skipping install of 'forestr' from a github remote, the SHA1 (db22eba7) has not changed since last install.
-##   Use `force = TRUE` to force installation</code></pre>
 </div>
 <div id="usage" class="section level2">
 <h2>Usage</h2>
@@ -145,7 +143,9 @@ $(document).ready(function () {
 process_pcl(osbs)</code></pre>
 <p>The output includes:</p>
 <ol style="list-style-type: decimal">
-<li>an output.csv file that contains 24 canopy structral complexity (CSC) metrics. These metrics are defined in <a href="http://www.mdpi.com/1999-4907/4/3/537/htm">Hardiman et al. 2013</a>.</li>
+<li><p>an output.csv file that contains 24 canopy structral complexity (CSC) metrics including rumple, canopy rugosity, and max canopy height. These metrics are defined in <a href="http://www.mdpi.com/1999-4907/4/3/537/htm">Hardiman et al. 2013</a>.</p></li>
+<li><p>an output_hit_matrix.csv file that is a file that contains the adjusted VAI by x and z position in the canopy.</p></li>
+<li><p>a summary_matrix.csv file that gives the mean height, max heights, VAI and variance metrics by each columnar position, or x position along the transect.</p></li>
 </ol>
 </div>
 <div id="plotting" class="section level2">

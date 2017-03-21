@@ -5,7 +5,7 @@ date: "March 21, 2017"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
+```{r setup,include = FALSE, echo = FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
 ```
@@ -16,7 +16,7 @@ The forestr package calculates forest structure and canopy structure metrics fro
 
 ## Installation
 To install the development version
-```{r}
+```{r eval = FALSE}
 devtools::install_github("atkinsjeff/forestr")
 ```
 
