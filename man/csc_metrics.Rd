@@ -34,4 +34,3 @@ and a filename or a single data frame in that directory.
 \keyword{rugosity,}
 \keyword{sky}
 \keyword{structure,}
-

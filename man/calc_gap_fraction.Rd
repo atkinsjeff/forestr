@@ -18,7 +18,9 @@ This is a specific function that works using the adjusted matrix to calculate ga
 \examples{
 calc_gap_fraction()
 
+\dontrun{
+
+}
 }
 \keyword{fraction}
 \keyword{gap}
-

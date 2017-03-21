@@ -21,4 +21,3 @@ A dataset that consists of one 40 m transect taken in a longleaf pine-oak savann
 in North-central Florida. Data collected April, 2016 by J. Atkins and R. Fahey.
 }
 \keyword{datasets}
-

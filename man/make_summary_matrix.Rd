@@ -26,7 +26,10 @@ transect is 40 m, this data frame has 40 rows.
 \examples{
 make_summary_matrix()
 
+
+\dontrun{
+
+}
 }
 \keyword{matrix}
 \keyword{summary}
-

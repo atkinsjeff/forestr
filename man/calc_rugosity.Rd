@@ -25,6 +25,8 @@ This is a specific function calculates canopy rugosity and other metrics
 \examples{
 calc_rugosity()
 
+\dontrun{
+
+}
 }
 \keyword{rugosity}
-

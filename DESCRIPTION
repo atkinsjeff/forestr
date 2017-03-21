@@ -1,8 +1,9 @@
 Package: forestr
 Type: Package
 Title: Calculates forest and canopy structural metrics
-Version: 0.1.0
-Authors: Jeff Atkins
+Version: 1.0.0
+Authors@R: person("Jeff", "Atkins", email = "jwatkins6@gmail.com",
+                  role = c("aut", "cre"))
 URL: http://atkinsjeff.github.io
 Maintainer: Jeff Atkins <jwatkins6@vcu.edu>
 Description: Forestr caclulates forest and canopy structural metrics from
@@ -19,4 +20,4 @@ Imports:
     magrittr,
     tools,
     readr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

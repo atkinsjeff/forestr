@@ -38,4 +38,3 @@ to csv if a path and name are given
 
 }
 }
-

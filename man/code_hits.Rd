@@ -24,4 +24,3 @@ this function accounts for the NAs that are in return distance which are actuall
 
 }
 }
-

@@ -22,7 +22,10 @@ This is a specific function that writes the summary matrix to disk in .csv forma
 \examples{
 write_summary_matrix_to_csv()
 
+\dontrun{
+
+}
+
 }
 \keyword{matrix}
 \keyword{summary}
-

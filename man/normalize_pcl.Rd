@@ -28,4 +28,3 @@ normalize_pcl()
 }
 }
 \keyword{light}
-

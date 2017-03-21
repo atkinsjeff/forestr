@@ -22,7 +22,11 @@ This is a specific function that writes the output variables to disk in .csv for
 \examples{
 write_hit_matrix_to_csv)
 
+\dontrun{
+
+}
+
+
 }
 \keyword{hit}
 \keyword{matrix}
-

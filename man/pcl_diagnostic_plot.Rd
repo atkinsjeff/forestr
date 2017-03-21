@@ -28,4 +28,3 @@ input of file into command so there will be no need to specify both directory an
 
 }
 }
-

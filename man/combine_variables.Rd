@@ -27,6 +27,8 @@ This is a specific function combines variables together to a coherent list.
 \examples{
 combine_Variables()
 
+\dontrun{
+
+}
 }
 \keyword{csc}
-
