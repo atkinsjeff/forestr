@@ -30,7 +30,7 @@ make_summary_matrix <- function(df, m) {
   a <- stats::setNames(stats::aggregate(return_distance ~ xbin, data = df, FUN = mean, na.rm = FALSE, na.action = 'na.pass'), c("xbin", "mean.ht"))
 
   # standard deviation of column height
-  b <- stats::setNames(stats::aggregate(return_distance ~ xbin, data = df, FUN = stats::sd, na.rm = FALSE, na.action = 'na.pass'), c("xbin", "stats::sd.ht"))
+  b <- stats::setNames(stats::aggregate(return_distance ~ xbin, data = df, FUN = stats::sd, na.rm = FALSE, na.action = 'na.pass'), c("xbin", "sd.ht"))
 
   # max height in column
   c <- stats::setNames(stats::aggregate(return_distance ~ xbin, data = df, FUN = max, na.rm = FALSE, na.action = 'na.pass'), c("xbin", "max.ht"))
@@ -42,7 +42,7 @@ make_summary_matrix <- function(df, m) {
   e <- stats::setNames(stats::aggregate(vai ~ xbin, data = m, FUN = sum, na.rm = FALSE, na.action = 'na.pass'), c("xbin", "sum.vai"))
 
   # standard deviation of VAI for column
-  f <- stats::setNames(stats::aggregate(vai ~ xbin, data = m, FUN = stats::sd, na.rm = FALSE, na.action = 'na.pass'), c("xbin", "stats::sd.vai"))
+  f <- stats::setNames(stats::aggregate(vai ~ xbin, data = m, FUN = stats::sd, na.rm = FALSE, na.action = 'na.pass'), c("xbin", "sd.vai"))
 
   # this is height at which max vai occurs
   g <- m$zbin[match(d$max.vai, m$vai)]
