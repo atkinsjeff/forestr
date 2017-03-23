@@ -9,11 +9,8 @@
 #'
 #'
 #' @examples
-#'
-#'
-#'
 #' \dontrun{
-#'
+#' code_hits(df)
 #' }
 code_hits <- function(df) {
   for(i in 1:nrow(df)){

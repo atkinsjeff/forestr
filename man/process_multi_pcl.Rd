@@ -21,14 +21,12 @@ This is a specific function that works using the input of a data directory of .c
 files where the function cycles through the files there.
 }
 \examples{
+\dontrun{
+# This function works on a directory of raw PCL data
 data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
 process_multi_pcl(data_directory)
 
-process_multi_pcl("./data/PCL_transects/")
-
-
-\dontrun{
-
+process_multi_pcl("./data/PCL_transects/"
 }
 
 }

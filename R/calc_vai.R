@@ -9,12 +9,13 @@
 #' @export
 #'
 #' @examples
-#' calc_vai()
 #' \dontrun{
-#'
+#' calc_vai(df)
 #' }
 #####this series of functions creates VAI
 calc_vai <- function(df) {
+  #declaring global variables
+  globalVariables(c("lidar.pulses", "can.hits", "fee"))
 
   # this should be how much cover (cvr) is in each, x,z bin index value
   df$cvr <- (df$bin.hits / df$can.hits)

@@ -21,10 +21,9 @@ and a filename in that directory.Future versions of this will allow for direct
 input of file into command so there will be no need to specify both directory and file.
 }
 \examples{
-normalize_pcl()
 
 \dontrun{
-
+normalize_pcl(df)
 }
 }
 \keyword{light}

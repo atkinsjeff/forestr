@@ -15,9 +15,14 @@
 #' @examples
 #'
 #' \dontrun{
-#'
+#' pcl_diagnostic_plot(df, filename)
 #' }
 pcl_diagnostic_plot <- function(df, filename) {
+  #creates empty part if no filename.
+  if (missing(filename)) {
+    filename <- as.character(c(""))
+  }
+
   plot(df$index,
        df$return_distance,
        main = filename,

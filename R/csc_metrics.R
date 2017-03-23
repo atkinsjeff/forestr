@@ -14,11 +14,14 @@
 #' @examples
 #'
 #' \dontrun{
-#'
+#' csc_metrics(df, filename)
 #' }
 #####Canopy metrics before matrix creations
 
 csc_metrics <- function(df, filename) {
+  #Declaring global variables
+  globalVariables(c("return_distance"))
+
   if (missing(filename)) {
     filename <- as.character(c(""))
   }
@@ -33,7 +36,7 @@ csc_metrics <- function(df, filename) {
   message("Mean Return Height (m) of raw data -- meanHeight in old code")
   print(mean.return.ht)
 
-  sd.ht = sd(z$return_distance, na.rm = TRUE)
+  sd.ht = stats::sd(z$return_distance, na.rm = TRUE)
   message("Standard Deviation of raw  Canopy Height returns-- meanStd in old code")
   print(sd.ht)
 

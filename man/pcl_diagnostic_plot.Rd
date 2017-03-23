@@ -25,6 +25,6 @@ input of file into command so there will be no need to specify both directory an
 \examples{
 
 \dontrun{
-
+pcl_diagnostic_plot(df, filename)
 }
 }

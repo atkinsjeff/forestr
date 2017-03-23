@@ -16,14 +16,9 @@ sorted matrix with z and x coordinates in meters
 \code{make matrix} imports and processes a single PCL transect.
 }
 \examples{
-data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
-filename <- "oldgrowth_one.csv"  #name of PCL transect to be processed
-process_pcl(data_directory, filename)
-
-process_pcl("./data/PCL_transects/", "oldgrowth_one.csv" )
 
 \dontrun{
-
+make_matrix(df)
 }
 }
 \keyword{matrix}

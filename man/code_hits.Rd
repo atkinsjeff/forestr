@@ -17,10 +17,7 @@ this function accounts for the NAs that are in return distance which are actuall
   the sky hits (i.e. when the lidar does not record a canopy hit)
 }
 \examples{
-
-
-
 \dontrun{
-
+code_hits(df)
 }
 }

@@ -7,20 +7,13 @@
 calc_gap_fraction(m)
 }
 \arguments{
-\item{m}{the matrix of adjusted values}
+\item{m}{the matrix of bin hits calculated as density of LiDAR returns for each x column.}
 }
 \description{
 \code{calc_gap_fraction} imports and processes a single PCL transect.
 }
 \details{
-This is a specific function that works using the adjusted matrix to calculate gap fraction through the canopy.
-}
-\examples{
-calc_gap_fraction()
-
-\dontrun{
-
-}
+This is a specific function that works using the adjusted matrix to calculate gap fraction through the canopy. This function also returns clumping index. #'
 }
 \keyword{fraction}
 \keyword{gap}

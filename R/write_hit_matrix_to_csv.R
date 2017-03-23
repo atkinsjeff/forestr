@@ -8,16 +8,13 @@
 #' @param output_directory directory where output goes
 #' @keywords hit matrix
 #'
-#' @export
-#' @examples
-#' write_hit_matrix_to_csv)
 #'
 #' @examples
 #' \dontrun{
-#'
+#' # This function runs internally.
+#' write_hit_matrix_to_csv(m, outputname, output_directory)
 #' }
-#'
-#'
+
 write_hit_matrix_to_csv <- function(m, outputname, output_directory) {
   m <- m[, c("xbin", "zbin", "vai")]
 

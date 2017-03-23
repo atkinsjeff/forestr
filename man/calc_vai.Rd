@@ -16,9 +16,8 @@ a matrix of vai by x, z in the canopy
 \code{calc_vai} imports and processes a single PCL transect.
 }
 \examples{
-calc_vai()
 \dontrun{
-
+calc_vai(df)
 }
 }
 \keyword{vai}

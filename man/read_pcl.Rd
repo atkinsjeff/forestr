@@ -13,13 +13,13 @@ read_pcl(f)
 This function specificially reads in PCL files that are in .csv format, standard format for that data type.
 }
 \examples{
-read_pcl()
-
 \dontrun{
+read_pcl(f)
+ }
 
 }
-
-}
+\keyword{data}
 \keyword{input}
 \keyword{pcl}
+\keyword{raw}
 \keyword{read}

@@ -11,12 +11,8 @@
 #' @keywords output variables
 #' @export
 #' @examples
-#'
-#' write.pcl.to.csv(output_variables, outputname, output_directory)
-#'
-#' @examples
 #' \dontrun{
-#'
+#' write_pcl_to_csv(output_variables, outputname, output_directory)
 #' }
 #'
 write_pcl_to_csv <- function(output.variables, outputname, output_directory) {

@@ -10,13 +10,10 @@
 #' @keywords summary matrix
 #' @export
 #' @examples
-#' write_summary_matrix_to_csv()
-#'
-#' @examples
 #' \dontrun{
-#'
+#' write_summary_matrix_to_csv()
 #' }
-#'
+
 
 write_summary_matrix_to_csv <- function(m, outputname, output_directory) {
 

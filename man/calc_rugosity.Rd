@@ -7,11 +7,11 @@
 calc_rugosity(df, m, filename)
 }
 \arguments{
-\item{df}{of adjusted pcl data}
+\item{df}{is a data frame of adjusted pcl data.}
 
-\item{m}{matrix of light adjusted vai values}
+\item{m}{matrix of light adjusted vai values.}
 
-\item{filename}{the name of the file currently being processed}
+\item{filename}{the name of the file currently being processed.}
 }
 \value{
 a slew of metrics...need to fully outline later
@@ -23,10 +23,8 @@ a slew of metrics...need to fully outline later
 This is a specific function calculates canopy rugosity and other metrics
 }
 \examples{
-calc_rugosity()
-
-\dontrun{
-
+# Calculates metrics of canopy structural complexity.
+\dontrun{calc_rugosity()
 }
 }
 \keyword{rugosity}

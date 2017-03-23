@@ -11,13 +11,9 @@
 #'
 #' @keywords rumple
 #' @return rumple for the canopy based on 2-D transect
-#'
-#' @examples
-#' calc_rumple()
-#'
 #' @examples
 #' \dontrun{
-#'
+#' calc_rumple()
 #' }
 calc_rumple <- function(df){
   df$rump.diff <- 0

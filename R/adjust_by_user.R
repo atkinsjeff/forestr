@@ -10,11 +10,10 @@
 #' @param df the data frame of raw pcl data
 #' @param user_height the height of the laser off the ground as mounted on the user in meters
 #'
-#
-#'
-#'
+#' @examples
+#' # Adust raw data to account for user height as PCL is user-mounted and correction gives actual distance from ground.
 #' \dontrun{
-#'
+#' adjust_by_user(df, 1.05)
 #' }
 
 adjust_by_user <- function(df, user_height) {

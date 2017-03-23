@@ -11,17 +11,18 @@
 #' frame of pcl data, but this can
 #' optionally also write out the results
 #' to csv if a path and name are given
-#' @param pcl_data data frame of unprocessed PCL data
-#' @param transect.length total transect length
-#' @param marker.spacing distance between markers in meters within the PCL data
-#' @param data_dir directory where PCL data .csv are stored
-#' @param output_file_name old code relic
+#' @param pcl_data data frame of unprocessed PCL data.
+#' @param transect.length total transect length. Default value is 40 meters.
+#' @param marker.spacing distance between markers in meters within the PCL data. Default value is 10 m.
+#' @param data_dir directory where PCL data .csv are stored if value is used.
+#' @param output_file_name old code relic that doesn't do much.
+#' @param DEBUG check to see order of final output. Default is FALSE.
+#'
 #'
 #'
 #' @examples
-#'
-#' \dontrun{
-#'
+#' # Function that has the algorithm that splits the raw data into defined, equidistant x-bins.
+#' \dontrun{split_transects_from_pcl(df, 40, 10)
 #' }
 ##########################################
 ##########################################
@@ -36,7 +37,7 @@
 # to csv if a path and name are given
 ##########################################
 ##########################################
-split_transects_from_pcl <- function(pcl_data, transect.length, marker.spacing, DEBUG = FALSE, write_out = FALSE, data_dir, output_file_name) {
+split_transects_from_pcl <- function(pcl_data, transect.length, marker.spacing, DEBUG = FALSE,  data_dir, output_file_name) {
 
   # Initialize count for segments (expecting 4 segments per transect)
   # Some returns before beginning of first segment and some after last
@@ -75,7 +76,7 @@ split_transects_from_pcl <- function(pcl_data, transect.length, marker.spacing, 
   for (i in 1:(max(pcl_data$seg_num) - 1)) {
     for (i in 1:(max(pcl_data$seg_num))) {
       this_segment <- subset(pcl_data, pcl_data$seg_num == i)
-      this_segment$chunk_num <- cut(this_segment$index, 10, labels = FALSE)
+      this_segment$chunk_num <- cut(this_segment$index, marker.spacing, labels = FALSE)
       results <- rbind(results, this_segment)
     }
 
@@ -84,15 +85,13 @@ split_transects_from_pcl <- function(pcl_data, transect.length, marker.spacing, 
     stopifnot(max(results$seg_num) < ((transect.length/marker.spacing) + 1))
   }
   # Code segment to create zbin and xbin
-  results$xbin <- ((results$seg_num * 10) - 10)  + results$chunk_num
+  results$xbin <- ((results$seg_num * marker.spacing) - marker.spacing)  + results$chunk_num
   results$zbin <- round(results$return_distance)
   results$zbin[results$sky_hit == "TRUE"] <- 0
   # Check final output
   if (DEBUG) head(results)
   if (DEBUG) tail(results)
 
-  # Write out if write parameter is set at top
-  if (write_out) write.csv(results, paste0(data_dir, output_file_name, ".with_categories.csv"), row.names = FALSE)
 
   results <- dplyr::distinct(results, index, .keep_all = TRUE)
   results

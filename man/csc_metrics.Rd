@@ -24,7 +24,7 @@ and a filename or a single data frame in that directory.
 \examples{
 
 \dontrun{
-
+csc_metrics(df, filename)
 }
 }
 \keyword{canopy}

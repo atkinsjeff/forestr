@@ -20,12 +20,9 @@ write_summary_matrix_to_csv(m, outputname, output_directory)
 This is a specific function that writes the summary matrix to disk in .csv format
 }
 \examples{
-write_summary_matrix_to_csv()
-
 \dontrun{
-
+write_summary_matrix_to_csv()
 }
-
 }
 \keyword{matrix}
 \keyword{summary}

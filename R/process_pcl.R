@@ -19,15 +19,14 @@
 #'
 #'
 #' @examples
-#' # with designated file
+#'
+#' \dontrun{
+# # with designated file
 #' process_pcl("pcl_data.csv", 10, 1.05)
 #'
 #'
 #' # with data frame
 #' process_pcl(osbs, 10, 1.05)
-#'
-#' \dontrun{
-#'
 #' }
 
 process_pcl<- function(f, user_height, marker.spacing){
@@ -48,6 +47,7 @@ process_pcl<- function(f, user_height, marker.spacing){
 
   # Cuts off the directory info to give just the filename.
   filename <- sub(".*/", "", f)
+
   } else if(is.data.frame(f) == TRUE){
     df <- f
     filename <- deparse(substitute(f))

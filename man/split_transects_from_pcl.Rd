@@ -5,18 +5,20 @@
 \title{Split transects from PCL}
 \usage{
 split_transects_from_pcl(pcl_data, transect.length, marker.spacing,
-  DEBUG = FALSE, write_out = FALSE, data_dir, output_file_name)
+  DEBUG = FALSE, data_dir, output_file_name)
 }
 \arguments{
-\item{pcl_data}{data frame of unprocessed PCL data}
+\item{pcl_data}{data frame of unprocessed PCL data.}
 
-\item{transect.length}{total transect length}
+\item{transect.length}{total transect length. Default value is 40 meters.}
 
-\item{marker.spacing}{distance between markers in meters within the PCL data}
+\item{marker.spacing}{distance between markers in meters within the PCL data. Default value is 10 m.}
 
-\item{data_dir}{directory where PCL data .csv are stored}
+\item{DEBUG}{check to see order of final output. Default is FALSE.}
 
-\item{output_file_name}{old code relic}
+\item{data_dir}{directory where PCL data .csv are stored if value is used.}
+
+\item{output_file_name}{old code relic that doesn't do much.}
 }
 \description{
 \code{split_transects_from_pcl} imports and processes a single PCL transect.
@@ -33,8 +35,7 @@ optionally also write out the results
 to csv if a path and name are given
 }
 \examples{
-
-\dontrun{
-
+# Function that has the algorithm that splits the raw data into defined, equidistant x-bins.
+\dontrun{split_transects_from_pcl(df, 40, 10)
 }
 }

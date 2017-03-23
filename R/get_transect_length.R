@@ -13,7 +13,7 @@
 #' @examples
 #'
 #' \dontrun{
-#'
+#' get_transect_length(df, marker.spacing)
 #' }
 
 get_transect_length <- function (df, marker.spacing) {

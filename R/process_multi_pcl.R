@@ -11,15 +11,12 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
+#' # This function works on a directory of raw PCL data
 #' data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
 #' process_multi_pcl(data_directory)
 #'
-#'process_multi_pcl("./data/PCL_transects/")
-#'
-
-#'
-#' \dontrun{
-#'
+#' process_multi_pcl("./data/PCL_transects/"
 #' }
 #'
 process_multi_pcl <- function(data_dir, user_height, marker.spacing){

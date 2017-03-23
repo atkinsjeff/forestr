@@ -20,13 +20,10 @@ write_hit_matrix_to_csv(m, outputname, output_directory)
 This is a specific function that writes the output variables to disk in .csv format
 }
 \examples{
-write_hit_matrix_to_csv)
-
 \dontrun{
-
+# This function runs internally.
+write_hit_matrix_to_csv(m, outputname, output_directory)
 }
-
-
 }
 \keyword{hit}
 \keyword{matrix}

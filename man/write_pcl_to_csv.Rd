@@ -21,11 +21,8 @@ This is a specific function that writes the output variables to disk in .csv for
 in the process_pcl function.
 }
 \examples{
-
-write.pcl.to.csv(output_variables, outputname, output_directory)
-
 \dontrun{
-
+write_pcl_to_csv(output_variables, outputname, output_directory)
 }
 
 }

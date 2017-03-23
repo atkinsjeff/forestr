@@ -13,10 +13,9 @@
 #'
 #' @export
 #' @examples
-#' normalize_pcl()
 #'
 #' \dontrun{
-#'
+#' normalize_pcl(df)
 #' }
 normalize_pcl <- function(df) {
 
@@ -86,7 +85,7 @@ normalize_pcl_three <- function(df) {
   }
 
   # now to sum up dee to make sum.dee the %total adjusted hits in the column
-  q <- setNames(aggregate(dee ~ xbin, data = df, FUN = sum), c("xbin", "sum.dee"))
+  q <- stats::setNames(stats::aggregate(dee ~ xbin, data = df, FUN = sum), c("xbin", "sum.dee"))
   df$sum.dee <- q$sum.dee[match(df$xbin, q$xbin)]
 
 

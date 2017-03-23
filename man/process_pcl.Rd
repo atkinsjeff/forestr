@@ -27,15 +27,13 @@ summarized, metrics of canopy structure complexity are calculated, and then outp
 A hit grid plot is also saved to this same directory.
 }
 \examples{
-# with designated file
+
+\dontrun{
 process_pcl("pcl_data.csv", 10, 1.05)
 
 
 # with data frame
 process_pcl(osbs, 10, 1.05)
-
-\dontrun{
-
 }
 }
 \keyword{pcl}

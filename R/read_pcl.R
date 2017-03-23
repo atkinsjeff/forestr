@@ -6,15 +6,13 @@
 #'
 #' @param f name of file currently being processed
 #'
-#' @keywords read pcl input
+#' @keywords read pcl raw input data
 #' @export
-#' @examples
-#' read_pcl()
 #'
 #' @examples
 #' \dontrun{
-#'
-#' }
+#' read_pcl(f)
+#'  }
 #'
 
 read_pcl <- function(f) {

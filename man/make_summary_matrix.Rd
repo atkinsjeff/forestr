@@ -24,11 +24,9 @@ transect is 40 m, this data frame has 40 rows.
 #' This function allows you to express your love of cats.
 }
 \examples{
-make_summary_matrix()
-
 
 \dontrun{
-
+#' make_summary_matrix()
 }
 }
 \keyword{matrix}
