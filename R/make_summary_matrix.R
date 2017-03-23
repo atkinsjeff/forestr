@@ -66,7 +66,7 @@ make_summary_matrix <- function(df, m) {
 
 
   p$mean.ht[is.na(p$mean.ht)] <- 0
-  p$stats::sd.ht[is.na(p$stats::sd.ht)] <- 0
+  p$sd.ht[is.na(p$stats::sd.ht)] <- 0
   p$max.ht[is.na(p$max.ht)] <- 0
 
   p$height.bin <- p$vai.z.sum / p$sum.vai
