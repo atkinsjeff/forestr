@@ -15,7 +15,9 @@
 #####this series of functions creates VAI
 calc_vai <- function(df) {
   #declaring global variables
-  globalVariables(c("lidar.pulses", "can.hits", "fee"))
+  lidar.pulses <- NULL
+  can.hits <- NULL
+  fee <- NULL
 
   # this should be how much cover (cvr) is in each, x,z bin index value
   df$cvr <- (df$bin.hits / df$can.hits)

@@ -22,7 +22,7 @@
 
 make_summary_matrix <- function(df, m) {
   #declaring global varieties
-  globalVariables(c("return_distance"))
+  return_distance <- NULL
 
   df <- subset(df, return_distance > 0)
 

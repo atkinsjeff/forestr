@@ -23,7 +23,7 @@ pcl_diagnostic_plot <- function(df, filename) {
     filename <- as.character(c(""))
   }
 
-  plot(df$index,
+  graphics::plot(df$index,
        df$return_distance,
        main = filename,
 

@@ -20,7 +20,7 @@
 
 csc_metrics <- function(df, filename) {
   #Declaring global variables
-  globalVariables(c("return_distance"))
+  return_distance <- NULL
 
   if (missing(filename)) {
     filename <- as.character(c(""))

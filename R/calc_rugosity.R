@@ -24,9 +24,9 @@ calc_rugosity <- function(df, m, filename) {
   #m = vai matrix
 
   # Setting global variables
-  globalVariables(c("max.vai.z", "max.ht"))
+  max.vai.z  <-NULL
+  max.ht <- NULL
 
-  a <- subset(df, max.vai.z > 0)
 
   transect.length = max(df$xbin)
   message("Transect Length (m)")
@@ -76,7 +76,8 @@ calc_rugosity <- function(df, m, filename) {
   max.vai = max(df$sum.vai)
   print(max.vai)
 
-  e <- subset(df, max.ht == 0)
+  #added the df thing in front of max ht, but don't know if it works.
+  e <- subset(df, df$max.ht == 0)
   deep.gaps <- nrow(e)
   message("Deep Gaps")
   print(deep.gaps)
@@ -120,7 +121,7 @@ calc_rugosity <- function(df, m, filename) {
   print(rugosity)
 
 
-  jess.rugosity = sd(df$max.ht)
+  jess.rugosity = stats::sd(df$max.ht)
   message("Surface Rugosity--TopRugosity")
   print(jess.rugosity)
 

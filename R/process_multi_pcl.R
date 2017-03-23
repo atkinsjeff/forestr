@@ -20,6 +20,8 @@
 #' }
 #'
 process_multi_pcl <- function(data_dir, user_height, marker.spacing){
+  #Global Variables
+  output_directory <- NULL
 
   # If missing user height default is 1 m.
   if(missing(user_height)){
@@ -44,13 +46,13 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing){
 
 
     #get filename first
-    plot.filename <- file_path_sans_ext(filename)
+    plot.filename <- tools::file_path_sans_ext(filename)
 
     plot.file.path <- file.path(paste(output_directory, plot.filename, ".png", sep = ""))
 
     vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
 
-    hit.grid <- ggplot(m5, aes(x = xbin, y = zbin))+
+    hit.grid <- ggplot2::ggplot(m5, aes(x = xbin, y = zbin))+
       geom_tile(aes(fill = vai))+
       scale_fill_gradient(low="white", high="dark green",
                           limits=c(0,8.5),

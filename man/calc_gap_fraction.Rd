@@ -15,5 +15,10 @@ calc_gap_fraction(m)
 \details{
 This is a specific function that works using the adjusted matrix to calculate gap fraction through the canopy. This function also returns clumping index. #'
 }
+\examples{
+\dontrun{
+calc_gap_fraction(m)
+}
+}
 \keyword{fraction}
 \keyword{gap}
