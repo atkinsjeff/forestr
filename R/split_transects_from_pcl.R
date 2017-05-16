@@ -39,6 +39,7 @@
 ##########################################
 split_transects_from_pcl <- function(pcl_data, transect.length, marker.spacing, DEBUG = FALSE,  data_dir, output_file_name) {
 
+  index <- NULL
   # Initialize count for segments (expecting 4 segments per transect)
   # Some returns before beginning of first segment and some after last
   segment_num <- 0
@@ -62,7 +63,7 @@ split_transects_from_pcl <- function(pcl_data, transect.length, marker.spacing, 
   }
 
   # Check to see if it worked
-  if (DEBUG) head(pcl_data)
+  if (DEBUG) utils::head(pcl_data)
 
   # Initialize empty data frame to store results
   results <- data.frame()
@@ -89,8 +90,8 @@ split_transects_from_pcl <- function(pcl_data, transect.length, marker.spacing, 
   results$zbin <- round(results$return_distance)
   results$zbin[results$sky_hit == "TRUE"] <- 0
   # Check final output
-  if (DEBUG) head(results)
-  if (DEBUG) tail(results)
+  if (DEBUG) utils::head(results)
+  if (DEBUG) utils::tail(results)
 
 
   results <- dplyr::distinct(results, index, .keep_all = TRUE)

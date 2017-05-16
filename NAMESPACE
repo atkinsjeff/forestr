@@ -13,3 +13,7 @@ export(process_pcl)
 export(read_pcl)
 export(write_pcl_to_csv)
 export(write_summary_matrix_to_csv)
+
+ importFrom("graphics", "plot")
+  importFrom("stats", "aggregate", "sd", "setNames")
+  importFrom("utils", "head", "read.csv", "tail", "write.csv")

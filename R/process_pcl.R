@@ -30,6 +30,9 @@
 #' }
 
 process_pcl<- function(f, user_height, marker.spacing){
+  xbin <- NULL
+  zbin <- NULL
+  vai <- NULL
 
   # If missing user height default is 1 m.
   if(missing(user_height)){

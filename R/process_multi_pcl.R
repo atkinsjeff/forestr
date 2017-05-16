@@ -53,13 +53,13 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing){
     vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
 
     hit.grid <- ggplot2::ggplot(m5, aes(x = xbin, y = zbin))+
-      geom_tile(aes(fill = vai))+
-      scale_fill_gradient(low="white", high="dark green",
+      ggplot2::geom_tile(aes(fill = vai))+
+      ggplot2::scale_fill_gradient(low="white", high="dark green",
                           limits=c(0,8.5),
                           name=vai.label)+
       #scale_y_continuous(breaks = seq(0, 20, 5))+
       # scale_x_continuous(minor_breaks = seq(0, 40, 1))+
-      theme(axis.line = element_line(colour = "black"),
+      ggplot2::theme(axis.line = element_line(colour = "black"),
             panel.grid.major = element_blank(),
             panel.grid.minor = element_blank(),
             panel.background = element_blank(),
@@ -67,33 +67,33 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing){
             axis.text.y = element_text(size = 14),
             axis.title.x = element_text(size = 20),
             axis.title.y = element_text(size = 20))+
-      xlim(0,transect.length)+
-      ylim(0,41)+
-      xlab("Distance along transect (m)")+
-      ylab("Height above ground (m)")+
-      ggtitle(filename)+
-      theme(plot.title = element_text(lineheight=.8, face="bold"))
+      ggplot2::xlim(0,transect.length)+
+      ggplot2::ylim(0,41)+
+      ggplot2::xlab("Distance along transect (m)")+
+      ggplot2::ylab("Height above ground (m)")+
+      ggplot2::ggtitle(filename)+
+      ggplot2::theme(plot.title = element_text(lineheight=.8, face="bold"))
 
-    ggsave(plot.file.path, hit.grid, width = 8, height = 6,  units = c("in"))
+    ggplot2::ggsave(plot.file.path, hit.grid, width = 8, height = 6,  units = c("in"))
 
 
     write.pcl.to.csv <- function(output.variables, filename) {
 
       filename2 <- paste(filename, ".csv", sep="")
-      write.csv(output.variables,file.path(output_directory, filename2))
+      utils::write.csv(output.variables, file.path(output_directory, filename2))
     }
 
     write.summary.matrix.to.csv <- function(m, filename) {
 
       filename2 <- paste(filename, "_summary_matrix.csv", sep="")
-      write.csv(m, file.path(output_directory, filename2))
+      utils::write.csv(m, file.path(output_directory, filename2))
     }
 
     write.hit.matrix.to.csv <- function(m, filename) {
       m <- m[, c("xbin", "zbin", "vai")]
 
       filename2 <- paste(filename, "_hit_matrix.csv", sep="")
-      write.csv(m, file.path(output_directory, filename2))
+      utils::write.csv(m, file.path(output_directory, filename2))
     }
   }
 }

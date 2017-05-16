@@ -1,12 +1,12 @@
 Package: forestr
 Type: Package
 Version: 1.0.0
-Title: Calculates Forest and Canopy Structure Metrics
-Authors@R: person("Jeff", "Atkins", email = "jwatkins6@gmail.com",
+Title: Calculates Forest and Canopy Structural Metrics
+Authors@R: person("Jeff", "Atkins", email = "jwatkins6@vcu.edu",
                   role = c("aut", "cre"))
 URL: http://atkinsjeff.github.io
 Maintainer: Jeff Atkins <jwatkins6@vcu.edu>
-Description: Forestr caclulates forest and canopy structural metrics from
+Description: A package that calculates forest and canopy structural metrics from
     portable canopy LiDAR (PCL) and terrestrial scanning LiDAR.
 Depends:
     R (>= 3.3.2)
@@ -22,3 +22,6 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

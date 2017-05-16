@@ -19,5 +19,5 @@ write_hit_matrix_to_csv <- function(m, outputname, output_directory) {
   m <- m[, c("xbin", "zbin", "vai")]
 
   filename2 <- paste(outputname, "_hit_matrix.csv", sep="")
-  write.csv(m, file.path(output_directory, filename2))
+  utils::write.csv(m, file.path(output_directory, filename2))
 }
