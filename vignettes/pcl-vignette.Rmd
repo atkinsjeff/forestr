@@ -22,6 +22,15 @@ To import a single file use the `process_pcl` command. As input, `process_pcl` t
 process_pcl('./data-raw/rice.csv', 1, 10)
 ```
 
+The `process_pcl` file will print multiple CSC metrics to the screen, including canopy rugosity, rumple, porosity, etc., but will also create an output directory named output within the working directory where it will store four things:
+
+1.  The Summary Matrix - a .csv file of columnar values of mean leaf heigh, maximum height, vegetation area index (VAI), etc.
+2.  The Hit Matrix - a .csv file containing VAI by rows where each row correpsonds to the x, z position of VAI in the canopy.
+3.  The Output File - this is a .csv file that contains all CSC metrics in output form.
+4.  The Hit Grid - this is a PNG image file of the vertical hit grid as explained in Hardiman et al. (2013) and is a graphic representation of the vertical distribution of leaf density throughout the canopy. This can be recreated and modified using the source code with the Hit Matrix file as the input.
+
+
+
 
 Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
 

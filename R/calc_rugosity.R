@@ -42,7 +42,7 @@ calc_rugosity <- function(df, m, filename) {
 
 
   mode.el = mean(df$max.vai.z)
-  message("Mean Height of Maximum Return Density -- modeEl")
+  message("Mean Height of Maximum Return Density - modeEl")
   print(mode.el)
 
 
@@ -65,7 +65,7 @@ calc_rugosity <- function(df, m, filename) {
   print(max.can.ht)
 
   mean.max.ht = mean(df$max.ht)
-  message("Mean Max canopy height (m) -- meanTopel w/ deep gaps removed")
+  message("Mean Outer Canopy Height (m) or MOCH")
   print(mean.max.ht)
 
   mean.vai = mean(df$sum.vai)
