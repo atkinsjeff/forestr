@@ -29,7 +29,7 @@
 #' process_pcl(osbs, 10, 1.05)
 #' }
 
-process_pcl<- function(f, user_height, marker.spacing){
+process_pcl<- function(f, user_height, marker.spacing, ...){
   xbin <- NULL
   zbin <- NULL
   vai <- NULL

@@ -25,58 +25,127 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, ...){
   message("Transect Marker Spacing is:")
   print(marker.spacing)
 
-  # # If missing user height default is 1 m.
-  # if(missing(user_height)){
-  #   user_height = 1
-  # }
-  #
-  # # If missing marker.spacing, default is 10 m.
-  # if(missing(marker.spacing)){
-  #   marker.spacing = 10
-  # }
-
 
   file.names <- dir(data_dir, pattern =".CSV")
-  length(file.names)
 
+
+  #for loop that moves through files in directory
   for(i in 1:length(file.names)){
-    filename <- file.names[i]
+    f <- file.names[i]
+    filename <- f
+
+  #begin section of script cribbed from process_pcl
+      xbin <- NULL
+      zbin <- NULL
+      vai <- NULL
+
+      # If missing user height default is 1 m.
+      if(missing(user_height)){
+        user_height = 1
+      }
+
+      # If missing marker.spacing, default is 10 m.
+      if(missing(marker.spacing)){
+        marker.spacing = 10
+      }
+
+      if(is.character(f) == TRUE) {
+        # Read in PCL transect.
+        df<- read_pcl(f)
+
+        # Cuts off the directory info to give just the filename.
+        filename <- sub(".*/", "", f)
+
+      } else if(is.data.frame(f) == TRUE){
+        df <- f
+        filename <- deparse(substitute(f))
+      }
+
+      # Calculate transect length.
+      transect.length <- get_transect_length(df, marker.spacing)
+
+      # Desginates a LiDAR pulse as either a sky hit or a canopy hit
+      df <- code_hits(df)
+
+      # Adjusts by the height of the  user to account for difference in laser height to ground in meters==default is 1 m.
+      df <- adjust_by_user(df, user_height)
+
+      # Splits transects from code into segments (distances between markers as designated by marker.spacing
+      # and chunks (1 m chunks in each marker).
+      test.data.binned <- split_transects_from_pcl(df, transect.length, marker.spacing)
+
+      # First-order metrics of sky and cover fraction.
+      csc.metrics <- csc_metrics(test.data.binned, filename)
+
+      # Makes matrix of z and x coordinated pcl data.
+      m1 <- make_matrix(test.data.binned)
+
+      # Normalizes date by column based on assumptions of Beer-Lambert Law of light extinction vertically
+      # through the canopy.
+      m2 <- normalize_pcl_one(m1)
+      m3 <- normalize_pcl_two(m2)
+      m4 <- normalize_pcl_three(m3)
+
+      # Calculates VAI (vegetation area index m^ 2 m^ -2).
+      m5 <- calc_vai(m4)
+
+      # Summary matrix.
+      summary.matrix <- make_summary_matrix(test.data.binned, m5)
+      rumple <- calc_rumple(summary.matrix)
+      clumping.index <- calc_gap_fraction(m5)
+
+      variable.list <- calc_rugosity(summary.matrix, m5, filename)
+
+      output.variables <- combine_variables(variable.list, csc.metrics, rumple, clumping.index)
+      #print(output.variables)
+
+      #output procedure for variables
+      outputname = substr(filename,1,nchar(filename)-4)
+      outputname <- paste(outputname, "output", sep = "_")
+      dir.create("output", showWarnings = FALSE)
+      output_directory <- "./output/"
+      print(outputname)
+      print(output_directory)
+
+      write_pcl_to_csv(output.variables, outputname, output_directory)
+      write_summary_matrix_to_csv(summary.matrix, outputname, output_directory)
+      write_hit_matrix_to_csv(m5, outputname, output_directory)
 
 
-    process_pcl(data_dir, filename, user_height, marker.spacing)
 
 
+      #get filename first
+      plot.filename <- tools::file_path_sans_ext(filename)
 
-    #get filename first
-    plot.filename <- tools::file_path_sans_ext(filename)
+      plot.file.path <- file.path(paste(output_directory, plot.filename, ".png", sep = ""))
 
-    plot.file.path <- file.path(paste(output_directory, plot.filename, ".png", sep = ""))
+      vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
+      #x11(width = 8, height = 6)
+      hit.grid <- ggplot2::ggplot(m5, ggplot2::aes(x = xbin, y = zbin))+
+        ggplot2::geom_tile(ggplot2::aes(fill = vai))+
+        ggplot2::scale_fill_gradient(low="white", high="dark green",
+                                     limits=c(0,8.5),
+                                     name=vai.label)+
+        #scale_y_continuous(breaks = seq(0, 20, 5))+
+        # scale_x_continuous(minor_breaks = seq(0, 40, 1))+
+        ggplot2::theme(axis.line = ggplot2::element_line(colour = "black"),
+                       panel.grid.major = ggplot2::element_blank(),
+                       panel.grid.minor = ggplot2::element_blank(),
+                       panel.background = ggplot2::element_blank(),
+                       axis.text.x = ggplot2::element_text(size = 14),
+                       axis.text.y = ggplot2::element_text(size = 14),
+                       axis.title.x = ggplot2::element_text(size = 20),
+                       axis.title.y = ggplot2::element_text(size = 20))+
+        ggplot2::xlim(0,transect.length)+
+        ggplot2::ylim(0,41)+
+        ggplot2::xlab("Distance along transect (m)")+
+        ggplot2::ylab("Height above ground (m)")+
+        ggplot2::ggtitle(filename)+
+        ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
 
-    vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
+      ggplot2::ggsave(plot.file.path, hit.grid, width = 8, height = 6, units = c("in"))
 
-    hit.grid <- ggplot2::ggplot(m5, aes(x = xbin, y = zbin))+
-      ggplot2::geom_tile(aes(fill = vai))+
-      ggplot2::scale_fill_gradient(low="white", high="dark green",
-                          limits=c(0,8.5),
-                          name=vai.label)+
-      #scale_y_continuous(breaks = seq(0, 20, 5))+
-      # scale_x_continuous(minor_breaks = seq(0, 40, 1))+
-      ggplot2::theme(axis.line = element_line(colour = "black"),
-            panel.grid.major = element_blank(),
-            panel.grid.minor = element_blank(),
-            panel.background = element_blank(),
-            axis.text.x= element_text(size = 14),
-            axis.text.y = element_text(size = 14),
-            axis.title.x = element_text(size = 20),
-            axis.title.y = element_text(size = 20))+
-      ggplot2::xlim(0,transect.length)+
-      ggplot2::ylim(0,41)+
-      ggplot2::xlab("Distance along transect (m)")+
-      ggplot2::ylab("Height above ground (m)")+
-      ggplot2::ggtitle(filename)+
-      ggplot2::theme(plot.title = element_text(lineheight=.8, face="bold"))
 
-    ggplot2::ggsave(plot.file.path, hit.grid, width = 8, height = 6,  units = c("in"))
 
 
     write.pcl.to.csv <- function(output.variables, filename) {
