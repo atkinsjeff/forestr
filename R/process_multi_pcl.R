@@ -19,9 +19,11 @@
 #' process_multi_pcl("./data/PCL_transects/"
 #' }
 #'
-process_multi_pcl <- function(data_dir, user_height, marker.spacing){
+process_multi_pcl <- function(data_dir, user_height, marker.spacing, ...){
   #Global Variables
   output_directory <- NULL
+  message("Transect Marker Spacing is:")
+  print(marker.spacing)
 
   # # If missing user height default is 1 m.
   # if(missing(user_height)){
