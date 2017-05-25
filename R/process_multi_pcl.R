@@ -32,7 +32,7 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, ...){
   #for loop that moves through files in directory
   for(i in 1:length(file.names)){
     f <- file.names[i]
-    filename <- f
+
 
   #begin section of script cribbed from process_pcl
       xbin <- NULL
@@ -51,7 +51,7 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, ...){
 
       if(is.character(f) == TRUE) {
         # Read in PCL transect.
-        df<- read_pcl(f)
+        df<- read_pcl_multi(data_dir, f)
 
         # Cuts off the directory info to give just the filename.
         filename <- sub(".*/", "", f)
