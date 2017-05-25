@@ -23,15 +23,15 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing){
   #Global Variables
   output_directory <- NULL
 
-  # If missing user height default is 1 m.
-  if(missing(user_height)){
-    user_height = 1
-  }
-
-  # If missing marker.spacing, default is 10 m.
-  if(missing(marker.spacing)){
-    marker.spacing = 10
-  }
+  # # If missing user height default is 1 m.
+  # if(missing(user_height)){
+  #   user_height = 1
+  # }
+  #
+  # # If missing marker.spacing, default is 10 m.
+  # if(missing(marker.spacing)){
+  #   marker.spacing = 10
+  # }
 
 
   file.names <- dir(data_dir, pattern =".CSV")
