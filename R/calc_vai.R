@@ -3,7 +3,7 @@
 #' \code{calc_vai} imports and processes a single PCL transect.
 #'
 #' @param df data frame of pcl data that has been corrected for light extinction
-#'
+#' @param max.vai the maximum value of column VAI. The default is 8. Should be a max value, not a mean.
 #' @keywords vai
 #' @return a matrix of vai by x, z in the canopy
 #' @export
@@ -19,15 +19,18 @@ calc_vai <- function(df, max.vai) {
   can.hits <- NULL
   fee <- NULL
 
+  #calculates the coefficent for the eq.olai step based on max VAI/LAI
+  vai.coeff <- 1 - (exp(-(max.vai/2)))
+
   # this should be how much cover (cvr) is in each, x,z bin index value
   df$cvr <- (df$bin.hits / df$can.hits)
 
   # olai has a maxium value of 8. eq one is for use on areas that are not saturated
-  eq.olai = (log(1.0 - (df$can.hits/df$lidar.pulses)*0.9817)  * -1) /0.5
+  eq.olai = (log(1.0 - (df$can.hits/df$lidar.pulses) * vai.coeff)  * -1) /0.5
 
   ##### you need to do this for all of those columns! olai by column
   # for all columns that are less than saturated, adjust olai
-  df <- transform(df, olai = ifelse(lidar.pulses > can.hits, eq.olai, 8))
+  df <- transform(df, olai = ifelse(lidar.pulses > can.hits, eq.olai, max.vai))
 
   # now make adjusted vai
   eq.vai1 = df$olai * df$fee
