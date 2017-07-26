@@ -29,7 +29,7 @@
 #' process_pcl(osbs, 10, 1.05)
 #' }
 
-process_pcl<- function(f, user_height, marker.spacing, ...){
+process_pcl<- function(f, user_height, marker.spacing, max.vai, ...){
   xbin <- NULL
   zbin <- NULL
   vai <- NULL
@@ -42,6 +42,11 @@ process_pcl<- function(f, user_height, marker.spacing, ...){
   # If missing marker.spacing, default is 10 m.
   if(missing(marker.spacing)){
     marker.spacing = 10
+  }
+
+  # If missing max.vai default is 8
+  if(missing(max.vai)){
+    max.vai = 8
   }
 
   if(is.character(f) == TRUE) {

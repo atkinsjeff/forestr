@@ -19,7 +19,7 @@
 #' process_multi_pcl("./data/PCL_transects/"
 #' }
 #'
-process_multi_pcl <- function(data_dir, user_height, marker.spacing, ...){
+process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, ...){
   #Global Variables
   output_directory <- NULL
   message("Transect Marker Spacing is:")
@@ -47,6 +47,11 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, ...){
       # If missing marker.spacing, default is 10 m.
       if(missing(marker.spacing)){
         marker.spacing = 10
+      }
+
+      # If missing max.vai default is 8
+      if(missing(max.vai)){
+        max.vai = 8
       }
 
       if(is.character(f) == TRUE) {

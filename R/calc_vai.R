@@ -13,7 +13,7 @@
 #' calc_vai(df)
 #' }
 #####this series of functions creates VAI
-calc_vai <- function(df) {
+calc_vai <- function(df, max.vai) {
   #declaring global variables
   lidar.pulses <- NULL
   can.hits <- NULL
