@@ -4,7 +4,7 @@
 \alias{process_pcl}
 \title{Process single PCL transects.}
 \usage{
-process_pcl(f, user_height, marker.spacing)
+process_pcl(f, user_height, marker.spacing, max.vai, ...)
 }
 \arguments{
 \item{f}{the name of the filename to input <character> or a data frame <data frame>.}

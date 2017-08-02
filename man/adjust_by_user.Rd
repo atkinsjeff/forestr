@@ -20,7 +20,8 @@ and a filename in that directory.Future versions of this will allow for direct
 input of file into command so there will be no need to specify both directory and file.
 }
 \examples{
-# Adust raw data to account for user height as PCL is user-mounted and correction gives actual distance from ground.
+# Adust raw data to account for user height as PCL is user-mounted and correction
+# gives actual distance from ground.
 \dontrun{
 adjust_by_user(df, 1.05)
 }

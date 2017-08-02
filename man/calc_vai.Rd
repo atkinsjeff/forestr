@@ -4,10 +4,12 @@
 \alias{calc_vai}
 \title{Calculate vegetation area index (VAI) from normalized PCL data matrix}
 \usage{
-calc_vai(df)
+calc_vai(df, max.vai)
 }
 \arguments{
 \item{df}{data frame of pcl data that has been corrected for light extinction}
+
+\item{max.vai}{the maximum value of column VAI. The default is 8. Should be a max value, not a mean.}
 }
 \value{
 a matrix of vai by x, z in the canopy

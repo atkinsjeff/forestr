@@ -53,7 +53,7 @@ make_summary_matrix <- function(df, m) {
   #mean column leaf height that is the "heightBin" from Matlab code
   # first we make el
   #m$el <- (m$vai / m$sum.vai) * 100
-  m$vai.z <- m$vai * (m$zbin +0.5)
+  m$vai.z <- m$vai * (m$zbin + 0.5)
   h <- stats::setNames(stats::aggregate(vai.z ~ xbin, data = m, FUN = sum, na.rm = FALSE,  na.action = 'na.pass'), c("xbin", "vai.z.sum"))
 
 
