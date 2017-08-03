@@ -37,7 +37,7 @@ normalize_pcl_one <-  function(df) {
   # for loop for this jenk
   # what we are doing is counting up the number of canopy hits to an x,z point in the canopy
   sum.dee <- NULL
-  lidar.pulse <- NULL
+  lidar.pulses <- NULL
   can.hits <- NULL
 
   # first we sort
@@ -64,7 +64,7 @@ normalize_pcl_one <-  function(df) {
 
 normalize_pcl_two <- function(df) {
   sum.dee <- NULL
-  lidar.pulse <- NULL
+  lidar.pulses <- NULL
   can.hits <- NULL
 
   eq1 = (df$can.hits - df$hit.count) / df$can.hits
@@ -77,7 +77,7 @@ normalize_pcl_two <- function(df) {
 
 normalize_pcl_three <- function(df) {
   sum.dee <- NULL
-  lidar.pulse <- NULL
+  lidar.pulses <- NULL
   can.hits <- NULL
 
   df$dee <- 0   #creates and empty column of zeros

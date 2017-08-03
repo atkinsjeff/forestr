@@ -8,6 +8,8 @@
 #' @param data_dir directory where PCL .csv files are stored
 #' @param user_height height of laser from ground based on user in meters
 #' @param marker.spacing space between markers in the PCL data, in meters
+#' @param max.vai the maximum value of column VAI. The default is 8. Should be a max value, not a mean.
+#'
 #'
 #' @export
 #' @examples
@@ -19,7 +21,7 @@
 #' process_multi_pcl("./data/PCL_transects/"
 #' }
 #'
-process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, ...){
+process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai){
   #Global Variables
   output_directory <- NULL
   message("Transect Marker Spacing is:")

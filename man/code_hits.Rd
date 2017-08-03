@@ -7,7 +7,7 @@
 code_hits(df)
 }
 \arguments{
-\item{df}{an raw set of pcl data}
+\item{df}{a raw set of pcl data}
 }
 \description{
 \code{code_hits} imports and processes a single PCL transect.

@@ -19,10 +19,6 @@ calc_vai <- function(df, max.vai) {
   can.hits <- NULL
   fee <- NULL
 
-  #max.vai
-  if(missing(max.vai)){
-    max.vai = 8
-  }
 
   #calculates the coefficent for the eq.olai step based on max VAI/LAI
   vai.coeff <- 1 - (exp(-(max.vai/2)))

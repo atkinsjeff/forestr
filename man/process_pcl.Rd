@@ -4,7 +4,7 @@
 \alias{process_pcl}
 \title{Process single PCL transects.}
 \usage{
-process_pcl(f, user_height, marker.spacing, max.vai, ...)
+process_pcl(f, user_height, marker.spacing, max.vai)
 }
 \arguments{
 \item{f}{the name of the filename to input <character> or a data frame <data frame>.}
@@ -12,6 +12,8 @@ process_pcl(f, user_height, marker.spacing, max.vai, ...)
 \item{user_height}{the height of the laser off the ground as mounted on the user in meters. default is 1 m}
 
 \item{marker.spacing}{distance between markers, defaults is 10 m}
+
+\item{max.vai}{the maximum value of column VAI. The default is 8. Should be a max value, not a mean.}
 }
 \value{
 writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot

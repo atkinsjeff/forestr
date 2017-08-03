@@ -5,7 +5,7 @@
 #'  this function accounts for the NAs that are in return distance which are actually
 #'   the sky hits (i.e. when the lidar does not record a canopy hit)
 #
-#' @param df an raw set of pcl data
+#' @param df a raw set of pcl data
 #'
 #'
 #' @examples

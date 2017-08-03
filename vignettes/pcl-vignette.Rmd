@@ -1,13 +1,19 @@
 ---
 title: "Working With PCL Data"
 author: "Jeff Atkins"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{pcl-vignette}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+  \usepackage[utf8]{inputenc}
 ---
+```{r, echo = FALSE, message = FALSE}
+library(plyr)
+library(dplyr)
+library(forestr)
+```
+
+
 This vignette is aimed at those working with portable canopy LiDAR (PCL) data. Raw PCL data is most typically stored in comma separated values (.csv) files that contain a series of ASCII strings of return distances and return intensities. These return distances are interspersed with data markers that correspond to known distance measures on the ground as described in Hardiman et al. (2013). The spacing between these markers, typically at 10 m, is used as an input into the forestr processing algorithm (Atkins et al. in prep). 
 
 This vignette walks through how to work with  both single PCL files and multiple PCL files into forestr in order to calculate canopy structural metrics.
@@ -18,8 +24,8 @@ This vignette walks through how to work with  both single PCL files and multiple
 
 To import a single file use the `process_pcl` command. As input, `process_pcl` takes the name and directory of the file, the height of the laser from the ground, and the marker spacing used along the transect (Atkins et al. in prep). In the example below, 1 is entered as the laser height and 10 is used as the marker spacing. Both of these measurements are in meters. The laser height adjustement is used to account for the fact that the laser is user-mounted. The laser height is added to each return distance so that each return distance represents a measurement from the ground surface, rather than the laser. The marker spacing is used in the algorithm to section out the data based on the data markers as outlined in Atkins et al. (in prep).
 
-```{r, process_pcl}
-process_pcl('./data-raw/rice.csv', user_height = 1, marker.spacing = 10, max.vai = 8)
+```{r, pcl}
+forestr::process_pcl(osbs, user_height = 1, marker.spacing = 10, max.vai = 8)
 ```
 
 The `process_pcl` file will print multiple CSC metrics to the screen, including canopy rugosity, rumple, porosity, etc., but will also create an output directory named output within the working directory where it will store four things:
@@ -42,40 +48,40 @@ Vignettes are long form documentation commonly included in packages. Because the
 
 Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
 
-## Styles
+<!-- ## Styles -->
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+<!-- The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows: -->
 
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
+<!--     output:  -->
+<!--       rmarkdown::html_vignette: -->
+<!--         css: mystyles.css -->
 
-## Figures
+<!-- ## Figures -->
 
-The figure sizes have been customised so that you can easily put two images side-by-side. 
+<!-- The figure sizes have been customised so that you can easily put two images side-by-side.  -->
 
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
-```
+<!-- ```{r, fig.show='hold'} -->
+<!-- plot(1:10) -->
+<!-- plot(10:1) -->
+<!-- ``` -->
 
-You can enable figure captions by `fig_caption: yes` in YAML:
+<!-- You can enable figure captions by `fig_caption: yes` in YAML: -->
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+<!--     output: -->
+<!--       rmarkdown::html_vignette: -->
+<!--         fig_caption: yes -->
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+<!-- Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**. -->
 
-## More Examples
+<!-- ## More Examples -->
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+<!-- You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`. -->
 
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
-```
+<!-- ```{r, echo=FALSE, results='asis'} -->
+<!-- knitr::kable(head(mtcars, 10)) -->
+<!-- ``` -->
 
-Also a quote using `>`:
+<!-- Also a quote using `>`: -->
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+<!-- > "He who gives up [code] safety for [code] speed deserves neither." -->
+<!-- ([via](https://twitter.com/hadleywickham/status/504368538874703872)) -->
