@@ -41,5 +41,5 @@ The forestr package also produces hit grids--vegetation area index (VAI) for by 
 
 
 
-![](http://atkinsjeff.github.io/images/osbs.png)
+![](osbs.png)
 

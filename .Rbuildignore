@@ -1,2 +1,4 @@
+figure/
+osbs.png
 ^.*\.Rproj$
 ^\.Rproj\.user$

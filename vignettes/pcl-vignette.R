@@ -1,9 +1,8 @@
 ## ---- echo = FALSE, message = FALSE--------------------------------------
-knitr::opts_chunk$set(collapse = T, comment = "#>")
-options(tibble.print_min = 5)
+library(plyr)
 library(dplyr)
 library(forestr)
-knit_print.tbl_df <- function(x, options) {
-  knitr::knit_print(trunc_mat(x), options)
-}
+
+## ---- pcl----------------------------------------------------------------
+forestr::process_pcl(osbs, user_height = 1, marker.spacing = 10, max.vai = 8)
 
