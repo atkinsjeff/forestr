@@ -1,0 +1,45 @@
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+forestr
+-------
+
+The forestr package calculates forest structure and canopy structure metrics from multiple data forms, including two-dimensional portable canopy LiDAR (PCL) raw data files and from certain processed three-dimensional terrestrial LiDAR scanner (TLS) data forms.
+
+Installation
+------------
+
+To install the development version
+
+``` r
+devtools::install_github("atkinsjeff/forestr")
+```
+
+Usage
+-----
+
+To process raw PCL data, which comes in .csv form as two columns: column one is a string of numbers that represent return distance in meters, and column two is a string of integers that represent return intensity.
+
+You can run an example data set that is included, a 40 m forest transect from Ordway-Swisher Biological Station in Hawthorn, FL.
+
+The `process_pcl` function writes data to an output folder that is created in the working directory.
+
+``` r
+
+require(forestr)
+
+process_pcl(osbs)
+```
+
+The output includes:
+
+1.  an output.csv file that contains 24 canopy structral complexity (CSC) metrics including rumple, canopy rugosity, and max canopy height. These metrics are defined in [Hardiman et al. 2013](http://www.mdpi.com/1999-4907/4/3/537/htm).
+
+2.  an output\_hit\_matrix.csv file that is a file that contains the adjusted VAI by x and z position in the canopy.
+
+3.  a summary\_matrix.csv file that gives the mean height, max heights, VAI and variance metrics by each columnar position, or x position along the transect.
+
+Plotting
+--------
+
+The forestr package also produces hit grids--vegetation area index (VAI) for by 1 squared meter bins on the x and z axis through the canopy.
+
+![](http://atkinsjeff.github.io/images/osbs.png)

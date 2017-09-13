@@ -1,6 +1,20 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
 
 
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "figure/",
+  fig.height = 1
+)
+```
 ## forestr
 
 The forestr package calculates forest structure and canopy structure metrics from multiple data forms, including two-dimensional portable canopy LiDAR (PCL) raw data files and from certain processed three-dimensional terrestrial LiDAR scanner (TLS) data forms. 
@@ -41,5 +55,5 @@ The forestr package also produces hit grids--vegetation area index (VAI) for by 
 
 
 
-![](osbs.png)
+![](http://atkinsjeff.github.io/images/osbs.png)
 
