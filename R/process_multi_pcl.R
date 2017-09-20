@@ -94,7 +94,7 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai){
       m4 <- normalize_pcl_three(m3)
 
       # Calculates VAI (vegetation area index m^ 2 m^ -2).
-      m5 <- calc_vai(m4)
+      m5 <- calc_vai(m4, max.vai)
 
       # Summary matrix.
       summary.matrix <- make_summary_matrix(test.data.binned, m5)
