@@ -18,7 +18,7 @@
 #' }
 #####Canopy metrics before matrix creations
 
-csc_metrics <- function(df, filename) {
+csc_metrics <- function(df, filename, transect.length) {
   #Declaring global variables
   return_distance <- NULL
 
@@ -52,12 +52,18 @@ csc_metrics <- function(df, filename) {
   message("Max Measured Canopy Height (%)")
   print(max.ht)
 
+  scan.density = nrow(df/transect.length)
+  messagbe("Scan Density")
+  print(scan.density)
+
   csc.variable.list <- list(plot = filename,
                             mean.return.ht = mean.return.ht,
                             sd.return.ht = sd.ht,
                             sky.fraction = sky.fraction,
                             cover.fraction = cover.fraction,
-                            max.ht = max.ht)
+                            max.ht = max.ht,
+                            scan.density = scan.density)
+
   csc.variable.list <- data.frame(csc.variable.list)
   return(csc.variable.list)
 }

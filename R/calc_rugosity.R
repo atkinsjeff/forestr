@@ -125,7 +125,7 @@ calc_rugosity <- function(df, m, filename) {
   message("Surface Rugosity--TopRugosity")
   print(jess.rugosity)
 
-  variable.list <- list(plot = filename,
+    variable.list <- list(plot = filename,
                         mean.height = mean.height,
                         transect.length = transect.length,
                         mode.el = mode.el,
