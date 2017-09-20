@@ -53,7 +53,7 @@ csc_metrics <- function(df, filename, transect.length) {
   print(max.ht)
 
   scan.density = nrow(df/transect.length)
-  messagbe("Scan Density")
+  message("Scan Density")
   print(scan.density)
 
   csc.variable.list <- list(plot = filename,

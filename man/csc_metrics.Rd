@@ -4,7 +4,7 @@
 \alias{csc_metrics}
 \title{Cover and sky fraction estimates}
 \usage{
-csc_metrics(df, filename)
+csc_metrics(df, filename, transect.length)
 }
 \arguments{
 \item{df}{data frame of uncorrected PCL data}
