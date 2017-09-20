@@ -10,6 +10,8 @@ csc_metrics(df, filename, transect.length)
 \item{df}{data frame of uncorrected PCL data}
 
 \item{filename}{name of file currently being processed}
+
+\item{transect.length}{the length of the transect}
 }
 \value{
 slew of cover and sky fraction metrics
