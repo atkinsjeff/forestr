@@ -3,6 +3,7 @@
 figure/
 osbs.png
 ^README\.Rmd$       # An Rmarkdown file used to generate README.md
+README.Rmd
 README.html
 README.md
 cran-comments.md
