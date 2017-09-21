@@ -30,13 +30,13 @@ A hit grid plot is also saved to this same directory.
 }
 \examples{
 
-\dontrun{
-process_pcl("pcl_data.csv", 10, 1.05)
+# with designated file
+process_pcl("pcl_data.csv", marker.spacing = 10, user_height = 1.05, max.vai = 8)
 
 
 # with data frame
-process_pcl(osbs, 10, 1.05)
-}
+process_pcl(osbs, marker.spacing = 10, user_height = 1.05, max.vai = 8)
+
 }
 \keyword{pcl}
 \keyword{processing}
