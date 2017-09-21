@@ -1,13 +1,13 @@
 Package: forestr
 Type: Package
 Version: 1.0.0
-Title: For Calculating Forest and Canopy Structural Metrics
+Title: Calculating Forest and Canopy Structural Complexity Metrics from LiDAR
 Authors@R: person("Jeff", "Atkins", email = "jwatkins6@vcu.edu",
                   role = c("aut", "cre"))
-URL: http://atkinsjeff.github.io
+URL: https://github.com/atkinsjeff/forestr
 Maintainer: Jeff Atkins <jwatkins6@vcu.edu>
-Description: A package that calculates forest and canopy structural metrics from
-    portable canopy LiDAR (PCL) and terrestrial scanning LiDAR.
+Description: Provides a toolkil for calculating forest and canopy structural complexity metrics from
+    portable canopy LiDAR (PCL) and terrestrial scanning LiDAR (TLS).
 Depends:
     R (>= 3.1.2)
 Imports:
