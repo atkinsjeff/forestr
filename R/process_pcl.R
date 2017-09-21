@@ -21,14 +21,13 @@
 #'
 #' @examples
 #'
-#' \dontrun{
-# # with designated file
+#' # # with designated file
 #' process_pcl("pcl_data.csv", 10, 1.05)
 #'
 #'
 #' # with data frame
 #' process_pcl(osbs, 10, 1.05)
-#' }
+#'
 
 process_pcl<- function(f, user_height, marker.spacing, max.vai){
   xbin <- NULL

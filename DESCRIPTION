@@ -7,7 +7,8 @@ Authors@R: person("Jeff", "Atkins", email = "jwatkins6@vcu.edu",
 URL: https://github.com/atkinsjeff/forestr
 Maintainer: Jeff Atkins <jwatkins6@vcu.edu>
 Description: Provides a toolkit for calculating forest and canopy structural complexity metrics from
-    portable canopy LiDAR (PCL) and terrestrial scanning LiDAR (TLS).
+    terrestrial LiDAR (light detection and ranging). References:  Atkins et al. In Review; Hardiman et al. 2013(doi:10.3390/f4030537);
+    Parker et al. 2004 (doi:10.1111/j.0021-8901.2004.00925.x)
 Depends:
     R (>= 3.1.2)
 Imports:
