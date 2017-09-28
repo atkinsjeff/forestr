@@ -13,13 +13,13 @@
 #'
 #' @export
 #' @examples
-#' \dontrun{
+#'
 #' # This function works on a directory of raw PCL data
 #' data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
 #' process_multi_pcl(data_directory)
 #'
 #' process_multi_pcl("./data/PCL_transects/"
-#' }
+#'
 #'
 process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai){
   #Global Variables
@@ -70,6 +70,9 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai){
 
       # Calculate transect length.
       transect.length <- get_transect_length(df, marker.spacing)
+
+      # Cuts off extremely high values. Should be set to be operationally defined later. And throw up a warning.
+      df <- df[!(df$return_distance >= 50), ]
 
       # Desginates a LiDAR pulse as either a sky hit or a canopy hit
       df <- code_hits(df)
