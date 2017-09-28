@@ -68,8 +68,6 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai){
         filename <- deparse(substitute(f))
       }
 
-      # Cuts off extremely high values. Should be set to be operationally defined later. And throw up a warning.
-      df <- df[!(df$return_distance >= 50), ]
 
       # Calculate transect length.
       transect.length <- get_transect_length(df, marker.spacing)
@@ -80,9 +78,13 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai){
       # Adjusts by the height of the  user to account for difference in laser height to ground in meters==default is 1 m.
       df <- adjust_by_user(df, user_height)
 
+
       # Splits transects from code into segments (distances between markers as designated by marker.spacing
       # and chunks (1 m chunks in each marker).
       test.data.binned <- split_transects_from_pcl(df, transect.length, marker.spacing)
+
+      # Cuts off extremely high values. Should be set to be operationally defined later. And throw up a warning.
+      df <- df[!(df$return_distance >= 50), ]
 
       # First-order metrics of sky and cover fraction.
       csc.metrics <- csc_metrics(test.data.binned, filename, transect.length)
