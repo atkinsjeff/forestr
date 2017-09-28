@@ -53,6 +53,9 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
   # Read in PCL transect.
   df<- read_pcl(f)
 
+  # cuts out erroneous high values
+  df <- df[!(df$return_distance >= 50), ]
+
   # Cuts off the directory info to give just the filename.
   filename <- sub(".*/", "", f)
 
