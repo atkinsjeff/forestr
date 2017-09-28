@@ -49,7 +49,7 @@ csc_metrics <- function(df, filename, transect.length) {
   print(cover.fraction)
 
   max.ht = max(df$return_distance, na.rm = TRUE)
-  message("Max Measured Canopy Height (%)")
+  message("Max Measured Canopy Height (m)")
   print(max.ht)
 
   scan.density = nrow(df) /transect.length
