@@ -68,11 +68,11 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai){
         filename <- deparse(substitute(f))
       }
 
-      # Calculate transect length.
-      transect.length <- get_transect_length(df, marker.spacing)
-
       # Cuts off extremely high values. Should be set to be operationally defined later. And throw up a warning.
       df <- df[!(df$return_distance >= 50), ]
+
+      # Calculate transect length.
+      transect.length <- get_transect_length(df, marker.spacing)
 
       # Desginates a LiDAR pulse as either a sky hit or a canopy hit
       df <- code_hits(df)
