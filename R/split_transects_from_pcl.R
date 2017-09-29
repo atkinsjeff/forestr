@@ -68,7 +68,6 @@ split_transects_from_pcl <- function(pcl_data, transect.length, marker.spacing, 
   # Initialize empty data frame to store results
   results <- data.frame()
 
-  # For each segment there should only be 4 in total -- checked with test
   # but we're flexible here. Uses cut() with labels = FALSE to return
 
   #### this needs to be adjusted to account for smaller transects
@@ -82,7 +81,7 @@ split_transects_from_pcl <- function(pcl_data, transect.length, marker.spacing, 
     }
 
     # Make sure we didn't make too many chunks in any segment
-    stopifnot(max(results$chunk_num) < 11)
+    #stopifnot(max(results$chunk_num) < 11)
     stopifnot(max(results$seg_num) < ((transect.length/marker.spacing) + 1))
   }
   # Code segment to create zbin and xbin
