@@ -85,9 +85,7 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
 
   # Normalizes date by column based on assumptions of Beer-Lambert Law of light extinction vertically
   # through the canopy.
-  m2 <- normalize_pcl_one(m1)
-  m3 <- normalize_pcl_two(m2)
-  m4 <- normalize_pcl_three(m3)
+  m4 <- normalize_pcl(m1)
 
   # Calculates VAI (vegetation area index m^ 2 m^ -2).
   m5 <- calc_vai(m4, max.vai)
