@@ -62,6 +62,9 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
 #   }
 
   df<- read_pcl(f)
+  message("how many in base df have NA")
+  print(sum(is.na(df$return.distance)))
+
   #
   #     # Cuts off the directory info to give just the filename.
   filename <- sub(".*/", "", f)
