@@ -40,7 +40,7 @@ csc_metrics <- function(df, filename, transect.length) {
   message("Standard Deviation of raw  Canopy Height returns-- meanStd in old code")
   print(sd.ht)
 
-  sky.fraction = (1 - (length(which(df$can_hit == TRUE)) / (length(df$return_distance) - correction.coef) )) * 100
+  sky.fraction = (1 -  ( (length(which(df$can_hit == TRUE))) / (length(df$return_distance) - correction.coef) )) * 100
   message("Sky Fraction (%)")
   print(sky.fraction)
 
