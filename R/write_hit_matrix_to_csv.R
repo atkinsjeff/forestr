@@ -16,8 +16,15 @@
 #' }
 
 write_hit_matrix_to_csv <- function(m, outputname, output_directory) {
+  m.og <- m
   m <- m[, c("xbin", "zbin", "vai")]
 
+  #Write just thie hit matrix
   filename2 <- paste(outputname, "_hit_matrix.csv", sep="")
   utils::write.csv(m, file.path(output_directory, filename2))
+
+  #full matrix
+  filename3 <- paste(outputname, "_full_matrix.csv", sep = "")
+  utils::write.csv(m.og, file.path(output_directory, filename3))
+
 }
