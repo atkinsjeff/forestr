@@ -82,15 +82,11 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
   # Desginates a LiDAR pulse as either a sky hit or a canopy hit
   df2 <- code_hits(df)
 
+  message("Table of sky hits")
   print(table(df2$sky_hit))
 
   # Adjusts by the height of the  user to account for difference in laser height to ground in   meters==default is 1 m.
   df3 <- adjust_by_user(df2, user_height)
-  print(sum(is.na(df$return_distance)))
-  message("df2 check")
-  print(sum(is.na(df2$return_distance)))
-  message("df3 check")
-  print(sum(is.na(df3$return_distance)))
 
   # First-order metrics of sky and cover fraction.
   csc.metrics <- csc_metrics(df3, filename, transect.length)
@@ -108,10 +104,8 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
 
   # Calculates VAI (vegetation area index m^ 2 m^ -2).
   m5 <- calc_vai(m2, max.vai)
-  print(m5)
   # Summary matrix.
   summary.matrix <- make_summary_matrix(test.data.binned, m5)
-  print(summary.matrix)
   rumple <- calc_rumple(summary.matrix)
   clumping.index <- calc_gap_fraction(m5)
 

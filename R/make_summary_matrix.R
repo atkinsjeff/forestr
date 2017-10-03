@@ -41,7 +41,6 @@ make_summary_matrix <- function(df, m) {
 
   # sum of VAI in column
   e <- stats::setNames(stats::aggregate(vai ~ xbin, data = m, FUN = sum, na.rm = FALSE, na.action = 'na.pass'), c("xbin", "sum.vai"))
-  print(e)
   # standard deviation of VAI for column
   f <- stats::setNames(stats::aggregate(vai ~ xbin, data = m, FUN = stats::sd, na.rm = FALSE, na.action = 'na.pass'), c("xbin", "sd.vai"))
 
@@ -73,17 +72,9 @@ make_summary_matrix <- function(df, m) {
   p$height.bin <- p$vai.z.sum / p$sum.vai
   p[is.na(p)] <- 0
 
-  #p$sum.vai <- apply(p, sum.vai, function(x) ifelse(x > 8, 8, x))
+  # replace overestimate of VAI in first column
+  p$sum.vai[p$sum.vai > 8] <- 8
 
-  # p$std.bin.num <- p$vai * ((p$zbin - p$height.bin)^2)
-  #
-  # j <- stats::aggregate(std.bin.num ~ xbin, data = p, FUN = sum, na.rm = FALSE, na.action = 'na.pass')
-  # j[is.na(j)] <- 0
-  # print(j)
-  #
-  # p <- merge(p, j, by = "xbin")
-  # p$std.bin <- p$std.bin.num / p$sum.vai
-  # first we sort
 
   return(p)
 }
