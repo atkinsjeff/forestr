@@ -20,6 +20,7 @@
 
 #' }
 
+
 make_summary_matrix <- function(df, m) {
   #declaring global varieties
   return_distance <- NULL
@@ -72,8 +73,7 @@ make_summary_matrix <- function(df, m) {
   p$height.bin <- p$vai.z.sum / p$sum.vai
   p[is.na(p)] <- 0
 
-  #corrects at least the sum.vai error where the first column goes over
-  p$sum.vai[p$vai > 8] <- 8
+  #p$sum.vai <- apply(p, sum.vai, function(x) ifelse(x > 8, 8, x))
 
   # p$std.bin.num <- p$vai * ((p$zbin - p$height.bin)^2)
   #
