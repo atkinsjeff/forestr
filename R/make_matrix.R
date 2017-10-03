@@ -28,14 +28,18 @@ make_matrix_part_one <- function(df) {
 
   # number of sky.hits per column (x)
   n <- stats::setNames(stats::aggregate(sky_hit ~ xbin, data = df, FUN = sum), c("xbin", "sky.hits"))
-
+  message("sky hits per column")
+  print(n)
   # number of canopy returns in column
   k <- stats::setNames(stats::aggregate(can_hit ~ xbin, data = df, FUN = sum), c("xbin", "can.hits"))
+  message("canopy hits per column")
+  print(k)
 
   p <- merge(m, n, by = c("xbin"), all = TRUE)
   p <- merge(p, k, by = c("xbin"), all = TRUE)
 
   p$lidar.pulses <- p$can.hits + p$sky.hits
+  print(p$lidar.pulses)
   message("lidar pulses")
   print(length(p$lidar.pulses))
   message("can hits")
