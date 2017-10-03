@@ -16,10 +16,10 @@
 #'
 #' # This function works on a directory of raw PCL data
 #' data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
-#' process_multi_pcl(data_directory)
+#' \dontrun{process_multi_pcl(data_directory, user_height = 1.05, marker.spacing = 10, max.vai = 8)
 #'
-#' process_multi_pcl("./data/PCL_transects/"
-#'
+#' process_multi_pcl("./data/PCL_transects/", user_height = 1.05, marker.spacing = 10, max.vai = 8)
+#' }
 #'
 process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai){
   #Global Variables
@@ -97,7 +97,7 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai){
 
       # Normalizes date by column based on assumptions of Beer-Lambert Law of light extinction vertically
       # through the canopy.
-      m5 <- normalize_pcl(m1)
+      m4 <- normalize_pcl(m1)
 
       # Calculates VAI (vegetation area index m^ 2 m^ -2).
       m5 <- calc_vai(m4, max.vai)
