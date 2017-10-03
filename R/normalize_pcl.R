@@ -32,6 +32,7 @@ normalize_pcl <- function(df) {
 }
 
 
+
 #### light saturation correction
 normalize_pcl_one <-  function(df) {
   # for loop for this jenk
@@ -61,6 +62,7 @@ normalize_pcl_one <-  function(df) {
   }
   return(df)
 }
+
 
 normalize_pcl_two <- function(df) {
   sum.dee <- NULL
