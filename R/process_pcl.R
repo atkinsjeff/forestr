@@ -70,17 +70,18 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
   #error checking transect length
   message("Transect Length")
   print(transect.length)
-  # Desginates a LiDAR pulse as either a sky hit or a canopy hit
-  df <- code_hits(df)
 
-  print(table(df$sky_hit))
+  # Desginates a LiDAR pulse as either a sky hit or a canopy hit
+  df2 <- code_hits(df)
+
+  print(table(df2$sky_hit))
 
   # Adjusts by the height of the  user to account for difference in laser height to ground in meters==default is 1 m.
-  df <- adjust_by_user(df, user_height)
+  df3 <- adjust_by_user(df2, user_height)
 
   # Splits transects from code into segments (distances between markers as designated by marker.spacing
   # and chunks (1 m chunks in each marker).
-  test.data.binned <- split_transects_from_pcl(df, transect.length, marker.spacing)
+  test.data.binned <- split_transects_from_pcl(df3, transect.length, marker.spacing)
 
   # First-order metrics of sky and cover fraction.
   csc.metrics <- csc_metrics(test.data.binned, filename, transect.length)
