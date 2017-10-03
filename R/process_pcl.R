@@ -70,7 +70,7 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
   # Desginates a LiDAR pulse as either a sky hit or a canopy hit
   df <- code_hits(df)
 
-  table(df$sky_hit)
+  print(table(df$sky_hit))
 
   # Adjusts by the height of the  user to account for difference in laser height to ground in meters==default is 1 m.
   df <- adjust_by_user(df, user_height)
