@@ -61,9 +61,9 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
 #     filename <- deparse(substitute(f))
 #   }
 
-  df<- read_pcl(f)
+  df <- read_pcl(f)
   message("how many in base df have NA")
-  print(sum(is.na(df$return.distance)))
+  print(sum(is.na(df$return_distance)))
 
   #
   #     # Cuts off the directory info to give just the filename.
@@ -86,11 +86,11 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
 
   # Adjusts by the height of the  user to account for difference in laser height to ground in   meters==default is 1 m.
   df3 <- adjust_by_user(df2, user_height)
-  print(sum(is.na(df$return.distance)))
+  print(sum(is.na(df$return_distance)))
   message("df2 check")
-  print(sum(is.na(df2$return.distance)))
+  print(sum(is.na(df2$return_distance)))
   message("df3 check")
-  print(sum(is.na(df3$return.distance)))
+  print(sum(is.na(df3$return_distance)))
 
   # First-order metrics of sky and cover fraction.
   csc.metrics <- csc_metrics(df3, filename, transect.length)
