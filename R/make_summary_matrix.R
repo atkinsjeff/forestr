@@ -40,7 +40,7 @@ make_summary_matrix <- function(df, m) {
 
   # sum of VAI in column
   e <- stats::setNames(stats::aggregate(vai ~ xbin, data = m, FUN = sum, na.rm = FALSE, na.action = 'na.pass'), c("xbin", "sum.vai"))
-
+  print(e)
   # standard deviation of VAI for column
   f <- stats::setNames(stats::aggregate(vai ~ xbin, data = m, FUN = stats::sd, na.rm = FALSE, na.action = 'na.pass'), c("xbin", "sd.vai"))
 
