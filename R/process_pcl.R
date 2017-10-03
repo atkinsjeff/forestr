@@ -78,7 +78,7 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
 
   # Adjusts by the height of the  user to account for difference in laser height to ground in   meters==default is 1 m.
   df3 <- adjust_by_user(df2, user_height)
-
+  print(sum(is.na(df$return.distance)))
   message("df2 check")
   print(sum(is.na(df2$return.distance)))
   message("df3 check")
