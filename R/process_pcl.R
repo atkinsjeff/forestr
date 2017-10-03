@@ -84,7 +84,7 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
   test.data.binned <- split_transects_from_pcl(df3, transect.length, marker.spacing)
 
   # First-order metrics of sky and cover fraction.
-  csc.metrics <- csc_metrics(test.data.binned, filename, transect.length)
+  csc.metrics <- csc_metrics(df3, filename, transect.length)
 
   # Makes matrix of z and x coordinated pcl data.
   m1 <- make_matrix(test.data.binned)
