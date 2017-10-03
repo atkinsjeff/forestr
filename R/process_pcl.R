@@ -76,15 +76,15 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
 
   print(table(df2$sky_hit))
 
-  # Adjusts by the height of the  user to account for difference in laser height to ground in meters==default is 1 m.
+  # Adjusts by the height of the  user to account for difference in laser height to ground in   meters==default is 1 m.
   df3 <- adjust_by_user(df2, user_height)
-
-  # Splits transects from code into segments (distances between markers as designated by marker.spacing
-  # and chunks (1 m chunks in each marker).
-  test.data.binned <- split_transects_from_pcl(df3, transect.length, marker.spacing)
 
   # First-order metrics of sky and cover fraction.
   csc.metrics <- csc_metrics(df3, filename, transect.length)
+
+  # Splits transects from code into segments (distances between markers as designated by        marker.spacing
+  # and chunks (1 m chunks in each marker).
+  test.data.binned <- split_transects_from_pcl(df3, transect.length, marker.spacing)
 
   # Makes matrix of z and x coordinated pcl data.
   m1 <- make_matrix(test.data.binned)
