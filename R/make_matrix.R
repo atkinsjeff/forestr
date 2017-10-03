@@ -36,9 +36,12 @@ make_matrix_part_one <- function(df) {
   p <- merge(p, k, by = c("xbin"), all = TRUE)
 
   p$lidar.pulses <- p$can.hits + p$sky.hits
-  print(sum(p$lidar.pulses))
-  print(sum(p$can.hits))
-  print(sum(p$sky.hits) )
+  message("lidar pulses")
+  print(length(p$lidar.pulses))
+  message("can hits")
+  print(length(p$can.hits))
+  message("sky hits")
+  print(length(p$sky.hits) )
   replace(p, is.na(p), 0)#This will correct for any gaps w/out msmts as all NAs will be 0
 
 
