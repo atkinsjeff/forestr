@@ -80,9 +80,9 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
   df3 <- adjust_by_user(df2, user_height)
 
   message("df2 check")
-  print(summary(df2))
+  print(sum(is.na(df2$return.distance)))
   message("df3 check")
-  print(summary(df3))
+  print(sum(is.na(df3$return.distance)))
 
   # First-order metrics of sky and cover fraction.
   csc.metrics <- csc_metrics(df3, filename, transect.length)
