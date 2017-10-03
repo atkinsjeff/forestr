@@ -94,5 +94,5 @@ split_transects_from_pcl <- function(pcl_data, transect.length, marker.spacing, 
 
 
   results <- dplyr::distinct(results, index, .keep_all = TRUE)
-  results
+  return(results)
 }
