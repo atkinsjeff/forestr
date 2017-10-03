@@ -95,7 +95,7 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
 
   # Calculates VAI (vegetation area index m^ 2 m^ -2).
   m5 <- calc_vai(m2, max.vai)
-
+  print(m5)
   # Summary matrix.
   summary.matrix <- make_summary_matrix(test.data.binned, m5)
   print(summary.matrix)
