@@ -68,6 +68,9 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai){
         filename <- deparse(substitute(f))
       }
 
+      # How many NA's in return distance in df?
+      message("how many in base df have NA")
+      print(sum(is.na(df$return_distance)))
 
       # Calculate transect length.
       transect.length <- get_transect_length(df, marker.spacing)

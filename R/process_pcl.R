@@ -49,28 +49,29 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
     max.vai = 8
   }
 #
-#   if(is.character(f) == TRUE) {
-#   # Read in PCL transect.
-#   df<- read_pcl(f)
-#
-#     # Cuts off the directory info to give just the filename.
-#   filename <- sub(".*/", "", f)
-#
-#   } else if(is.data.frame(f) == TRUE){
-#     df <- f
-#     filename <- deparse(substitute(f))
-#   }
+  if(is.character(f) == TRUE) {
+  # Read in PCL transect.
+  df<- read_pcl(f)
+
+    # Cuts off the directory info to give just the filename.
+  filename <- sub(".*/", "", f)
+
+  } else if(is.data.frame(f) == TRUE){
+    df <- f
+    filename <- deparse(substitute(f))
+  }
 
   df <- read_pcl(f)
   message("how many in base df have NA")
   print(sum(is.na(df$return_distance)))
+
 
   #
   #     # Cuts off the directory info to give just the filename.
   filename <- sub(".*/", "", f)
   #
   # cuts out erroneous high values
-  #df <- df[!(df$return_distance >= 50), ]
+  df <- df[!(df$return_distance >= 50), ]
 
   # Calculate transect length.
   transect.length <- get_transect_length(df, marker.spacing)
