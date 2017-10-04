@@ -71,7 +71,7 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
   filename <- sub(".*/", "", f)
   #
   # cuts out erroneous high values
-  df <- df[!(df$return_distance >= 50), ]
+  #df <- df[!(df$return_distance >= 50), ]
 
   # Calculate transect length.
   transect.length <- get_transect_length(df, marker.spacing)

@@ -76,7 +76,7 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai){
       transect.length <- get_transect_length(df, marker.spacing)
 
       # cuts out erroneous high values
-      df <- df[!(df$return_distance >= 50), ]
+      #df <- df[!(df$return_distance >= 50), ]
 
       # Desginates a LiDAR pulse as either a sky hit or a canopy hit
       df <- code_hits(df)
