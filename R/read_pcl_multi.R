@@ -18,7 +18,7 @@
 
 read_pcl_multi <- function(data_directory, filename) {
   f <- file.path(data_directory, filename)
-  df <- utils::read.csv(f, header=FALSE, col.names = c("return_distance", "intensity"), blank.lines.skip = FALSE)
+  df <- utils::read.csv(f, header=FALSE, col.names = c("return_distance", "intensity"), blank.lines.skip = FALSE)[,1:2]
   df$index <- as.numeric(rownames(df))
   df = df[,c(3, 1, 2)]
   df

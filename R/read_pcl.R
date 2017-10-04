@@ -17,7 +17,7 @@
 
 read_pcl <- function(f) {
   df <- utils::read.csv(f, header=FALSE, col.names = c("return_distance", "intensity"),
-                        blank.lines.skip = FALSE)
+                        blank.lines.skip = FALSE)[,1:2]
   message("how many in base df have NA")
   print(sum(is.na(df$return_distance)))
   df$index <- as.numeric(rownames(df))
