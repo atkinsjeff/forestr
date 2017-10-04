@@ -89,9 +89,6 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai){
       # and chunks (1 m chunks in each marker).
       test.data.binned <- split_transects_from_pcl(df, transect.length, marker.spacing)
 
-      # Cuts off extremely high values. Should be set to be operationally defined later. And throw up a warning.
-      test.data.binned <- test.data.binned[!(test.data.binned$return_distance >= 50), ]
-
       # First-order metrics of sky and cover fraction.
       csc.metrics <- csc_metrics(df, filename, transect.length)
 
