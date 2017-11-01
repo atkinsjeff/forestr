@@ -132,8 +132,11 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
 
   #get filename first
   plot.filename <- tools::file_path_sans_ext(filename)
+  plot.filename.full <- paste(plot.filename, "hit_grid", sep = "_")
+  plot.filename.pavd <- paste(plot.filename, "pavd", sep = "_")
 
-  plot.file.path <- file.path(paste(output_directory, plot.filename, ".png", sep = ""))
+  plot.file.path.hg <- file.path(paste(output_directory, plot.filename.full, ".png", sep = ""))
+  plot.file.path.pavd <- file.path(paste(output_directory, plot.filename.pavd, ".png", sep = ""))
 
   vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
   #x11(width = 8, height = 6)
