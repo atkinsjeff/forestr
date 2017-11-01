@@ -18,7 +18,7 @@
 
 
 # PAVD script
-plot_pavd <- function(m, filename, plot.file.path, hist = FALSE) {
+plot_pavd <- function(m, filename, plot.file.path.pavd, hist = FALSE) {
   #m = vai matrix
 
 
@@ -76,7 +76,7 @@ ggplot2::ggsave(plot.file.path, hit.grid, width = 8, height = 6, units = c("in")
 }
 
 
-ggplot2::ggsave(plot.file.path, pavd, width = 8, height = 6, units = c("in"))
+ggplot2::ggsave(plot.file.path.pavd, pavd, width = 8, height = 6, units = c("in"))
 
 }
 
