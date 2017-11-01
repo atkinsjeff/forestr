@@ -34,5 +34,7 @@ calc_enl <- function(m) {
   # The effective number of layers
   enl <- sum(df.z.count$p.i)
 
+  print(enl)
+
   return(enl)
 }
