@@ -165,11 +165,11 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
   ggplot2::ggsave(plot.file.path.hg, hit.grid, width = 8, height = 6, units = c("in"))
 
   # PAVD
-  if(pavd == TRUE | hist == FALSE){
+  if(pavd == TRUE && hist == FALSE){
 
     plot_pavd(m5, filename, plot.file.path.pavd)
   }
-  if(pavd == TRUE | hist == TRUE){
+  if(pavd == TRUE && hist == TRUE){
 
     plot_pavd(m5, filename, plot.file.path.pavd, hist = TRUE)
   }
