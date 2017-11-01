@@ -32,7 +32,7 @@ calc_enl <- function(m) {
   df.z.count$p.i <- (df.z.count$vai / total.cells)^2
 
   # The effective number of layers
-  enl <- sum(df.z.count$p.i)
+  enl <- 1 / (sum(df.z.count$p.i))
 
   message("Effective Number of Layers:  ")
   print(enl)
