@@ -29,7 +29,7 @@
 #' process_pcl(osbs, marker.spacing = 10, user_height = 1.05, max.vai = 8)
 #' }
 
-process_pcl<- function(f, user_height, marker.spacing, max.vai){
+process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hist = FALSE){
   xbin <- NULL
   zbin <- NULL
   vai <- NULL
@@ -160,4 +160,15 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai){
     ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
 
   ggplot2::ggsave(plot.file.path, hit.grid, width = 8, height = 6, units = c("in"))
+
+  # PAVD
+  if(pavd == TRUE | hist == FALSE){
+
+    plot_pavd(m5, filename, plot.file.path)
+  }
+  if(pavd == TRUE | hist == TRUE){
+
+    plot_pavd(m5, filename, plot.file.path, hist = TRUE)
+  }
+
 }
