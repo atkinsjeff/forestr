@@ -162,7 +162,7 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
     ggplot2::ggtitle(filename)+
     ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
 
-  ggplot2::ggsave(plot.file.path, hit.grid, width = 8, height = 6, units = c("in"))
+  ggplot2::ggsave(plot.file.path.hg, hit.grid, width = 8, height = 6, units = c("in"))
 
   # PAVD
   if(pavd == TRUE | hist == FALSE){
