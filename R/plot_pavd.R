@@ -76,7 +76,7 @@ ggplot2::ggsave(plot.file.path, hit.grid, width = 8, height = 6, units = c("in")
 }
 
 
-ggplot2::ggsave(plot.file.path, pacvd, width = 8, height = 6, units = c("in"))
+ggplot2::ggsave(plot.file.path, pavd, width = 8, height = 6, units = c("in"))
 
 }
 
