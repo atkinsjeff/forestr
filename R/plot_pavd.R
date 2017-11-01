@@ -54,7 +54,7 @@ pavd <- ggplot2::ggplot(df.z, aes(y = df.z$ratio.vai, x = df.z$zbin))+
   ggplot2::ggtitle(filename)+
   ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
 
-ggplot2::ggsave(plot.file.path, hit.grid, width = 8, height = 6, units = c("in"))
+ggplot2::ggsave(plot.file.path.pavd, hit.grid, width = 8, height = 6, units = c("in"))
 } else {
   pavd <- ggplot2::ggplot(df.z, aes(y = df.z$ratio.vai, x = df.z$zbin))+
     #geom_bar(stat = "identity", color = "light grey")+
