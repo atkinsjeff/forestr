@@ -167,11 +167,11 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
   # PAVD
   if(pavd == TRUE | hist == FALSE){
 
-    plot_pavd(m5, filename, plot.file.path)
+    plot_pavd(m5, filename, plot.file.path.pavd)
   }
   if(pavd == TRUE | hist == TRUE){
 
-    plot_pavd(m5, filename, plot.file.path, hist = TRUE)
+    plot_pavd(m5, filename, plot.file.path.pavd, hist = TRUE)
   }
 
 }
