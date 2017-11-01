@@ -18,9 +18,9 @@
 #' }
 
 
-combine_variables <- function(variable.list, csc.metrics, rumple, clumping.index){
+combine_variables <- function(variable.list, csc.metrics, rumple, clumping.index, enl){
 
-  output.variables <- cbind(variable.list, csc.metrics, rumple, clumping.index)
+  output.variables <- cbind(variable.list, csc.metrics, rumple, clumping.index, enl)
   return(output.variables)
 
 }
