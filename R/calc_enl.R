@@ -20,7 +20,7 @@ calc_enl <- function(m) {
   #m = vai matrix
 
   # Setting global variables
-  total.cells  <-NULL
+  total.cells  <- NULL
 
   # This counts the number of filled cells where there is VAI for the matrix
   df.z.count <- stats::aggregate(vai ~ zbin, data = m, FUN = function(X) sum(X != 0) )
@@ -29,7 +29,7 @@ calc_enl <- function(m) {
   total.cells <- sum(df.z.count$vai)
 
   # Gives the proportion of cells at each level
-  df.z.count$p.i <- (df.z.count$vai / z)^2
+  df.z.count$p.i <- (df.z.count$vai / total.cells)^2
 
   # The effective number of layers
   enl <- sum(df.z.count$p.i)
