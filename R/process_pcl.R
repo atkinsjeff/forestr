@@ -112,7 +112,10 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
 
   variable.list <- calc_rugosity(summary.matrix, m5, filename)
 
-  output.variables <- combine_variables(variable.list, csc.metrics, rumple, clumping.index)
+  # effective number of layers
+  enl <- calc_enl(m5)
+
+  output.variables <- combine_variables(variable.list, csc.metrics, rumple, clumping.index, enl)
   #print(output.variables)
 
   #output procedure for variables
