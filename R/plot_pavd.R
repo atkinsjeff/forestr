@@ -37,7 +37,7 @@ sf <- sum(df.z$ratio.vai > 0)
 if(hist == TRUE){
 # Making PAVD plot
 pavd <- ggplot2::ggplot(df.z, aes(y = df.z$ratio.vai, x = df.z$zbin))+
-  geom_bar(stat = "identity", color = "light grey")+
+  ggplot2::geom_bar(stat = "identity", color = "light grey")+
   ggplot2::geom_smooth(method = "lm", se = FALSE, formula = y ~ splines::ns(x, sf))+
   ggplot2::theme_classic()+
   ggplot2::theme(axis.line = element_line(colour = "black"),
