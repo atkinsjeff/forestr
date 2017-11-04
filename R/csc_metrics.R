@@ -33,7 +33,7 @@ csc_metrics <- function(df, filename, transect.length) {
   correction.coef <- length(which((df$return_distance <= -9999)))
 
   mean.return.ht = mean(z$return_distance, na.rm = TRUE)
-  message("Mean Return Height (m) of raw data -- meanHeight in old code")
+  message("Mean Return Height (m) of raw data")
   print(mean.return.ht)
 
   sd.ht = stats::sd(z$return_distance, na.rm = TRUE)

@@ -36,7 +36,7 @@ calc_vai <- function(df, max.vai) {
   # now make adjusted vai
   eq.vai1 = df$olai * df$fee
   eq.vai2 = df$olai * df$cvr
-  df <- transform(df, vai = ifelse(fee > 0,  eq.vai1, eq.vai2 ))
+  df <- transform(df, vai = ifelse(lidar.pulses == can.hits, eq.vai1, eq.vai2))
 
   # df[is.na(df)] <- 0
 

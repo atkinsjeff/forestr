@@ -11,7 +11,9 @@ plot_pavd(m, filename, plot.file.path.pavd, hist = FALSE)
 
 \item{filename}{the name of the file currently being processed.}
 
-\item{plot.file.path}{path of plot file to be written, inherited from [process_pcl] or [process_multi_pcl]}
+\item{plot.file.path.pavd}{path of plot file to be written, inherited from [process_pcl] or [process_multi_pcl]}
+
+\item{hist}{logical input to include histogram of VAI, if TRUE it is included, if FALSE, it is not.}
 }
 \value{
 plant area volume density plots
@@ -20,11 +22,12 @@ plant area volume density plots
 \code{plot_pavd} produces a PAVD plot from matrix data
 }
 \details{
-This is a specific function calculates canopy rugosity and other metrics
+This function is a nested function inside of [process_pcl]. It could be run independently using the summary_matrix.csv
+output files created from running [procesS_pcl] as well.
 }
 \examples{
 # Calculates metrics of canopy structural complexity.
-\dontrun{plot_pavd()
+\dontrun{plot_pavd(summary_matrix)
 }
 }
 \keyword{area}

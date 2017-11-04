@@ -45,22 +45,31 @@ normalize_pcl_one <-  function(df) {
   df <- df[with(df, order(xbin, zbin)), ]
 
   df$hit.count <- 0   #creates and empty column of zeros
-  for (i in 1:nrow(df)) {
-    x.counter = 1  #a counter! woohoo
 
-    for(j in 2:nrow(df)){
-      if(df$xbin[j] == x.counter ){
+  #split into list of data frames
+  df.list <- split(df, df$xbin)
 
-        df$hit.count[j] = df$hit.count[j-1] + df$bin.hits[j]
+  df.list <- lapply(df.list, function(x){
 
-      }else {
-        x.counter = x.counter + 1
+    for (i in 1:nrow(x)) {
+      x.counter = 1  #a counter! woohoo
+
+      for(j in 2:nrow(x)){
+        if(x$xbin[j] == x.counter ){
+
+          x$hit.count[j] = x$hit.count[j-1] + x$bin.hits[j]
+
+        }else {
+          x.counter = x.counter + 1
+          next
+        }
         next
       }
-      next
+      return(x)
     }
-  }
-  return(df)
+  })
+  df2 <- ldply(df.list, data.frame)
+  return(df2)
 }
 
 
@@ -69,48 +78,55 @@ normalize_pcl_two <- function(df) {
   lidar.pulses <- NULL
   can.hits <- NULL
 
-  eq1 = (df$can.hits - df$hit.count) / df$can.hits
-  eq2 = ((df$can.hits + 1) - df$hit.count) / (df$can.hits + 1)
+  #saturated
+  eq1 = ((df$can.hits + 1) - df$hit.count) / (df$can.hits + 1)
+  #unsaturated
+  eq2 = (df$can.hits - df$hit.count) / df$can.hits
 
   # if can.hits and lidar.pulses are equal, then canopy is saturated
-
   df <- transform(df, phi = ifelse(lidar.pulses == can.hits, eq1, eq2))
 }
 
 normalize_pcl_three <- function(df) {
-  sum.dee <- NULL
-  lidar.pulses <- NULL
-  can.hits <- NULL
-
   df$dee <- 0   #creates and empty column of zeros
-  for (i in 1:nrow(df)) {
-    x.counter = 1  #a counter! woohoo
 
-    for(j in 2:nrow(df)){
-      if(df$phi[j-1] > 0 && df$phi[j] > 0 && df$xbin[j] == x.counter ){
+  #split into list of data frames
+  df.list <- split(df, df$xbin)
 
-        df$dee[j] = log(df$phi[j-1] / df$phi[j])
+  df.list <- lapply(df.list, function(x){
 
-      }else {
-        df$dee[j] = 0
-        x.counter = x.counter + 1
-        next
+    for (i in 1:nrow(x)) {
+      for(j in 2:nrow(x)){
+        x.counter = 1 # a counter
+
+        if(x$phi[j-1] > 0 && x$phi[j] > 0){
+
+          x$dee[j-1] = log(x$phi[j-1] / x$phi[j])
+          x$x.counter = x.counter
+        }else {
+          x$dee[j-1] = 0
+          x$x.counter = x.counter
+        }
+
       }
-      next
+      x.counter = x.counter + 1
+      return(x)
     }
-  }
+  })
 
-  # now to sum up dee to make sum.dee the %total adjusted hits in the column
-  q <- stats::setNames(stats::aggregate(dee ~ xbin, data = df, FUN = sum), c("xbin", "sum.dee"))
-  df$sum.dee <- q$sum.dee[match(df$xbin, q$xbin)]
+  df2 <- ldply(df.list, data.frame)
 
-
-
-
-  # now to make fee a percentage of the percent hits at that level
-  eq.fee = df$dee / df$sum.dee
-
-  # for all columns where dee is >0 i.e. that is saturated
-  df <- transform(df, fee = ifelse(sum.dee > 0, eq.fee, 0))
-  return(df)
+  # # now to sum up dee to make sum.dee the %total adjusted hits in the column
+  q <- setNames(stats::aggregate(dee ~ xbin, data = df2, FUN = sum), c("xbin", "sum.dee"))
+  df2$sum.dee <- q$sum.dee[match(df2$xbin, q$xbin)]
+  # #
+  # #
+  # #
+  # #
+  # # # now to make fee a percentage of the percent hits at that level
+  eq.fee = df2$dee / df2$sum.dee
+  # #
+  # # # for all columns where dee is > 0 i.e. that is saturated
+  df2 <- transform(df2, fee = ifelse(sum.dee > 0, eq.fee, 0))
+  return(df2)
 }

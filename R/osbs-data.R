@@ -1,4 +1,3 @@
-
 #' Portable Canopy LiDAR from Ordway-Swisher Biological Station
 #'
 #' Data collected in 2016 during an EAGER-NEON funded field campaign.

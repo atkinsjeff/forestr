@@ -8,6 +8,7 @@
 #' @param csc.metrics a list of metrics from the csc_metrics function
 #' @param rumple rumple value from calc_rumple
 #' @param clumping.index clumping index value
+#' @param enl effective number of layers
 #'
 #' @keywords csc
 #' @return a concatenated list of csc variables

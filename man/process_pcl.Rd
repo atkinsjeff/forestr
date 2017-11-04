@@ -15,6 +15,10 @@ process_pcl(f, user_height, marker.spacing, max.vai, pavd = FALSE,
 \item{marker.spacing}{distance between markers, defaults is 10 m}
 
 \item{max.vai}{the maximum value of column VAI. The default is 8. Should be a max value, not a mean.}
+
+\item{pavd}{logical input to include Plant Area Volume Density Plot from [plot_pavd], if TRUE it is included, if FALSE, it is not.}
+
+\item{hist}{logical input to include histogram of VAI with PAVD plot, if TRUE it is included, if FALSE, it is not.}
 }
 \value{
 writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
@@ -33,11 +37,12 @@ A hit grid plot is also saved to this same directory.
 
 # with designated file
 \dontrun{process_pcl("pcl_data.csv", marker.spacing = 10, user_height = 1.05, max.vai = 8)
-
+}
 
 # with data frame
 process_pcl(osbs, marker.spacing = 10, user_height = 1.05, max.vai = 8)
-}
+
+
 }
 \keyword{pcl}
 \keyword{processing}

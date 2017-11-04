@@ -9,7 +9,11 @@
 #' @param user_height height of laser from ground based on user in meters
 #' @param marker.spacing space between markers in the PCL data, in meters
 #' @param max.vai the maximum value of column VAI. The default is 8. Should be a max value, not a mean.
-#'
+#' @param pavd logical input to include Plant Area Volume Density Plot from [plot_pavd], if TRUE it is included, if FALSE, it is not.
+#' @param hist logical input to include histogram of VAI with PAVD plot, if TRUE it is included, if FALSE, it is not.
+#' @return writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
+#' @keywords pcl processing, multiple files
+
 #'
 #' @export
 #' @examples
@@ -21,7 +25,7 @@
 #' process_multi_pcl("./data/PCL_transects/", user_height = 1.05, marker.spacing = 10, max.vai = 8)
 #' }
 #'
-process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai){
+process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pavd = FALSE, hist = FALSE){
   #Global Variables
   output_directory <- NULL
   message("Transect Marker Spacing is:")
@@ -129,11 +133,16 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai){
 
       #get filename first
       plot.filename <- tools::file_path_sans_ext(filename)
+      plot.filename.full <- paste(plot.filename, "hit_grid", sep = "_")
+      plot.filename.pavd <- paste(plot.filename, "pavd", sep = "_")
 
-      plot.file.path <- file.path(paste(output_directory, plot.filename, ".png", sep = ""))
 
+      plot.file.path.hg <- file.path(paste(output_directory, plot.filename.full, ".png", sep = ""))
+      plot.file.path.pavd <- file.path(paste(output_directory, plot.filename.pavd, ".png", sep = ""))
+
+      #label for VAI
       vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
-      #x11(width = 8, height = 6)
+
       hit.grid <- ggplot2::ggplot(m5, ggplot2::aes(x = xbin, y = zbin))+
         ggplot2::geom_tile(ggplot2::aes(fill = vai))+
         ggplot2::scale_fill_gradient(low="white", high="dark green",
@@ -156,28 +165,41 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai){
         ggplot2::ggtitle(filename)+
         ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
 
-      ggplot2::ggsave(plot.file.path, hit.grid, width = 8, height = 6, units = c("in"))
+      ggplot2::ggsave(plot.file.path.hg, hit.grid, width = 8, height = 6, units = c("in"))
 
 
+      # PAVD
+      if(pavd == TRUE && hist == FALSE){
 
+        plot_pavd(m5, filename, plot.file.path.pavd)
+      }
+      if(pavd == TRUE && hist == TRUE){
 
-    write.pcl.to.csv <- function(output.variables, filename) {
+        plot_pavd(m5, filename, plot.file.path.pavd, hist = TRUE)
+      }
 
-      filename2 <- paste(filename, ".csv", sep="")
-      utils::write.csv(output.variables, file.path(output_directory, filename2))
-    }
-
-    write.summary.matrix.to.csv <- function(m, filename) {
-
-      filename2 <- paste(filename, "_summary_matrix.csv", sep="")
-      utils::write.csv(m, file.path(output_directory, filename2))
-    }
-
-    write.hit.matrix.to.csv <- function(m, filename) {
-      m <- m[, c("xbin", "zbin", "vai")]
-
-      filename2 <- paste(filename, "_hit_matrix.csv", sep="")
-      utils::write.csv(m, file.path(output_directory, filename2))
-    }
   }
+
 }
+
+
+  #   write.pcl.to.csv <- function(output.variables, filename) {
+  #
+  #     filename2 <- paste(filename, ".csv", sep="")
+  #     utils::write.csv(output.variables, file.path(output_directory, filename2))
+  #   }
+  #
+  #   write.summary.matrix.to.csv <- function(m, filename) {
+  #
+  #     filename2 <- paste(filename, "_summary_matrix.csv", sep="")
+  #     utils::write.csv(m, file.path(output_directory, filename2))
+  #   }
+  #
+  #   write.hit.matrix.to.csv <- function(m, filename) {
+  #     m <- m[, c("xbin", "zbin", "vai")]
+  #
+  #     filename2 <- paste(filename, "_hit_matrix.csv", sep="")
+  #     utils::write.csv(m, file.path(output_directory, filename2))
+  #   }
+  # }
+# }

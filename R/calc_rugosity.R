@@ -33,18 +33,24 @@ calc_rugosity <- function(df, m, filename) {
   print(transect.length)
 
   mean.height = mean(df$height.bin)
-  message("MeanHeight - plot mean of column mean return height")
+  message("MeanHeight - plot mean of column mean leaf height")
   print(mean.height)
 
   height.2 <- stats::sd(df$height.bin)
-  message("Standard Deviation of mean height for each xbin - height2")
+  message("Plot standard deviation of column mean leaf height -  height2")
   print(height.2)
 
+  mean.height.var = stats::var(df$height.bin)
+  message("Plot Variance of column mean leaf height - ")
+  print(mean.height.var)
+
+  mean.height.rms = sqrt(mean(df$height.bin^2))
+  message("Quadratic or root mean square of mean leaf height")
+  print(mean.height.rms)
 
   mode.el = mean(df$max.vai.z)
   message("Mean Height of Maximum Return Density - modeEl")
   print(mode.el)
-
 
   df$max.vai.sq <- df$max.vai.z^2
   mode.2 <- mean(df$max.vai.sq)
@@ -52,13 +58,9 @@ calc_rugosity <- function(df, m, filename) {
   message("Mean height of squared max VAI whatever the hell that is -- or mode2")
   print(mode.2)
 
-
-
   max.el = max(df$max.vai.z)
   message("Maximum VAI for entire transect -- max el!")
   print(max.el)
-
-
 
   max.can.ht = max(df$max.ht)
   message("Max canopy height (m)")
@@ -81,6 +83,10 @@ calc_rugosity <- function(df, m, filename) {
   deep.gaps <- nrow(e)
   message("Deep Gaps")
   print(deep.gaps)
+
+  deep.gap.fraction <- deep.gaps/transect.length
+  message("Deep Gap Fraction (0-1)")
+  print(deep.gap.fraction)
 
   porosity = sum(m$bin.hits == 0) / length(m$bin.hits)
   message("Canopy porosity")
@@ -127,9 +133,11 @@ calc_rugosity <- function(df, m, filename) {
 
     variable.list <- list(plot = filename,
                         mean.height = mean.height,
+                        height.2 = height.2,
+                        mean.height.var = mean.height.var,
+                        mean.height.rms = mean.height.rms,
                         transect.length = transect.length,
                         mode.el = mode.el,
-                        height.2 = height.2,
                         max.el = max.el,
                         mode.2 = mode.2,
                         max.can.ht = max.can.ht,
@@ -137,6 +145,7 @@ calc_rugosity <- function(df, m, filename) {
                         mean.vai = mean.vai,
                         max.vai = max.vai,
                         deep.gaps = deep.gaps,
+                        deep.gap.fraction = deep.gap.fraction,
                         porosity = porosity,
                         std.std = std.std,
                         mean.std = mean.std,

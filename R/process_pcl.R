@@ -13,6 +13,8 @@
 #' @param user_height the height of the laser off the ground as mounted on the user in meters. default is 1 m
 #' @param marker.spacing distance between markers, defaults is 10 m
 #' @param max.vai the maximum value of column VAI. The default is 8. Should be a max value, not a mean.
+#' @param pavd logical input to include Plant Area Volume Density Plot from [plot_pavd], if TRUE it is included, if FALSE, it is not.
+#' @param hist logical input to include histogram of VAI with PAVD plot, if TRUE it is included, if FALSE, it is not.
 #' @return writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
 #'
 #' @keywords pcl processing
@@ -23,11 +25,12 @@
 #'
 #' # with designated file
 #' \dontrun{process_pcl("pcl_data.csv", marker.spacing = 10, user_height = 1.05, max.vai = 8)
-#'
+#' }
 #'
 #' # with data frame
 #' process_pcl(osbs, marker.spacing = 10, user_height = 1.05, max.vai = 8)
-#' }
+#'
+#'
 
 process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hist = FALSE){
   xbin <- NULL
@@ -50,6 +53,7 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
   }
 #
   if(is.character(f) == TRUE) {
+
   # Read in PCL transect.
   df<- read_pcl(f)
 
@@ -59,16 +63,17 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
   } else if(is.data.frame(f) == TRUE){
     df <- f
     filename <- deparse(substitute(f))
+  } else {
+    warning('This is not the data you are looking for')
   }
 
-  df <- read_pcl(f)
   message("how many in base df have NA")
   print(sum(is.na(df$return_distance)))
 
-
-  #
-  #     # Cuts off the directory info to give just the filename.
-  filename <- sub(".*/", "", f)
+#
+#   #
+#   #     # Cuts off the directory info to give just the filename.
+#   filename <- sub(".*/", "", f)
   #
   # cuts out erroneous high values
   #df <- df[!(df$return_distance >= 50), ]
