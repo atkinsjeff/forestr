@@ -22,6 +22,7 @@ plot_pavd <- function(m, filename, plot.file.path.pavd, hist = FALSE) {
   #m = vai matrix
 
 
+
 # Creates the total value of VAI for the whole transect/plot
 total.vai <- sum(m$vai)
 
@@ -36,7 +37,7 @@ sf <- sum(df.z$ratio.vai > 0)
 
 if(hist == TRUE){
 # Making PAVD plot
-pavd <- ggplot2::ggplot(df.z, aes(y = df.z$ratio.vai, x = df.z$zbin))+
+pavd <- ggplot2::ggplot(df.z, ggplot2::aes(y = df.z$ratio.vai, x = df.z$zbin))+
   ggplot2::geom_bar(stat = "identity", color = "light grey")+
   ggplot2::geom_smooth(method = "lm", se = FALSE, formula = y ~ splines::ns(x, sf))+
   ggplot2::theme_classic()+
@@ -56,7 +57,7 @@ pavd <- ggplot2::ggplot(df.z, aes(y = df.z$ratio.vai, x = df.z$zbin))+
 
 ggplot2::ggsave(plot.file.path.pavd, hit.grid, width = 8, height = 6, units = c("in"))
 } else {
-  pavd <- ggplot2::ggplot(df.z, aes(y = df.z$ratio.vai, x = df.z$zbin))+
+  pavd <- ggplot2::ggplot(df.z, ggplot2::aes(y = df.z$ratio.vai, x = df.z$zbin))+
     #geom_bar(stat = "identity", color = "light grey")+
     ggplot2::geom_smooth(method = "lm", se = FALSE, formula = y ~ splines::ns(x, sf))+
     ggplot2::theme_classic()+
