@@ -19,7 +19,7 @@
 #' @param DEBUG check to see order of final output. Default is FALSE.
 #'
 #'
-#'
+#' @export
 #' @examples
 #' # Function that has the algorithm that splits the raw data into defined, equidistant x-bins.
 #' \dontrun{split_transects_from_pcl(df, 40, 10)

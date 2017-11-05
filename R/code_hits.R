@@ -6,7 +6,7 @@
 #'   the sky hits (i.e. when the lidar does not record a canopy hit)
 #
 #' @param df a raw set of pcl data
-#'
+#' @export
 #'
 #' @examples
 #' \dontrun{

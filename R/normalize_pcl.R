@@ -55,19 +55,13 @@ normalize_pcl_one <-  function(df) {
       x.counter = 1  #a counter! woohoo
 
       for(j in 2:nrow(x)){
-        if(x$xbin[j] == x.counter ){
+        # if(x$xbin[j] == x.counter ){
 
           x$hit.count[j] = x$hit.count[j-1] + x$bin.hits[j]
-
-        }else {
-          x.counter = x.counter + 1
-          next
-        }
-        next
       }
-      return(x)
+    return(x)
     }
-  })
+      })
 
   df <- plyr::ldply(df.list, data.frame)
   df <- df[-1] #drop weird columni
