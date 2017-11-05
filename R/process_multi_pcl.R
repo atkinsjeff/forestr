@@ -110,10 +110,12 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
       summary.matrix <- make_summary_matrix(test.data.binned, m5)
       rumple <- calc_rumple(summary.matrix)
       clumping.index <- calc_gap_fraction(m5)
+      # effective number of layers
+      enl <- calc_enl(m5)
 
       variable.list <- calc_rugosity(summary.matrix, m5, filename)
 
-      output.variables <- combine_variables(variable.list, csc.metrics, rumple, clumping.index)
+      output.variables <- combine_variables(variable.list, csc.metrics, rumple, clumping.index, enl)
       #print(output.variables)
 
       #output procedure for variables
