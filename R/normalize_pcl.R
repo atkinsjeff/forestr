@@ -68,8 +68,11 @@ normalize_pcl_one <-  function(df) {
       return(x)
     }
   })
-  df2 <- ldply(df.list, data.frame)
-  return(df2)
+
+  df <- plyr::ldply(df.list, data.frame)
+  df <- df[-1] #drop weird columni
+  return(df)
+
 }
 
 
@@ -85,17 +88,24 @@ normalize_pcl_two <- function(df) {
 
   # if can.hits and lidar.pulses are equal, then canopy is saturated
   df <- transform(df, phi = ifelse(lidar.pulses == can.hits, eq1, eq2))
+
+  df <- replace(df, is.na(df), 0)
+  #df[is.na(df)] <- 0
+
+
 }
 
 normalize_pcl_three <- function(df) {
+  sum.dee <- NULL
   df$dee <- 0   #creates and empty column of zeros
-
   #split into list of data frames
   df.list <- split(df, df$xbin)
 
   df.list <- lapply(df.list, function(x){
 
-    for (i in 1:nrow(x)) {
+
+    for(i in 1:nrow(x)) {
+      x.counter = 1 # a counter
       for(j in 2:nrow(x)){
         x.counter = 1 # a counter
 
@@ -113,20 +123,21 @@ normalize_pcl_three <- function(df) {
       return(x)
     }
   })
-
-  df2 <- ldply(df.list, data.frame)
-
-  # # now to sum up dee to make sum.dee the %total adjusted hits in the column
-  q <- setNames(stats::aggregate(dee ~ xbin, data = df2, FUN = sum), c("xbin", "sum.dee"))
-  df2$sum.dee <- q$sum.dee[match(df2$xbin, q$xbin)]
-  # #
-  # #
-  # #
-  # #
-  # # # now to make fee a percentage of the percent hits at that level
-  eq.fee = df2$dee / df2$sum.dee
-  # #
-  # # # for all columns where dee is > 0 i.e. that is saturated
-  df2 <- transform(df2, fee = ifelse(sum.dee > 0, eq.fee, 0))
-  return(df2)
+#
+  df2 <- plyr::ldply(df.list, data.frame)
+#
+#   # # now to sum up dee to make sum.dee the %total adjusted hits in the column
+   q <- stats::setNames(stats::aggregate(dee ~ xbin, data = df2, FUN = sum), c("xbin", "sum.dee"))
+   df2$sum.dee <- q$sum.dee[match(df2$xbin, q$xbin)]
+#   # #
+#   # #
+#   # #
+#   # #
+#   # # # now to make fee a percentage of the percent hits at that level
+    eq.fee = df2$dee / df2$sum.dee
+#   # #
+#   # # # for all columns where dee is > 0 i.e. that is saturated
+    df2 <- transform(df2, fee = ifelse(sum.dee > 0, eq.fee, 0))
+    return(df2)
 }
+
