@@ -32,35 +32,24 @@ calc_rugosity <- function(df, m, filename) {
   message("Transect Length (m)")
   print(transect.length)
 
+  # HEIGHT VARIABLES
+  message("HEIGHT METRICS")
+
   mean.height = mean(df$height.bin)
-  message("MeanHeight - plot mean of column mean leaf height")
+  message("Mean Leaf Height (H) - plot mean of column mean leaf height")
   print(mean.height)
 
   height.2 <- stats::sd(df$height.bin)
-  message("Plot standard deviation of column mean leaf height -  height2")
+  message("Height2 (H[2]) - standard deviation of column mean leaf height")
   print(height.2)
 
   mean.height.var = stats::var(df$height.bin)
-  message("Plot Variance of column mean leaf height - ")
+  message("Mean Leaf Height variance (H[var]) - variance of column mean leaf height")
   print(mean.height.var)
 
   mean.height.rms = sqrt(mean(df$height.bin^2))
-  message("Quadratic or root mean square of mean leaf height")
+  message("Root Mean Square Mean Leaf Height (H[rms]) - the root mean square or quadratic mean of column mean leaf height for the transect")
   print(mean.height.rms)
-
-  mode.el = mean(df$max.vai.z)
-  message("Mean Height of Maximum Return Density - modeEl")
-  print(mode.el)
-
-  df$max.vai.sq <- df$max.vai.z^2
-  mode.2 <- mean(df$max.vai.sq)
-  mode.2 = (mode.2 - (mode.el * mode.el))^0.5
-  message("Mean height of squared max VAI whatever the hell that is -- or mode2")
-  print(mode.2)
-
-  max.el = max(df$max.vai.z)
-  message("Maximum VAI for entire transect -- max el!")
-  print(max.el)
 
   max.can.ht = max(df$max.ht)
   message("Max canopy height (m)")
@@ -70,15 +59,31 @@ calc_rugosity <- function(df, m, filename) {
   message("Mean Outer Canopy Height (m) or MOCH")
   print(mean.max.ht)
 
+  # AREA AND DENSITY
+  message("AREA AND DENSITY METRICS")
+
   mean.vai = mean(df$sum.vai)
-  message("Mean VAI")
+  message("Mean VAI - mean VAI for entire transect")
   print(mean.vai)
 
-  message("Maximum VAI")
-  max.vai = max(df$sum.vai)
-  print(max.vai)
+  mode.el = mean(df$max.vai.z)
+  message("Mean Height of VAI[max] - modeEl")
+  print(mode.el)
+
+  mode.2 <- sd(df$max.vai.z)
+  message("Mode 2- The standard deviation of VAImax or MaxEl")
+  print(mode.2)
+
+  max.el = max(df$max.vai)
+  message("Maximum VAI for entire transect -- max el!")
+  print(max.el)
+
+  mean.peak.vai = mean(df$max.vai)
+  message("Mean Peak VAI for entire transect")
+  print(mean.peak.vai)
 
   #added the df thing in front of max ht, but don't know if it works.
+  message("CANOPY AND OPENNESS METRICS (cont.)")
   e <- subset(df, df$max.ht == 0)
   deep.gaps <- nrow(e)
   message("Deep Gaps")
@@ -88,6 +93,7 @@ calc_rugosity <- function(df, m, filename) {
   message("Deep Gap Fraction (0-1)")
   print(deep.gap.fraction)
 
+  message("ARRANGEMENT METRICS")
   porosity = sum(m$bin.hits == 0) / length(m$bin.hits)
   message("Canopy porosity")
   print(porosity)
@@ -143,7 +149,7 @@ calc_rugosity <- function(df, m, filename) {
                         max.can.ht = max.can.ht,
                         mean.max.ht = mean.max.ht,
                         mean.vai = mean.vai,
-                        max.vai = max.vai,
+                        mean.peak.vai = mean.peak.vai,
                         deep.gaps = deep.gaps,
                         deep.gap.fraction = deep.gap.fraction,
                         porosity = porosity,

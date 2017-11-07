@@ -32,6 +32,7 @@ csc_metrics <- function(df, filename, transect.length) {
   #for the cover fraction calculation, number of markers - 1
   correction.coef <- length(which((df$return_distance <= -9999)))
 
+  message("RAW LiDAR metrics -- WARNING")
   mean.return.ht = mean(z$return_distance, na.rm = TRUE)
   message("Mean Return Height (m) of raw data")
   print(mean.return.ht)
@@ -40,6 +41,15 @@ csc_metrics <- function(df, filename, transect.length) {
   message("Standard Deviation of raw  Canopy Height returns-- meanStd in old code")
   print(sd.ht)
 
+  max.ht = max(df$return_distance, na.rm = TRUE)
+  message("Max Measured Canopy Height (m)")
+  print(max.ht)
+
+  scan.density = nrow(df) /transect.length
+  message("Scan Density")
+  print(scan.density)
+
+  message("OPENNESS AND COVER METRICS")
   sky.fraction = (1 -  ( (length(which(df$can_hit == TRUE))) / (length(df$return_distance) - correction.coef) )) * 100
   message("Sky Fraction (%)")
   print(sky.fraction)
@@ -48,13 +58,7 @@ csc_metrics <- function(df, filename, transect.length) {
   message("Cover Fraction (%)")
   print(cover.fraction)
 
-  max.ht = max(df$return_distance, na.rm = TRUE)
-  message("Max Measured Canopy Height (m)")
-  print(max.ht)
 
-  scan.density = nrow(df) /transect.length
-  message("Scan Density")
-  print(scan.density)
 
   csc.variable.list <- list(plot = filename,
                             mean.return.ht = mean.return.ht,
