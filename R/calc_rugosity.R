@@ -59,7 +59,6 @@ calc_rugosity <- function(df, m, filename) {
   message("Mean Outer Canopy Height (m) or MOCH")
   print(mean.max.ht)
 
-  # AREA AND DENSITY
   message("AREA AND DENSITY METRICS")
 
   mean.vai = mean(df$sum.vai)

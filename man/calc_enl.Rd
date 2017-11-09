@@ -13,14 +13,11 @@ calc_enl(m)
 a slew of metrics...need to fully outline later
 }
 \description{
-\code{calc_enl} imports and processes a single PCL transect.
-}
-\details{
-This is a specific function calculates canopy rugosity and other metrics
+\code{calc_enl} calculates the effective number of layers in a canopy.
 }
 \examples{
 # Calculates the effective number of layers
 \dontrun{calc_enl()
 }
 }
-\keyword{rugosity}
+\keyword{enl}
