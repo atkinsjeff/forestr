@@ -53,7 +53,7 @@ pavd <- ggplot2::ggplot(df.z, ggplot2::aes(y = df.z$ratio.vai, x = df.z$zbin))+
         axis.title.x = ggplot2::element_text(size = 20),
         axis.title.y = ggplot2::element_text(size = 20))+
   ggplot2::coord_flip(xlim = NULL, ylim = c(0, max(df.z$ratio.vai) + 0.05), expand = FALSE)+
-  ggplot2::ylab("Plant Area Veg. Density (PAVD)")+
+  ggplot2::ylab("Plant Area Volume Density (PAVD)")+
   ggplot2::xlab("Height Above Ground (m)")+
   ggplot2::ggtitle(filename)+
   ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
@@ -73,7 +73,7 @@ ggplot2::ggsave(plot.file.path.pavd, pavd, width = 8, height = 6, units = c("in"
                    axis.title.x = ggplot2::element_text(size = 20),
                    axis.title.y = ggplot2::element_text(size = 20))+
     ggplot2::coord_flip(xlim = NULL, ylim = c(0, max(df.z$ratio.vai) + 0.05), expand = FALSE)+
-    ggplot2::ylab("Plant Area Veg. Density (PAVD)")+
+    ggplot2::ylab("Plant Area Volume Density (PAVD)")+
     ggplot2::xlab("Height Above Ground (m)")+
     ggplot2::ggtitle(filename)+
     ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))

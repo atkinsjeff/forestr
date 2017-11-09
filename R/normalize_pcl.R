@@ -105,10 +105,10 @@ normalize_pcl_three <- function(df) {
 
         if(x$phi[j-1] > 0 && x$phi[j] > 0){
 
-          x$dee[j-1] = log(x$phi[j-1] / x$phi[j])
+          x$dee[j] = log(x$phi[j-1] / x$phi[j])
           x$x.counter = x.counter
         }else {
-          x$dee[j-1] = 0
+          x$dee[j] = 0
           x$x.counter = x.counter
         }
 

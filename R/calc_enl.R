@@ -1,12 +1,11 @@
 #' Calculate rugosity and other higher level complexity metrics
 #'
-#' \code{calc_enl} imports and processes a single PCL transect.
+#' \code{calc_enl} calculates the effective number of layers in a canopy.
 #'
-#' This is a specific function calculates canopy rugosity and other metrics
 #'
 #' @param m the summary matrix
 #'
-#' @keywords rugosity
+#' @keywords enl
 #' @return a slew of metrics...need to fully outline later
 #'
 #' @export
