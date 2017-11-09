@@ -69,7 +69,7 @@ calc_rugosity <- function(df, m, filename) {
   message("Mean Height of VAI[max] - modeEl")
   print(mode.el)
 
-  mode.2 <- sd(df$max.vai.z)
+  mode.2 <- stats::sd(df$max.vai.z)
   message("Mode 2- The standard deviation of VAImax or MaxEl")
   print(mode.2)
 
