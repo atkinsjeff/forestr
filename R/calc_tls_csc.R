@@ -14,7 +14,7 @@
 #' calc_tls_csc(m)
 #' }
 
-calc_tls_csc <- function(m){
+calc_tls_csc <- function(m, filename){
   df <- m
   # first we create the std.bin numerator
   df$std.bin.num <- ((df$zbin - df$height.bin)^2) * df$vai
