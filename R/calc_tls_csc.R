@@ -17,6 +17,8 @@
 
 calc_tls_csc <- function(m, filename){
   df <- m
+  transect.length = max(m$xbin)
+
   # first we create the std.bin numerator
   df$std.bin.num <- ((df$zbin - df$height.bin)^2) * df$vai
 
@@ -35,7 +37,7 @@ calc_tls_csc <- function(m, filename){
   #print(super.size)
   # std.std = mean(super.size$std.bin.squared)
   std.std = ((mean(super.size$std.bin))^2) / transect.length
-  
+
   # mean.std = mean(super.size$std.bin)
   mean.std = mean(super.size$std.bin) / transect.length
 
