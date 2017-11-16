@@ -20,7 +20,7 @@ calc_tls_csc <- function(m, filename){
   transect.length = max(m$xbin)
 
   # first we create the std.bin numerator
-  df$std.bin.num <- ((df$zbin - df$height.bin)^2) * df$vai
+  df$std.bin.num <- (((df$zbin + 0.5) - df$height.bin)^2) * df$vai
 
   j <- stats::aggregate(std.bin.num ~ xbin, data = df, FUN = sum, na.rm = FALSE, na.action = 'na.pass')
   #print(j)
