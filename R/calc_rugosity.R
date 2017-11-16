@@ -1,15 +1,16 @@
 #' Calculate rugosity and other higher level complexity metrics
 #'
-#' \code{calc_rugosity} imports and processes a single PCL transect.
+#' \code{calc_rugosity} calculates canopy structural complexity metrics from PCL data and prints them to the screen.
 #'
-#' This is a specific function calculates canopy rugosity and other metrics
+#' This is a specific function calculates canopy rugosity and other metrics, including rumple, height metrics, etc.
 #'
 #' @param df is a data frame of adjusted pcl data.
 #' @param m matrix of light adjusted vai values.
 #' @param filename the name of the file currently being processed.
 #'
-#' @keywords rugosity
-#' @return a slew of metrics...need to fully outline later
+#' @keywords rugosity, porosity, csc
+#'
+#' @return a series of metrics that describe canopy and ecosystem height, density, openness, cover, etc.
 #'
 #' @export
 #' @examples
@@ -115,7 +116,7 @@ calc_rugosity <- function(df, m, filename) {
   super.size$std.bin.squared <- (super.size$std.bin^2)
 
   super.size[is.na(super.size)] <- 0
-  
+
   # std.std = mean(super.size$std.bin.squared)
   std.std = ((mean(super.size$std.bin))^2) / transect.length
 

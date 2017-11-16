@@ -1,6 +1,6 @@
 #' Calculate rugosity and other higher level complexity metrics
 #'
-#' \code{combine_variables} imports and processes a single PCL transect.
+#' \code{combine_variables} combines varibles from internal functions to export
 #'
 #' This is a specific function combines variables together to a coherent list.
 #'

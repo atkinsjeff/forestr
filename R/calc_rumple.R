@@ -1,6 +1,6 @@
 #' Calculates rumple
 #'
-#' \code{calc_rumple} imports and processes a single PCL transect.
+#' \code{calc_rumple} calculates canopy rumple.
 #'
 #' This is a specific function that works using the input of a data directory
 #' and a filename in that directory.Future versions of this will allow for direct

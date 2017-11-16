@@ -1,6 +1,6 @@
 #' Creates summary matrix
 #'
-#' \code{make_summary_matrix} imports and processes a single PCL transect.
+#' \code{make_summary_matrix} creates a summary matrix of data through data wrangling.
 #'
 #' This makes a dataframe that is as long as a transect is. If the
 #' transect is 40 m, this data frame has 40 rows.
