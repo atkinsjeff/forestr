@@ -33,12 +33,11 @@ calc_tls_csc <- function(m, filename){
 
   super.size[is.na(super.size)] <- 0
   #print(super.size)
-
-  std.std = mean(super.size$std.bin.squared)
-  #std.std = std.std/transect.length
-
-  mean.std = mean(super.size$std.bin)
-  #mean.std = mean.std/transect.length
+  # std.std = mean(super.size$std.bin.squared)
+  std.std = ((mean(super.size$std.bin))^2) / transect.length
+  
+  # mean.std = mean(super.size$std.bin)
+  mean.std = mean(super.size$std.bin) / transect.length
 
 
 

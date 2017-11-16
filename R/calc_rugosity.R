@@ -115,10 +115,12 @@ calc_rugosity <- function(df, m, filename) {
   super.size$std.bin.squared <- (super.size$std.bin^2)
 
   super.size[is.na(super.size)] <- 0
-  std.std = mean(super.size$std.bin.squared)
+  
+  # std.std = mean(super.size$std.bin.squared)
+  std.std = ((mean(super.size$std.bin))^2) / transect.length
 
-  mean.std = mean(super.size$std.bin)
-
+  # mean.std = mean(super.size$std.bin)
+  mean.std = mean(super.size$std.bin) / transect.length
 
   message("Square of leaf height variance (stdStd from old script)")
   print(std.std)
@@ -127,7 +129,7 @@ calc_rugosity <- function(df, m, filename) {
   message("Mean Standard deviation of leaf heights -- meanStd")
   print(mean.std)
 
-  rugosity = (std.std - mean.std * mean.std)^0.5
+  rugosity = (std.std - (mean.std * mean.std))^0.5
   message("Canopy Rugosity")
   print(rugosity)
 
