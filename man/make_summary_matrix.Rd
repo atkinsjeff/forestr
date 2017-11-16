@@ -15,7 +15,7 @@ make_summary_matrix(df, m)
 a matrix of summary stats by each x and z coordinate position
 }
 \description{
-\code{make_summary_matrix} imports and processes a single PCL transect.
+\code{make_summary_matrix} creates a summary matrix of data through data wrangling.
 }
 \details{
 This makes a dataframe that is as long as a transect is. If the

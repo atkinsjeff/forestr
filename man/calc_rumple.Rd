@@ -13,7 +13,7 @@ calc_rumple(df)
 rumple for the canopy based on 2-D transect
 }
 \description{
-\code{calc_rumple} imports and processes a single PCL transect.
+\code{calc_rumple} calculates canopy rumple.
 }
 \details{
 This is a specific function that works using the input of a data directory

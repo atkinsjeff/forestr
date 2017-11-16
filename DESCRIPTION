@@ -2,8 +2,15 @@ Package: forestr
 Type: Package
 Version: 1.0.0
 Title: Ecosystem and Canopy Structural Complexity Metrics from LiDAR
-Authors@R: person("Jeff", "Atkins", email = "jwatkins6@vcu.edu",
-                  role = c("aut", "cre"))
+Authors@R: c(person("Jeff", "Atkins", email = "jwatkins6@vcu.edu",
+                  role = c("aut", "cre")),
+          person("Gil", "Bohrer", role = "aut"),
+          person("Robert", "Fahey", role = "aut"),
+          person("Brady", "Hardiman", role = "aut"),
+          person("Chrisopher", "Gough", role = "aut"),
+          person("Timothy", "Morin", role = "aut"),
+          person("Atticus", "Stovall", role = "aut"),
+          person("Naupaka", "Zimmerman", role = "aut"))
 URL: https://github.com/atkinsjeff/forestr
 Maintainer: Jeff Atkins <jwatkins6@vcu.edu>
 Description: Provides a toolkit for calculating forest and canopy structural complexity metrics from

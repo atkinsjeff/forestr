@@ -21,7 +21,7 @@ combine_variables(variable.list, csc.metrics, rumple, clumping.index, enl)
 a concatenated list of csc variables
 }
 \description{
-\code{combine_variables} imports and processes a single PCL transect.
+\code{combine_variables} combines varibles from internal functions to export
 }
 \details{
 This is a specific function combines variables together to a coherent list.
