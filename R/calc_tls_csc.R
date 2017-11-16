@@ -20,7 +20,7 @@ calc_tls_csc <- function(m, filename){
   # first we create the std.bin numerator
   df$std.bin.num <- ((df$zbin - df$height.bin)^2) * df$vai
 
-  j <- aggregate(std.bin.num ~ xbin, data = df, FUN = sum, na.rm = FALSE, na.action = 'na.pass')
+  j <- stats::aggregate(std.bin.num ~ xbin, data = df, FUN = sum, na.rm = FALSE, na.action = 'na.pass')
   #print(j)
   j[is.na(j)] <- 0
 

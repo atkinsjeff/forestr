@@ -27,12 +27,12 @@ calc_tls_mean_leaf_ht <- function(m){
   #mean column leaf height that is the "heightBin" from Matlab code
 
   m$vai.z <- m$vai * (m$zbin +0.5)
-  h <- setNames(aggregate(vai.z ~ xbin, data = m, FUN = sum, na.rm = FALSE,  na.action = 'na.pass'), c("xbin", "vai.z.sum"))
+  h <- stats::setNames(stats::aggregate(vai.z ~ xbin, data = m, FUN = sum, na.rm = FALSE,  na.action = 'na.pass'), c("xbin", "vai.z.sum"))
 
-  e <- setNames(aggregate(vai ~ xbin, data = m, FUN = sum, na.rm = FALSE, na.action = 'na.pass'), c("xbin", "sum.vai"))
+  e <- stats::setNames(stats::aggregate(vai ~ xbin, data = m, FUN = sum, na.rm = FALSE, na.action = 'na.pass'), c("xbin", "sum.vai"))
 
   # this section joins all these guys together
-  p <- join_all(list(m, e, h), by = "xbin", type = "full")
+  p <- plyr::join_all(list(m, e, h), by = "xbin", type = "full")
 
 
   p$height.bin <- p$vai.z.sum / p$sum.vai

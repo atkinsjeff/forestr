@@ -30,12 +30,8 @@ user-determined methodologyy.
 \examples{
 
 # with designated file
-\dontrun{process_pcl("pcl_data.csv", marker.spacing = 10, user_height = 1.05, max.vai = 8)
+\dontrun{process_tls("tls.csv", slice = 5, pavd = FALSE, hist = FALSE)
 }
-
-# with data frame
-process_pcl(osbs, marker.spacing = 10, user_height = 1.05, max.vai = 8)
-
 
 }
 \keyword{processing}
