@@ -77,8 +77,7 @@ process_tls<- function(f, slice, pavd = FALSE, hist = FALSE){
 #   # effective number of layers
 #   enl <- calc_enl(m5)
 
-  output.variables <- combine_variables(variable.list)
-  #print(output.variables)
+  output.variables  <- cbind(variable.list)
 
   #output procedure for variables
   outputname = substr(filename,1,nchar(filename)-4)
