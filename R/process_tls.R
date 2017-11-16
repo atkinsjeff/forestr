@@ -11,6 +11,8 @@
 #' @param f  the name of the filename to input <character> or a data frame <data frame>.
 #' @param pavd logical input to include Plant Area Volume Density Plot from [plot_pavd], if TRUE it is included, if FALSE, it is not.
 #' @param hist logical input to include histogram of VAI with PAVD plot, if TRUE it is included, if FALSE, it is not.
+#' @param slice the number of the transect to use from xyz tls data
+#'
 #' @return writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
 #'
 #' @keywords tls processing
