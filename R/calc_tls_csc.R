@@ -6,8 +6,9 @@
 #'
 #'
 #' @param m matrix of vai data with mean leaf height column
+#' @param filename the name of the file being process0
 #'
-#' @keywords csc rugosity
+#' @keywords csc rugosity tls
 #' @return csc metrics
 #' @examples
 #' \dontrun{

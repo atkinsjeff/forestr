@@ -4,10 +4,12 @@
 \alias{calc_tls_csc}
 \title{Calculates rumple}
 \usage{
-calc_tls_csc(m)
+calc_tls_csc(m, filename)
 }
 \arguments{
 \item{m}{matrix of vai data with mean leaf height column}
+
+\item{filename}{the name of the file being process0}
 }
 \value{
 csc metrics
@@ -25,3 +27,4 @@ calc_tls_csc(m)
 }
 \keyword{csc}
 \keyword{rugosity}
+\keyword{tls}
