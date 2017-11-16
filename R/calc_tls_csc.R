@@ -112,7 +112,6 @@ calc_tls_csc <- function(m, filename){
                         mode.el = mode.el,
                         max.el = max.el,
                         mode.2 = mode.2,
-                        mean.max.ht = mean.max.ht,
                         mean.vai = mean.vai,
                         mean.peak.vai = mean.peak.vai,
                         porosity = porosity,
