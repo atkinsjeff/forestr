@@ -53,7 +53,7 @@ calc_tls_mean_leaf_ht <- function(m){
 
   colnames(g) <- c("max.vai.z")
 
-  q <- plyr::join_all(list(p, d, f), by = "xbin", type = "full")
+  q <- plyr::join_all(list(p, d, f, g), by = "xbin", type = "full")
 
 
   return(q)
