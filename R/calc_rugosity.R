@@ -118,8 +118,7 @@ calc_rugosity <- function(df, m, filename) {
   super.size[is.na(super.size)] <- 0
 
   # std.std = mean(super.size$std.bin.squared)
-  std.std = mean(super.size$std.bin)
-  std.std. = std.std^2
+  std.std = mean(super.size$std.bin.squared)
 
   # mean.std = mean(super.size$std.bin)
   mean.std = mean(super.size$std.bin)
