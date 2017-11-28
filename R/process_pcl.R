@@ -151,8 +151,9 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
   hit.grid <- ggplot2::ggplot(m5, ggplot2::aes(x = xbin, y = zbin))+
     ggplot2::geom_tile(ggplot2::aes(fill = vai))+
     ggplot2::scale_fill_gradient(low="gray88", high="dark green",
-                        limits=c(0,8.5),
-                        name=vai.label)+
+                                 na.value = "white",
+                                 limits=c(0, 8),
+                                 name=vai.label)+
     #scale_y_continuous(breaks = seq(0, 20, 5))+
     # scale_x_continuous(minor_breaks = seq(0, 40, 1))+
     ggplot2::theme(axis.line = ggplot2::element_line(colour = "black"),
