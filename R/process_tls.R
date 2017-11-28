@@ -102,8 +102,14 @@ process_tls<- function(f, slice, pavd = FALSE, hist = FALSE){
   plot.file.path.pavd <- file.path(paste(output_directory, plot.filename.pavd, ".png", sep = ""))
 
   vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
+
+
+  #setting up hit grid
+  m6 <- m2
+  m6$vai[m6$vai == 0] <- NA
+
   #x11(width = 8, height = 6)
-  hit.grid <- ggplot2::ggplot(m2, ggplot2::aes(x = xbin, y = zbin))+
+  hit.grid <- ggplot2::ggplot(m6, ggplot2::aes(x = xbin, y = zbin))+
     ggplot2::geom_tile(ggplot2::aes(fill = vai))+
     ggplot2::scale_fill_gradient(low="gray88", high="dark green",
                                  na.value = "white",

@@ -145,7 +145,12 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
       #label for VAI
       vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
 
-      hit.grid <- ggplot2::ggplot(m5, ggplot2::aes(x = xbin, y = zbin))+
+      #setting up hit grid
+      m6 <- m5
+      m6$vai[m6$vai == 0] <- NA
+
+
+      hit.grid <- ggplot2::ggplot(m6, ggplot2::aes(x = xbin, y = zbin))+
         ggplot2::geom_tile(ggplot2::aes(fill = vai))+
         ggplot2::scale_fill_gradient(low="gray88", high="dark green",
                                      na.value = "white",
