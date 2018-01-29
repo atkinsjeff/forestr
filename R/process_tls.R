@@ -33,7 +33,7 @@
 #' @export
 #'
 #' @seealso
-#' \link[forestr:process_pcl]{process_pcl}
+#' \code{\link{process_pcl}}
 #'
 #' @examples
 #'
