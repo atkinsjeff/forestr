@@ -7,12 +7,17 @@
 #' @param f name of file currently being processed
 #'
 #' @keywords read pcl raw input data
+#'
 #' @export
 #'
+#' @seealso
+#' \code{\link{process_pcl}}
+#' \code{\link(process_multi_pcl)}
+#'
 #' @examples
-#' \dontrun{
-#' read_pcl(f)
-#'  }
+#' uva.pcl <- system.data("extdata", "UVA_A4_01W.csv", package = "forestr )
+#' pcl.data <- read_pcl(uva.pcl)
+#'
 #'
 
 read_pcl <- function(f) {
