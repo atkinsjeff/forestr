@@ -29,16 +29,18 @@
 #' @return writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
 #'
 #' @keywords tls processing
-#' @export
 #'
+#' @export uva.tls
+#'
+#' #' @seealso
+#' \link[forestr:process_pcl]{process_pcl}
 #'
 #' @examples
 #'
 #' # with designated file
-#' f <- system.file("extdata", "UVA_A4_01_tls.csv", package = "forestr")
+#' uva.tls<- system.file("extdata", "UVA_A4_01_tls.csv", package = "forestr")
 #'
-#' #this will p
-#' process_tls(f, slice = 5, pavd = FALSE, hist = FALSE)
+#' process_tls(uva.tls, slice = 5, pavd = FALSE, hist = FALSE)
 #'
 #'
 

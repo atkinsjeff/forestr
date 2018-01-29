@@ -23,15 +23,31 @@ writes the hit matrix, summary matrix, and output variables to csv in an output 
 }
 \details{
 This function takes as input a four column .CSV file or data frame of x, y, z, and VAI
-(Vegetation Area Index) derived from 3-D LiDAR data. Currently, this function only analyzes
-a single slice from the inputed TLS data set. VAI is calculated externally by the user using
-user-determined methodologyy.
+(Vegetation Area Index) derived from 3-D (TLS)LiDAR data. Currently, this function only
+ analyzes a single slice from the inputed TLS data set. VAI is calculated externally
+ by the user using user-determined methodology.
+
+The [process_tls] function will write multiple output files to disk in an (output)
+directory that [process_tls] creates within the work directing. These files include:
+
+1. an output variables file that contains a list of CSC variables and is
+written by the subfunction [write_pcl_to_csv]
+2. a summary matrix, that includes detailed information on each vertical column of Lidar data
+written by the subfunction [write_summary_matrix_to_csv]
+3. a hit matrix, which is a matrix of VAI at each x and z position, written by the
+subfunction [write_hit_matrix_to_pcl]
+4. a hit grid, which is a graphical representation of VAI along the x and z coordinate space.
+5. optionally, plant area/volume density profiles can be created by including
+[pavd = TRUE] that include an additional histogram with the optional [hist = TRUE] in the
+[process_pcl] call.
 }
 \examples{
 
 # with designated file
-\dontrun{process_tls("tls.csv", slice = 5, pavd = FALSE, hist = FALSE)
-}
+uva.tls<- system.file("extdata", "UVA_A4_01_tls.csv", package = "forestr")
+
+process_tls(uva.tls, slice = 5, pavd = FALSE, hist = FALSE)
+
 
 }
 \keyword{processing}

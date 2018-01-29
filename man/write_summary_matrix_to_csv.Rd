@@ -17,7 +17,8 @@ write_summary_matrix_to_csv(m, outputname, output_directory)
 \code{write_summary_matrix_to_csv} writes summary matrix to .csv format
 }
 \details{
-This is a specific function that writes the summary matrix to disk in .csv format
+This is a specific subfunction that writes the summary matrix to disk in .csv format
+and runs within the functions [process_pcl], [process_multi_pcl], and [process_tls]
 }
 \examples{
 \dontrun{

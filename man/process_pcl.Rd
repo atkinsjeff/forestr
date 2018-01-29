@@ -16,7 +16,7 @@ process_pcl(f, user_height, marker.spacing, max.vai, pavd = FALSE,
 
 \item{max.vai}{the maximum value of column VAI. The default is 8. Should be a max value, not a mean.}
 
-\item{pavd}{logical input to include Plant Area Volume Density Plot from [plot_pavd], if TRUE it is included, if FALSE, it is not.}
+\item{pavd}{logical input to include Plant Area Volume Density Plot from {plot_pavd}, if TRUE it is included, if FALSE, it is not.}
 
 \item{hist}{logical input to include histogram of VAI with PAVD plot, if TRUE it is included, if FALSE, it is not.}
 }
@@ -27,22 +27,43 @@ writes the hit matrix, summary matrix, and output variables to csv in an output 
 \code{process_pcl} imports and processes a single PCL transect.
 }
 \details{
-This is function works on either files or existing data frames in the environment. It processes raw PCL data
-through a workflow that cuts the data into 1 meter segments with z and x positions and vertically normalizes data based on
-light extinction assumptions from the Beer-Lambert Law to account for light saturation. Data are then
-summarized, metrics of canopy structure complexity are calculated, and then output data saved to an output directory.
-A hit grid plot is also saved to this same directory.
+This function imports raw pcl data or existing data frames of pcl data and writes
+all data and analysis to a series of .csv files in an output directory (output)
+keeping nothing in the workspace.
+
+\code{process_pcl} uses a workflow that cuts the data into 1 meter segments with
+z and x positions in coordinate space where x referes to distance along the ground
+and z refers to distance above the ground. Data are normalized based on
+light extinction assumptions from the Beer-Lambert Law to account for light saturation.
+Data are then summarized and metrics of canopy structure complexity are calculated.
+
+\code{process_pcl} will write multiple output files to disk in an output directory that
+ \code{process_pcl} creates within the work directing. These files include:
+
+1. an output variables file that contains a list of CSC variables and is
+written by the subfunction \code{write_pcl_to_csv}
+2. a summary matrix, that includes detailed information on each vertical column of Lidar data
+written by the subfunction \code{write_summary_matrix_to_csv}
+3. a hit matrix, which is a matrix of VAI at each x and z position, written by the
+subfunction \code{write_hit_matrix_to_pcl}
+4. a hit grid, which is a graphical representation of VAI along the x and z coordinate space.
+5. optionally, plant area/volume density profiles can be created by including
+\code{pavd = TRUE} that include an additional histogram with the optional
+\code{hist = TRUE} in the \code{process_pcl} call.
 }
 \examples{
 
-# with designated file
-\dontrun{process_pcl("pcl_data.csv", marker.spacing = 10, user_height = 1.05, max.vai = 8)
-}
+uva.pcl <- system.file("extdata", "UVA_A4_01W.csv", package = "forestr")
+process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05, max.vai = 8, pavd = FALSE, hist = FALSE)
+
 
 # with data frame
-process_pcl(osbs, marker.spacing = 10, user_height = 1.05, max.vai = 8)
+process_pcl(osbs, marker.spacing = 10, user_height = 1.05, max.vai = 8, pavd = FALSE, hist = FALSE)
 
 
+}
+\seealso{
+\code{\link{process_multi_pcl}}
 }
 \keyword{pcl}
 \keyword{processing}

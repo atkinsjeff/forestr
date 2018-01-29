@@ -2,51 +2,56 @@
 #'
 #' \code{process_pcl} imports and processes a single PCL transect.
 #'
-#' This function imports raw pcl data or existing data frames of pcl data.
-#' [process_pcl] uses a workflow that cuts the data into 1 meter segments with
+#' This function imports raw pcl data or existing data frames of pcl data and writes
+#' all data and analysis to a series of .csv files in an output directory (output)
+#' keeping nothing in the workspace.
+#'
+#' \code{process_pcl} uses a workflow that cuts the data into 1 meter segments with
 #' z and x positions in coordinate space where x referes to distance along the ground
 #' and z refers to distance above the ground. Data are normalized based on
 #' light extinction assumptions from the Beer-Lambert Law to account for light saturation.
 #' Data are then summarized and metrics of canopy structure complexity are calculated.
 #'
-#' [process_pcl] will write multiple output files to disk in an (output) directory that
-#'  [process_pcl] creates within the work directing. These files include:
+#' \code{process_pcl} will write multiple output files to disk in an output directory that
+#'  \code{process_pcl} creates within the work directing. These files include:
 #'
 #' 1. an output variables file that contains a list of CSC variables and is
-#' written by the subfunction [write_pcl_to_csv]
+#' written by the subfunction \code{write_pcl_to_csv}
 #' 2. a summary matrix, that includes detailed information on each vertical column of Lidar data
-#' written by the subfunction [write_summary_matrix_to_csv]
+#' written by the subfunction \code{write_summary_matrix_to_csv}
 #' 3. a hit matrix, which is a matrix of VAI at each x and z position, written by the
-#' subfunction [write_hit_matrix_to_pcl]
+#' subfunction \code{write_hit_matrix_to_pcl}
 #' 4. a hit grid, which is a graphical representation of VAI along the x and z coordinate space.
 #' 5. optionally, plant area/volume density profiles can be created by including
-#' [pavd = TRUE] that include an additional histogram with the optional [hist = TRUE] in the
-#' [process_pcl] call.
+#' \code{pavd = TRUE} that include an additional histogram with the optional
+#' \code{hist = TRUE} in the \code{process_pcl} call.
 #'
 #'
 #' @param f  the name of the filename to input <character> or a data frame <data frame>.
 #' @param user_height the height of the laser off the ground as mounted on the user in meters. default is 1 m
 #' @param marker.spacing distance between markers, defaults is 10 m
 #' @param max.vai the maximum value of column VAI. The default is 8. Should be a max value, not a mean.
-#' @param pavd logical input to include Plant Area Volume Density Plot from [plot_pavd], if TRUE it is included, if FALSE, it is not.
+#' @param pavd logical input to include Plant Area Volume Density Plot from {plot_pavd}, if TRUE it is included, if FALSE, it is not.
 #' @param hist logical input to include histogram of VAI with PAVD plot, if TRUE it is included, if FALSE, it is not.
 #' @return writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
 #'
 #' @keywords pcl processing
-#' @export uva.pcl
+#' @export
 #'
 #' @seealso
-#' \link[forestr:process_multi_pcl]{process_multi_pcl}
+#' \code{\link{process_multi_pcl}}
 #'
 #'
 #' @examples
 #'
 #' uva.pcl <- system.file("extdata", "UVA_A4_01W.csv", package = "forestr")
-#' process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05, max.vai = 8, pavd = FALSE, hist = FALSE)
+#' process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05,
+#' max.vai = 8, pavd = FALSE, hist = FALSE)
 #'
 #'
 #' # with data frame
-#' process_pcl(osbs, marker.spacing = 10, user_height = 1.05, max.vai = 8, pavd = FALSE, hist = FALSE)
+#' process_pcl(osbs, marker.spacing = 10, user_height = 1.05,
+#' max.vai = 8, pavd = FALSE, hist = FALSE)
 #'
 #'
 
@@ -85,14 +90,6 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
     warning('This is not the data you are looking for')
   }
 
-  message("how many in base df have NA")
-  print(sum(is.na(df$return_distance)))
-
-#
-#   #
-#   #     # Cuts off the directory info to give just the filename.
-#   filename <- sub(".*/", "", f)
-  #
   # cuts out erroneous high values
   #df <- df[!(df$return_distance >= 50), ]
 
@@ -109,7 +106,8 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
   message("Table of sky hits")
   print(table(df2$sky_hit))
 
-  # Adjusts by the height of the  user to account for difference in laser height to ground in   meters==default is 1 m.
+  # Adjusts by the height of the  user to account for difference in laser height to
+  # ground in   meters==default is 1 m.
   df3 <- adjust_by_user(df2, user_height)
 
   # First-order metrics of sky and cover fraction.
@@ -139,7 +137,6 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
   enl <- calc_enl(m5)
 
   output.variables <- combine_variables(variable.list, csc.metrics, rumple, clumping.index, enl)
-  #print(output.variables)
 
   #output procedure for variables
   outputname = substr(filename,1,nchar(filename)-4)

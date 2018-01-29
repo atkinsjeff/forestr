@@ -2,12 +2,20 @@
 #'
 #' \code{write_hit_matrix_to_csv} writes hit matrix to .csv for further analysis
 #'
-#' This is a specific function that writes the output variables to disk in .csv format
+#' This is a specific sub-function that writes the output variables to disk in .csv format
+#' and runs within the functions \code{process_pcl}, \code{process_multi_pcl}, and
+#' \code{proces_tls}.
+#'
 #' @param m matrix of VAI with z and x coordinates
 #' @param outputname name of file currently being processed
 #' @param output_directory directory where output goes
 #' @keywords hit matrix
 #'
+#' @seealso
+#' \code{\link{process_pcl}}
+#' \code{\link{write_pcl_to_csv}}
+#' \code{\link{write_summary_matrix_to_csv}}
+
 #'
 #' @examples
 #' \dontrun{

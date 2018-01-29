@@ -28,15 +28,17 @@ writes the hit matrix, summary matrix, and output variables to csv in an output 
 }
 \details{
 This is a specific function that works using the input of a data directory of .csv
-files where the function cycles through the files there.
+files where the function cycles through the files there and processes multiple
+files, producing the same output files described in {process_pcl}
 }
 \examples{
 
 # This function works on a directory of raw PCL data
-data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
-\dontrun{process_multi_pcl(data_directory, user_height = 1.05, marker.spacing = 10, max.vai = 8)
+\dontrun{data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
+process_multi_pcl(data_directory, user_height = 1.05, marker.spacing = 10, max.vai = 8)
 
-process_multi_pcl("./data/PCL_transects/", user_height = 1.05, marker.spacing = 10, max.vai = 8)
+process_multi_pcl("./data/PCL_transects/", user_height = 1.05, marker.spacing = 10,
+max.vai = 8)
 }
 
 }
