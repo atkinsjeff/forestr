@@ -54,11 +54,13 @@ subfunction \code{write_hit_matrix_to_pcl}
 \examples{
 
 uva.pcl <- system.file("extdata", "UVA_A4_01W.csv", package = "forestr")
-process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05, max.vai = 8, pavd = FALSE, hist = FALSE)
+process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05,
+max.vai = 8, pavd = FALSE, hist = FALSE)
 
 
 # with data frame
-process_pcl(osbs, marker.spacing = 10, user_height = 1.05, max.vai = 8, pavd = FALSE, hist = FALSE)
+process_pcl(osbs, marker.spacing = 10, user_height = 1.05,
+max.vai = 8, pavd = FALSE, hist = FALSE)
 
 
 }

@@ -18,12 +18,17 @@ write_summary_matrix_to_csv(m, outputname, output_directory)
 }
 \details{
 This is a specific subfunction that writes the summary matrix to disk in .csv format
-and runs within the functions [process_pcl], [process_multi_pcl], and [process_tls]
+and runs within the functions \code{process_pcl}, \code{process_multi_pcl}, and
+\code{proces_tls}.
 }
 \examples{
 \dontrun{
 write_summary_matrix_to_csv()
 }
+}
+\seealso{
+\code{\link{write_pcl_to_csv}}
+\code{\link{write_hit_matrix_to_csv}}
 }
 \keyword{matrix}
 \keyword{summary}

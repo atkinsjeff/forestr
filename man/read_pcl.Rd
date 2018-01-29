@@ -12,11 +12,9 @@ read_pcl(f)
 \description{
 This function specificially reads in PCL files that are in .csv format, standard format for that data type.
 }
-\examples{
-\dontrun{
-read_pcl(f)
- }
-
+\seealso{
+\code{\link{process_pcl}}
+\code{\link(process_multi_pcl)}
 }
 \keyword{data}
 \keyword{input}
