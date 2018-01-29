@@ -30,9 +30,9 @@
 #'
 #' @keywords tls processing
 #'
-#' @export uva.tls
+#' @export
 #'
-#' #' @seealso
+#' @seealso
 #' \link[forestr:process_pcl]{process_pcl}
 #'
 #' @examples
@@ -49,6 +49,7 @@ process_tls<- function(f, slice, pavd = FALSE, hist = FALSE){
   zbin <- NULL
   vai <- NULL
   x <- NULL
+  m5 <- NULL
 
 
   if(is.character(f) == TRUE) {

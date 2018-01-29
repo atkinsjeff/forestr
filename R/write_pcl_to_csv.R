@@ -13,7 +13,7 @@
 #' @keywords output variables
 #' @export
 #' @seealso
-#' \code{\link{proces_pcl}}
+#' \code{\link{process_pcl}}
 #' \code{\link{write_summary_matrix_to_csv}}
 #' \code{\link{write_hit_matrix_to_csv}}
 

@@ -19,7 +19,7 @@
 #' @export
 #'
 #' @seealso
-#' \code{\link{process_pcl}
+#' \code{\link{process_pcl}}
 #'
 #' @examples
 #'

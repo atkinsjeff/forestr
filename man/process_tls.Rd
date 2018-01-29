@@ -50,5 +50,8 @@ process_tls(uva.tls, slice = 5, pavd = FALSE, hist = FALSE)
 
 
 }
+\seealso{
+\code{\link{process_pcl}}
+}
 \keyword{processing}
 \keyword{tls}
