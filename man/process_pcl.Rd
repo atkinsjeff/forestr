@@ -10,18 +10,22 @@ process_pcl(f, user_height, marker.spacing, max.vai, pavd = FALSE,
 \arguments{
 \item{f}{the name of the filename to input <character> or a data frame <data frame>.}
 
-\item{user_height}{the height of the laser off the ground as mounted on the user in meters. default is 1 m}
+\item{user_height}{the height of the laser off the ground as mounted on the user
+in meters. default is 1 m}
 
 \item{marker.spacing}{distance between markers, defaults is 10 m}
 
 \item{max.vai}{the maximum value of column VAI. The default is 8. Should be a max value, not a mean.}
 
-\item{pavd}{logical input to include Plant Area Volume Density Plot from {plot_pavd}, if TRUE it is included, if FALSE, it is not.}
+\item{pavd}{logical input to include Plant Area Volume Density Plot from {plot_pavd},
+if TRUE it is included, if FALSE, it is not.}
 
-\item{hist}{logical input to include histogram of VAI with PAVD plot, if TRUE it is included, if FALSE, it is not.}
+\item{hist}{logical input to include histogram of VAI with PAVD plot, if
+TRUE it is included, if FALSE, it is not.}
 }
 \value{
-writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
+writes the hit matrix, summary matrix, and output variables to csv
+in an output folder, along with hit grid plot
 }
 \description{
 \code{process_pcl} imports and processes a single PCL transect.
@@ -42,8 +46,8 @@ Data are then summarized and metrics of canopy structure complexity are calculat
 
 1. an output variables file that contains a list of CSC variables and is
 written by the subfunction \code{write_pcl_to_csv}
-2. a summary matrix, that includes detailed information on each vertical column of Lidar data
-written by the subfunction \code{write_summary_matrix_to_csv}
+2. a summary matrix, that includes detailed information on each vertical column
+of LiDAR data written by the subfunction \code{write_summary_matrix_to_csv}
 3. a hit matrix, which is a matrix of VAI at each x and z position, written by the
 subfunction \code{write_hit_matrix_to_pcl}
 4. a hit grid, which is a graphical representation of VAI along the x and z coordinate space.
