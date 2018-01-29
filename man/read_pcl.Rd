@@ -14,7 +14,7 @@ This function specificially reads in PCL files that are in .csv format, standard
 }
 \seealso{
 \code{\link{process_pcl}}
-\code{\link(process_multi_pcl)}
+\code{\link{process_multi_pcl}}
 }
 \keyword{data}
 \keyword{input}
