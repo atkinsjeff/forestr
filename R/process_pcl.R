@@ -9,7 +9,7 @@
 #' light extinction assumptions from the Beer-Lambert Law to account for light saturation.
 #' Data are then summarized and metrics of canopy structure complexity are calculated.
 #'
-#' [process_tls] will write multiple output files to disk in an (output) directory that
+#' [process_pcl] will write multiple output files to disk in an (output) directory that
 #'  [process_pcl] creates within the work directing. These files include:
 #'
 #' 1. an output variables file that contains a list of CSC variables and is
@@ -33,13 +33,16 @@
 #' @return writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
 #'
 #' @keywords pcl processing
-#' @export
+#' @export uva.pcl
+#'
+#' @seealso
+#' \link[forestr:process_multi_pcl]{process_multi_pcl}
 #'
 #'
 #' @examples
 #'
-#' f <- system.file("extdata", "UVA_A4_01W.csv", package = "forestr")
-#' process_pcl(f, marker.spacing = 10, user_height = 1.05, max.vai = 8, pavd = FALSE, hist = FALSE)
+#' uva.pcl <- system.file("extdata", "UVA_A4_01W.csv", package = "forestr")
+#' process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05, max.vai = 8, pavd = FALSE, hist = FALSE)
 #'
 #'
 #' # with data frame

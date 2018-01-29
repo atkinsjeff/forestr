@@ -3,7 +3,8 @@
 #' \code{process_multi_pcl} imports and processes mutiple PCL transect.
 #'
 #' This is a specific function that works using the input of a data directory of .csv
-#' files where the function cycles through the files there.
+#' files where the function cycles through the files there and processes multiple
+#' files, producing the same output files described in [process_pcl]
 #'
 #' @param data_dir directory where PCL .csv files are stored
 #' @param user_height height of laser from ground based on user in meters
@@ -15,12 +16,16 @@
 #' @keywords pcl processing, multiple files
 
 #'
-#' @export
+#' @export f
+#'
+#' @seealso
+#' \link[forestr:process_pcl]{process_pcl}
+#'
 #' @examples
 #'
 #' # This function works on a directory of raw PCL data
-#' data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
-#' \dontrun{process_multi_pcl(data_directory, user_height = 1.05, marker.spacing = 10, max.vai = 8)
+#' \dontrun{data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
+#' process_multi_pcl(data_directory, user_height = 1.05, marker.spacing = 10, max.vai = 8)
 #'
 #' process_multi_pcl("./data/PCL_transects/", user_height = 1.05, marker.spacing = 10, max.vai = 8)
 #' }
