@@ -2,19 +2,20 @@
 #'
 #' \code{calc_rumple} calculates canopy rumple.
 #'
-#' This is a specific function that works using the input of a data directory
-#' and a filename in that directory.Future versions of this will allow for direct
-#' input of file into command so there will be no need to specify both directory and file.
+#' This function uses the summary matrix created by
+#' the function \code{make_summary_matrix} to calculate
+#' canopy rumple, the relationship between outer canopy surface
+#' and the ground area.
 #'
 #'
-#' @param df data frame of processed pcl data
+#' @param df LiDAR summary matrix data frame
 #'
 #' @keywords rumple
 #' @return rumple for the canopy based on 2-D transect
 #' @examples
-#' \dontrun{
-#' calc_rumple()
-#' }
+#'
+#' calc_rumple(pcl_summary)
+#'
 calc_rumple <- function(df){
   df$rump.diff <- 0
 

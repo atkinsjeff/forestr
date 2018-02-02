@@ -1,22 +1,21 @@
 #' Normalize PCL data based on light saturation and attenuation
 #'
-#' \code{normalize_pcl} imports and processes a single PCL transect.
+#' \code{normalize_pcl} normalizes a PCL matrix for occlusion.
 #'
-#' This is a specific function that works using the input of a data directory
-#' and a filename in that directory.Future versions of this will allow for direct
-#' input of file into command so there will be no need to specify both directory and file.
+#' This function corrects saturated columns of LiDAR data
+#' for occlusion based on assumptions from the Beer-Lambert Law.
 #'
-#' @param df data frame of pcl hit density
+#' @param df data frame of pcl hit density processed from
+#' \code{make_matrix}
 #'
 #' @keywords light
-#' @return a data frame of PCL hit density corrected for light saturation and attentuation based on Beer's Law
+#' @return a data frame of PCL hit density corrected for
+#' light saturation and attentuation based on Beer's Law
 #'
 #' @export
 #' @examples
+#' pcl_norm <- normalize_pcl(pcl_matrix)
 #'
-#' \dontrun{
-#' normalize_pcl(df)
-#' }
 normalize_pcl <- function(df) {
 
   sum.dee <- NULL

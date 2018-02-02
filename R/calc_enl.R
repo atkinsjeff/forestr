@@ -3,16 +3,15 @@
 #' \code{calc_enl} calculates the effective number of layers in a canopy.
 #'
 #'
-#' @param m the summary matrix
+#' @param m a data frame of VAI for x, z bins from
 #'
 #' @keywords enl
-#' @return a slew of metrics...need to fully outline later
-#'
+#' @return the effective number of layers
 #' @export
 #' @examples
 #' # Calculates the effective number of layers
-#' \dontrun{calc_enl()
-#'}
+#' calc_enl(pcl_vai)
+#'
 
 calc_enl <- function(m) {
   #df = the summary matrix

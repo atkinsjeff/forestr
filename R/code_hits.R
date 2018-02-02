@@ -1,17 +1,19 @@
 #' Code hits
 #'
-#' \code{code_hits} imports and processes a single PCL transect.
+#' \code{code_hits} classifies data values as canopy returns, sky returns, or
+#' data markers.
 #'
-#'  this function accounts for the NAs that are in return distance which are actually
-#'   the sky hits (i.e. when the lidar does not record a canopy hit)
+#'  The function \code{code_hits} accounts for the NAs that are in
+#'  the return distance column which are actually
+#'   the sky hits (i.e. when the lidar does not record a canopy hit).
 #
 #' @param df a raw set of pcl data
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' code_hits(df)
-#' }
+#' # classify data values that have been imported using read_pcl
+#' pcl_coded <- code_hits(pcl_data)
+#'
 code_hits <- function(df) {
   for(i in 1:nrow(df)){
     if (is.na(df$return_distance[i]) == TRUE) {

@@ -15,8 +15,12 @@
 #' \code{\link{process_multi_pcl}}
 #'
 #' @examples
-#' uva.pcl <- system.data("extdata", "UVA_A4_01W.csv", package = "forestr")
-#' pcl.data <- read_pcl(uva.pcl)
+#'
+#' # Link to raw PCL data, in .csv form.
+#' uva_pcl <- system.data("extdata", "UVAX_A4_01W.csv", package = "forestr")
+#'
+#' # Import PCL data to the workspace
+#' pcl_data <- read_pcl(uva_pcl)
 #'
 #'
 

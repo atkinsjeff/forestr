@@ -1,9 +1,13 @@
 #' Creates summary matrix
 #'
-#' \code{make_summary_matrix} creates a summary matrix of data through data wrangling.
+#' \code{make_summary_matrix} creates a summary matrix of data through data wrangling
+#' the VAI data frame.
 #'
 #' This makes a dataframe that is as long as a transect is. If the
-#' transect is 40 m, this data frame has 40 rows.
+#' transect is 40 m, this data frame has 40 rows. As input,
+#' \code{make_summary_matrix} requires a data frame of values
+#' from \code(split_transects_from_pcl) first, and second,
+#' the data frame of VAI from the function \code{calc_vai}.
 #'
 #'#' This function allows you to express your love of cats.
 #' @param df sorted data frame of processed PCL data
@@ -15,11 +19,8 @@
 #' @export
 #' @examples
 #'
-#' \dontrun{
-#' #' make_summary_matrix()
-
-#' }
-
+#' pcl_summary <- make_summary_matrix(pcl_split, pcl_vai)
+#'
 
 make_summary_matrix <- function(df, m) {
   #declaring global varieties

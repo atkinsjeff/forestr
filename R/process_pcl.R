@@ -31,7 +31,8 @@
 #' @param user_height the height of the laser off the ground as mounted on the user
 #' in meters. default is 1 m
 #' @param marker.spacing distance between markers, defaults is 10 m
-#' @param max.vai the maximum value of column VAI. The default is 8. Should be a max value, not a mean.
+#' @param max.vai the maximum value of column VAI. The default is 8. Should be
+#' a max value, not a mean.
 #' @param pavd logical input to include Plant Area Volume Density Plot from {plot_pavd},
 #' if TRUE it is included, if FALSE, it is not.
 #' @param hist logical input to include histogram of VAI with PAVD plot, if
@@ -47,8 +48,10 @@
 #'
 #'
 #' @examples
+#' # Link to stored, raw PCL data in .csv form
+#' uva.pcl <- system.file("extdata", "UVAX_A4_01W.csv", package = "forestr")
 #'
-#' uva.pcl <- system.file("extdata", "UVA_A4_01W.csv", package = "forestr")
+#' # Run process complete PCL transect, store output to disk
 #' process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05,
 #' max.vai = 8, pavd = FALSE, hist = FALSE)
 #'
@@ -199,11 +202,12 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
   # PAVD
   if(pavd == TRUE && hist == FALSE){
 
-    plot_pavd(m5, filename, plot.file.path.pavd)
+    plot_pavd(m5, filename, plot.file.path.pavd, output.file = TRUE)
+
   }
   if(pavd == TRUE && hist == TRUE){
 
-    plot_pavd(m5, filename, plot.file.path.pavd, hist = TRUE)
+    plot_pavd(m5, filename, plot.file.path.pavd, hist = TRUE, output.file = TRUE)
   }
 
 }

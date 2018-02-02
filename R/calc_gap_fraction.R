@@ -1,17 +1,19 @@
 #' Calculate gap fraction
 #'
-#' \code{calc_gap_fraction} imports and processes a single PCL transect.
+#' \code{calc_gap_fraction} produces clumping index based on
+#' gap fraction through the canopy.
 #'
-#' This is a specific function that works using the adjusted matrix to calculate gap fraction through the canopy. This function also returns clumping index. #'
-#' @param m the matrix of bin hits calculated as density of LiDAR returns for each x column.
+#' This is a specific function that works using the adjusted matrix to calculate gap fraction through the canopy. This function also returns clumping index.
+#'
+#' @param m the matrix of bin hits calculated as density of
+#' LiDAR returns for each x column.
 #'
 #' @keywords gap fraction
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' calc_gap_fraction(m)
-#' }
+#' calc_gap_fraction(pcl_vai)
+#'
 
 
 calc_gap_fraction <- function(m){

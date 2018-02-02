@@ -1,22 +1,25 @@
 #' Calculate rugosity and other higher level complexity metrics
 #'
-#' \code{calc_rugosity} calculates canopy structural complexity metrics from PCL data and prints them to the screen.
+#' \code{calc_rugosity} calculates canopy structural complexity
+#' metrics from PCL data and prints them to the screen.
 #'
-#' This is a specific function calculates canopy rugosity and other metrics, including rumple, height metrics, etc.
+#' This is a specific function calculates canopy rugosity
+#' and other metrics, including rumple, height metrics, etc.
 #'
-#' @param df is a data frame of adjusted pcl data.
+#' @param df is a LiDAR summary matrix data frame
 #' @param m matrix of light adjusted vai values.
 #' @param filename the name of the file currently being processed.
 #'
 #' @keywords rugosity, porosity, csc
 #'
-#' @return a series of metrics that describe canopy and ecosystem height, density, openness, cover, etc.
+#' @return a series of metrics that describe canopy and
+#' ecosystem height, density, openness, cover, etc.
 #'
 #' @export
 #' @examples
 #' # Calculates metrics of canopy structural complexity.
-#' \dontrun{calc_rugosity()
-#'}
+#' calc_rugosity(pcl_summary, pcl_vai, filename = "")
+#'
 
 
 # RUGOSITY

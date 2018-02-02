@@ -1,22 +1,23 @@
 #' Make PCL matrix for higher level complexity measures
 #'
-#' \code{make matrix} imports and processes a single PCL transect.
+#' \code{make matrix} produces a matrix of, x, z values in
+#' coordinate space with the number and type of each LiDAR
+#' return in each x, z bin combination
 #'
-#' @param df data frame of unprocessed PCL data
+#' The \code{make_matrix} function munges data in to a data frame
+#' of x, z bins with the number of canopy hits located in each bin.
+#'
+#' @param df data frame of PCL data that has been processed with
+#' \code{split_transect_from_pcl}
 #'
 #' @keywords matrix
-#' @return sorted matrix with z and x coordinates in meters
+#' @return sorted matrix of LiDAR returns for each x, z position
 #'
 #' @export
 #'
 #' @examples
-
+#' pcl_matrix <- make_matrix(pcl_split)
 #'
-#' \dontrun{
-#' make_matrix(df)
-#' }
-
-
 
 make_matrix_part_one <- function(df) {
   #ultimately this should actually make an empty data frame or something

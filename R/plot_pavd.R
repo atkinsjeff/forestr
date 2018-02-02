@@ -2,29 +2,50 @@
 #'
 #' \code{plot_pavd} produces a PAVD plot from matrix data
 #'
-#' This function is a nested function inside of [process_pcl]. It could be run independently using the summary_matrix.csv
-#' output files created from running [procesS_pcl] as well.
+#' This function is a nested function inside of \code{process_pcl}. It could be run independently using the summary_matrix.csv
+#' output files created from running \code{procesS_pcl} as well.
 #'
 #' @param m matrix of light adjusted vai values.
 #' @param filename the name of the file currently being processed.
-#' @param plot.file.path.pavd path of plot file to be written, inherited from [process_pcl] or [process_multi_pcl]
+#' @param plot.file.path.pavd path of plot file to be written, inherited from \code{process_pcl} or \code{process_multi_pcl}
 #' @param hist logical input to include histogram of VAI, if TRUE it is included, if FALSE, it is not.
 #' @keywords plant area volume density profile, pavd
 #' @return plant area volume density plots
 #'
 #' @export
+#'
+#'  @seealso
+#' \code{\link{plot_hit_grid}}
+#'
 #' @examples
 #' # Calculates metrics of canopy structural complexity.
-#' \dontrun{plot_pavd(summary_matrix)
-#'}
+#' plot_pavd(pcl_vai, hist = FALSE, output.file = FALSE)
+#' plot_pavd(pcl_vai, hist = TRUE, output.file = FALSE)
+#'
 
 
 # PAVD script
-plot_pavd <- function(m, filename, plot.file.path.pavd, hist = FALSE) {
+plot_pavd <- function(m, filename, plot.file.path.pavd, hist = FALSE, output.file = FALSE) {
   #m = vai matrix
 
-  pavd <- NULL
+pavd <- NULL
 
+# Deal with missing stuff
+if(missing(filename)){
+  filename = ""
+}
+
+if(missing(plot.file.path.pavd)){
+  plot.file.path.pavd = ""
+}
+
+if(missing(hist)){
+  hist = FALSE
+}
+
+if(missing(output.file)){
+  output.file = FALSE
+}
 
 # Creates the total value of VAI for the whole transect/plot
 total.vai <- sum(m$vai)
@@ -58,7 +79,7 @@ pavd <- ggplot2::ggplot(df.z, ggplot2::aes(y = df.z$ratio.vai, x = df.z$zbin))+
   ggplot2::ggtitle(filename)+
   ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
 
-ggplot2::ggsave(plot.file.path.pavd, pavd, width = 8, height = 6, units = c("in"))
+pavd
 } else {
   pavd <- ggplot2::ggplot(df.z, ggplot2::aes(y = df.z$ratio.vai, x = df.z$zbin))+
     #geom_bar(stat = "identity", color = "light grey")+
@@ -77,10 +98,14 @@ ggplot2::ggsave(plot.file.path.pavd, pavd, width = 8, height = 6, units = c("in"
     ggplot2::xlab("Height Above Ground (m)")+
     ggplot2::ggtitle(filename)+
     ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
+
+pavd
+}
+if(output.file == TRUE){
+
+  ggplot2::ggsave(plot.file.path.pavd, pavd, width = 8, height = 6, units = c("in"))
 }
 
-
-ggplot2::ggsave(plot.file.path.pavd, pavd, width = 8, height = 6, units = c("in"))
-
 }
+
 

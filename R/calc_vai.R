@@ -1,18 +1,21 @@
 #' Calculate vegetation area index (VAI) from normalized PCL data matrix
 #'
-#' \code{calc_vai} imports and processes a single PCL transect.
+#' \code{calc_vai} calculates vegetation area index (VAI) from a normalized
+#' matrix of LiDAR data.
+#'
 #'
 #' @param df data frame of pcl data that has been corrected for light extinction
-#' @param max.vai the maximum value of column VAI. The default is 8. Should be a max value, not a mean.
+#' using the \code{normalize_pcl} function.
+#' @param max.vai the maximum value of column VAI. The default is 8.
+#' Should be a max value, not a mean.
 #' @keywords vai
 #' @return a matrix of vai by x, z in the canopy
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' calc_vai(df)
-#' }
-#####this series of functions creates VAI
+#'
+#' pcl_vai <- calc_vai(pcl_norm, max.vai = 8)
+#'
 calc_vai <- function(df, max.vai) {
   #declaring global variables
   lidar.pulses <- NULL
