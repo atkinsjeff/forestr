@@ -6,10 +6,11 @@
 #'
 #' @param m matrix of light adjusted vai values.
 #' @param filename the name of the file currently being processed.
-#' @param plot.file.path.pavd path of plot file to be written, inherited from [process_pcl] or [process_multi_pcl]
-#' @param hist logical input to include histogram of VAI, if TRUE it is included, if FALSE, it is not.
-#' @keywords plant area volume density profile, pavd
-#' @return plant area volume density plots
+#' @param transect.length the length of the transect used to create the x-axis
+#' @param max.ht the maximum measured height used to create the y-axis
+#' @param max.vai the maximum density of VAI, defaul = 8
+#' @keywords hitgrid, plot,
+#' @return a hit gride of VAI
 #'
 #' @export
 #' @examples
@@ -22,6 +23,9 @@
 # PAVD script
 plot_hit_grid <- function(m, filename, transect.length, max.ht, max.vai) {
   # m = vai matrix
+  xbin <- NULL
+  zbin <- NULL
+  vai <- NULL
   m$vai[m$vai == 0] <- NA
 
   # Deal with missing stuff

@@ -15,19 +15,22 @@ make_summary_matrix(df, m)
 a matrix of summary stats by each x and z coordinate position
 }
 \description{
-\code{make_summary_matrix} creates a summary matrix of data through data wrangling.
+\code{make_summary_matrix} creates a summary matrix of data through data wrangling
+the VAI data frame.
 }
 \details{
 This makes a dataframe that is as long as a transect is. If the
-transect is 40 m, this data frame has 40 rows.
+transect is 40 m, this data frame has 40 rows. As input,
+\code{make_summary_matrix} requires a data frame of values
+from \code{split_transects_from_pcl} first, and second,
+the data frame of VAI from the function \code{calc_vai}.
 
 #' This function allows you to express your love of cats.
 }
 \examples{
 
-\dontrun{
-#' make_summary_matrix()
-}
+pcl_summary <- make_summary_matrix(pcl_split, pcl_vai)
+
 }
 \keyword{matrix}
 \keyword{summary}

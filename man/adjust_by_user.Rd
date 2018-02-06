@@ -12,17 +12,16 @@ adjust_by_user(df, user_height)
 \item{user_height}{the height of the laser off the ground as mounted on the user in meters}
 }
 \description{
-\code{adjust_by_user} imports and processes a single PCL transect.
+\code{adjust_by_user} adjusts data based on the user height to acccount
+for the laser's distance from the ground.
 }
 \details{
-This is a specific function that works using the input of a data directory
-and a filename in that directory.Future versions of this will allow for direct
-input of file into command so there will be no need to specify both directory and file.
+The function \code{adjust_by_user} simply adds the height of the user to the
+return distances in the data frame to estimate true height.
 }
 \examples{
 # Adust raw data to account for user height as PCL is user-mounted and correction
 # gives actual distance from ground.
-\dontrun{
-adjust_by_user(df, 1.05)
-}
+pcl_adjusted <- adjust_by_user(pcl_coded, user_height = 1.05)
+
 }

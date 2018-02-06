@@ -6,7 +6,7 @@
 #' This makes a dataframe that is as long as a transect is. If the
 #' transect is 40 m, this data frame has 40 rows. As input,
 #' \code{make_summary_matrix} requires a data frame of values
-#' from \code(split_transects_from_pcl) first, and second,
+#' from \code{split_transects_from_pcl} first, and second,
 #' the data frame of VAI from the function \code{calc_vai}.
 #'
 #'#' This function allows you to express your love of cats.

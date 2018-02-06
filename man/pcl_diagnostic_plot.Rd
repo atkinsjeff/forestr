@@ -15,16 +15,14 @@ pcl_diagnostic_plot(df, filename)
 a plot of PCL data showing marker spacing
 }
 \description{
-\code{pcl_diagnostic_plot} imports and processes a single PCL transect.
+\code{pcl_diagnostic_plot} this function provides a diagnostic view of raw PCL data
 }
 \details{
-This is a specific function that works using the input of a data directory
-and a filename in that directory.Future versions of this will allow for direct
-input of file into command so there will be no need to specify both directory and file.
+This function provides a graphic view of raw PCL data to check for equal data
+spacing and marker spacing
 }
 \examples{
+# using the Ordway-Swisher Data set
+pcl_diagnostic_plot(osbs)
 
-\dontrun{
-pcl_diagnostic_plot(df, filename)
-}
 }

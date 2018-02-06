@@ -7,19 +7,22 @@
 calc_vai(df, max.vai)
 }
 \arguments{
-\item{df}{data frame of pcl data that has been corrected for light extinction}
+\item{df}{data frame of pcl data that has been corrected for light extinction
+using the \code{normalize_pcl} function.}
 
-\item{max.vai}{the maximum value of column VAI. The default is 8. Should be a max value, not a mean.}
+\item{max.vai}{the maximum value of column VAI. The default is 8.
+Should be a max value, not a mean.}
 }
 \value{
 a matrix of vai by x, z in the canopy
 }
 \description{
-\code{calc_vai} imports and processes a single PCL transect.
+\code{calc_vai} calculates vegetation area index (VAI) from a normalized
+matrix of LiDAR data.
 }
 \examples{
-\dontrun{
-calc_vai(df)
-}
+
+pcl_vai <- calc_vai(pcl_norm, max.vai = 8)
+
 }
 \keyword{vai}

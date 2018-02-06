@@ -9,22 +9,21 @@ get_transect_length(df, marker.spacing)
 \arguments{
 \item{df}{data frame of unprocessed PCL data}
 
-\item{marker.spacing}{distance between transect markers, typically 10 m}
+\item{marker.spacing}{distance between transect markers, typically 5 or 10 m}
 }
 \value{
 length of transect
 }
 \description{
-\code{get_transect_length} imports and processes a single PCL transect.
+\code{get_transect_length} acquires the length of a transect based on
+a known marker spacing of the data markers stored in pcl data.
 }
 \details{
-This is a specific function that works using the input of a data directory
-and a filename in that directory.Future versions of this will allow for direct
-input of file into command so there will be no need to specify both directory and file.
+Returns the transect length of a given PCL file given a known marker spacing.
 }
 \examples{
 
-\dontrun{
-get_transect_length(df, marker.spacing)
-}
+# Get the length of the transect given a known spacing between data markers
+transect.length <- get_transect_length(pcl_data, marker.spacing)
+
 }

@@ -7,17 +7,17 @@
 calc_enl(m)
 }
 \arguments{
-\item{m}{the summary matrix}
+\item{m}{a data frame of VAI for x, z bins from}
 }
 \value{
-a slew of metrics...need to fully outline later
+the effective number of layers
 }
 \description{
 \code{calc_enl} calculates the effective number of layers in a canopy.
 }
 \examples{
 # Calculates the effective number of layers
-\dontrun{calc_enl()
-}
+calc_enl(pcl_vai)
+
 }
 \keyword{enl}

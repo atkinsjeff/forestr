@@ -26,7 +26,6 @@
 #'  pcl_split <- split_transects_from_pcl(pcl_adjusted,
 #'  transect.length = 40, marker.spacing = 10)
 #'
-##########################################
 split_transects_from_pcl <- function(pcl_data, transect.length, marker.spacing, DEBUG = FALSE,  data_dir, output_file_name) {
 
   index <- NULL

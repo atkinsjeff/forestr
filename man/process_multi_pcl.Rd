@@ -29,7 +29,7 @@ writes the hit matrix, summary matrix, and output variables to csv in an output 
 \details{
 This is a specific function that works using the input of a data directory of .csv
 files where the function cycles through the files there and processes multiple
-files, producing the same output files described in {process_pcl}
+files, producing the same output files described in \code{process_pcl}
 }
 \examples{
 

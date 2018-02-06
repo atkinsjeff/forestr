@@ -4,7 +4,7 @@
 #'
 #' This is a specific function that works using the input of a data directory of .csv
 #' files where the function cycles through the files there and processes multiple
-#' files, producing the same output files described in {process_pcl}
+#' files, producing the same output files described in \code{process_pcl}
 #'
 #' @param data_dir directory where PCL .csv files are stored
 #' @param user_height height of laser from ground based on user in meters

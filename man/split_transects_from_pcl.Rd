@@ -21,7 +21,8 @@ split_transects_from_pcl(pcl_data, transect.length, marker.spacing,
 \item{output_file_name}{old code relic that doesn't do much.}
 }
 \description{
-\code{split_transects_from_pcl} imports and processes a single PCL transect.
+\code{split_transects_from_pcl} places data values into x-bins (x-coordinates
+and) and z-bins (z-coordinates)
 }
 \details{
 Function to add two additional columns
@@ -29,13 +30,13 @@ to the pcl dataset, one for the segment
  (which should only be from 1-4) and is
 designated by a -99999999 value in the
 return_distance column
-The only required parameter is the data
-frame of pcl data, but this can
-optionally also write out the results
-to csv if a path and name are given
+The only required parameters are the data
+frame of pcl data, with the length of transect and the marker
+spacing.
 }
 \examples{
 # Function that has the algorithm that splits the raw data into defined, equidistant x-bins.
-\dontrun{split_transects_from_pcl(df, 40, 10)
-}
+ pcl_split <- split_transects_from_pcl(pcl_adjusted,
+ transect.length = 40, marker.spacing = 10)
+
 }

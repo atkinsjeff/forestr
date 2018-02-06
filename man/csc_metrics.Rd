@@ -17,17 +17,23 @@ csc_metrics(df, filename, transect.length)
 slew of cover and sky fraction metrics
 }
 \description{
-\code{csc_metrics} imports and processes a single PCL transect.
+\code{csc_metrics} creates first-order canopy structural metrics that
+do not require normalization
 }
 \details{
-This is a specific function that works using the input of a data directory
-and a filename or a single data frame in that directory.
+The \code{csc_metrics} function processes uncorrected PCL data to
+generate canopy structural complexity (CSC) metrics that do not
+require normalization (i.e. correction for light saturation based on
+Beer-Lambert Law). These metrics include:  mean return height of raw data, sd
+of raw canopy height returns, maximum measured canopy height, scan density (the
+average no. of LiDAR returns per linear meter), and both openness and cover
+fraction which are used for gap fraction calcuations.
 }
 \examples{
 
-\dontrun{
-csc_metrics(df, filename)
-}
+
+csc.metrics <- csc_metrics(pcl_adjusted, filename, transect.length = 10)
+
 }
 \keyword{canopy}
 \keyword{csc,}

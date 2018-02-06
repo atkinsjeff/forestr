@@ -13,10 +13,13 @@
 #' @examples
 #' # Adust raw data to account for user height as PCL is user-mounted and correction
 #' # gives actual distance from ground.
-#' pcl_adjusted <- adjust_by_user(pcl_coded, 1.05)
+#' pcl_adjusted <- adjust_by_user(pcl_coded, user_height = 1.05)
 #'
 
 adjust_by_user <- function(df, user_height) {
+  if(missing(user_height)){
+    user_height = 1
+  }
   df$return_distance <- df$return_distance + user_height
   df
 }

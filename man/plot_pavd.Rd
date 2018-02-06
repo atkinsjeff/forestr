@@ -4,16 +4,21 @@
 \alias{plot_pavd}
 \title{Graphs Plant Area Volume Density Profiles}
 \usage{
-plot_pavd(m, filename, plot.file.path.pavd, hist = FALSE)
+plot_pavd(m, filename, plot.file.path.pavd, hist = FALSE,
+  output.file = FALSE)
 }
 \arguments{
 \item{m}{matrix of light adjusted vai values.}
 
 \item{filename}{the name of the file currently being processed.}
 
-\item{plot.file.path.pavd}{path of plot file to be written, inherited from [process_pcl] or [process_multi_pcl]}
+\item{plot.file.path.pavd}{path of plot file to be written, inherited
+from \code{process_pcl} or \code{process_multi_pcl}}
 
-\item{hist}{logical input to include histogram of VAI, if TRUE it is included, if FALSE, it is not.}
+\item{hist}{logical input to include histogram of VAI, if TRUE it is included,
+if FALSE, it is not.}
+
+\item{output.file}{TRUE or FALSE whether to write PAVD to disk}
 }
 \value{
 plant area volume density plots
@@ -22,13 +27,18 @@ plant area volume density plots
 \code{plot_pavd} produces a PAVD plot from matrix data
 }
 \details{
-This function is a nested function inside of [process_pcl]. It could be run independently using the summary_matrix.csv
-output files created from running [procesS_pcl] as well.
+This function is a nested function inside of \code{process_pcl}. It could be run
+independently using the summary_matrix.csv
+output files created from running \code{procesS_pcl} as well.
 }
 \examples{
 # Calculates metrics of canopy structural complexity.
-\dontrun{plot_pavd(summary_matrix)
+plot_pavd(pcl_vai, hist = FALSE, output.file = FALSE)
+plot_pavd(pcl_vai, hist = TRUE, output.file = FALSE)
+
 }
+\seealso{
+\code{\link{plot_hit_grid}}
 }
 \keyword{area}
 \keyword{density}

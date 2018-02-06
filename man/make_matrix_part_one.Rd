@@ -7,18 +7,23 @@
 make_matrix_part_one(df)
 }
 \arguments{
-\item{df}{data frame of unprocessed PCL data}
+\item{df}{data frame of PCL data that has been processed with
+\code{split_transect_from_pcl}}
 }
 \value{
-sorted matrix with z and x coordinates in meters
+sorted matrix of LiDAR returns for each x, z position
 }
 \description{
-\code{make matrix} imports and processes a single PCL transect.
+\code{make matrix} produces a matrix of, x, z values in
+coordinate space with the number and type of each LiDAR
+return in each x, z bin combination
+}
+\details{
+The \code{make_matrix} function munges data in to a data frame
+of x, z bins with the number of canopy hits located in each bin.
 }
 \examples{
+pcl_matrix <- make_matrix(pcl_split)
 
-\dontrun{
-make_matrix(df)
-}
 }
 \keyword{matrix}

@@ -2,19 +2,23 @@
 #'
 #' \code{plot_pavd} produces a PAVD plot from matrix data
 #'
-#' This function is a nested function inside of \code{process_pcl}. It could be run independently using the summary_matrix.csv
+#' This function is a nested function inside of \code{process_pcl}. It could be run
+#' independently using the summary_matrix.csv
 #' output files created from running \code{procesS_pcl} as well.
 #'
 #' @param m matrix of light adjusted vai values.
 #' @param filename the name of the file currently being processed.
-#' @param plot.file.path.pavd path of plot file to be written, inherited from \code{process_pcl} or \code{process_multi_pcl}
-#' @param hist logical input to include histogram of VAI, if TRUE it is included, if FALSE, it is not.
+#' @param plot.file.path.pavd path of plot file to be written, inherited
+#' from \code{process_pcl} or \code{process_multi_pcl}
+#' @param hist logical input to include histogram of VAI, if TRUE it is included,
+#' if FALSE, it is not.
+#' @param output.file TRUE or FALSE whether to write PAVD to disk
 #' @keywords plant area volume density profile, pavd
 #' @return plant area volume density plots
 #'
 #' @export
 #'
-#'  @seealso
+#' @seealso
 #' \code{\link{plot_hit_grid}}
 #'
 #' @examples
