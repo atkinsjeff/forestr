@@ -18,7 +18,7 @@ This function specificially reads in PCL files that are in .csv format, standard
 uva_pcl <- system.data("extdata", "UVAX_A4_01W.csv", package = "forestr")
 
 # Import PCL data to the workspace
-pcl_data <- read_pcl(uva_pcl)
+pcl_data <-read_pcl(uva_pcl)
 
 
 }

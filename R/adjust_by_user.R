@@ -8,11 +8,15 @@
 #'
 #'
 #' @param df the data frame of raw pcl data
-#' @param user_height the height of the laser off the ground as mounted on the user in meters
+#' @param user_height the height of the laser off the ground as mounted on the
+#' user in meters
+#' @return a data frame adjusted by height
 #' @export
+#'
 #' @examples
 #' # Adust raw data to account for user height as PCL is user-mounted and correction
 #' # gives actual distance from ground.
+#'
 #' pcl_adjusted <- adjust_by_user(pcl_coded, user_height = 1.05)
 #'
 

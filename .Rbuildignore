@@ -2,6 +2,9 @@
 ^\.Rproj\.user$
 figure/
 osbs.png
+hitgrid.png
+pavd.png
+pavd_hist.png
 ^.*\.RDA
 ^README\.Rmd$       # An Rmarkdown file used to generate README.md
 README.Rmd

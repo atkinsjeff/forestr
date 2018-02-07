@@ -9,7 +9,11 @@ adjust_by_user(df, user_height)
 \arguments{
 \item{df}{the data frame of raw pcl data}
 
-\item{user_height}{the height of the laser off the ground as mounted on the user in meters}
+\item{user_height}{the height of the laser off the ground as mounted on the
+user in meters}
+}
+\value{
+a data frame adjusted by height
 }
 \description{
 \code{adjust_by_user} adjusts data based on the user height to acccount
@@ -22,6 +26,7 @@ return distances in the data frame to estimate true height.
 \examples{
 # Adust raw data to account for user height as PCL is user-mounted and correction
 # gives actual distance from ground.
+\dontrun{
 pcl_adjusted <- adjust_by_user(pcl_coded, user_height = 1.05)
-
+}
 }

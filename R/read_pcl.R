@@ -20,7 +20,7 @@
 #' uva_pcl <- system.data("extdata", "UVAX_A4_01W.csv", package = "forestr")
 #'
 #' # Import PCL data to the workspace
-#' pcl_data <- read_pcl(uva_pcl)
+#' pcl_data <-read_pcl(uva_pcl)
 #'
 #'
 
