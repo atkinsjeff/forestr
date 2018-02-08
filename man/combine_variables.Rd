@@ -28,8 +28,9 @@ This is a specific function combines variables together to a coherent list.
 }
 \examples{
 \dontrun{
-#This function runs interanlly and collates the slew of CSC metrics and formats them.
-combine_Variables(variable.list, csc.metrics, rumple, clumping.index)
+#This function runs interanlly and collates the slew of
+CSC metrics and formats them.
+#' combine_Variables(variable.list, csc.metrics, rumple, clumping.index)
 }
 }
 \keyword{csc}

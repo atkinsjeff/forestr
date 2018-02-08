@@ -24,6 +24,6 @@ Returns the transect length of a given PCL file given a known marker spacing.
 \examples{
 
 # Get the length of the transect given a known spacing between data markers
-transect.length <- get_transect_length(pcl_data, marker.spacing)
+transect.length <- get_transect_length(pcl_data, marker.spacing = 10)
 
 }

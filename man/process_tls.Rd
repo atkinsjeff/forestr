@@ -47,7 +47,7 @@ subfunction \code{write_hit_matrix_to_pcl}
 \examples{
 
 # with designated file
-uva.tls<- system.file("extdata", "UVA_A4_01_tls.csv", package = "forestr")
+uva.tls<- system.file("extdata", "UVAX_A4_01_tls.csv", package = "forestr")
 
 process_tls(uva.tls, slice = 5, pavd = FALSE, hist = FALSE)
 

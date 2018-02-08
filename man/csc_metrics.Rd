@@ -32,7 +32,7 @@ fraction which are used for gap fraction calcuations.
 \examples{
 
 
-csc.metrics <- csc_metrics(pcl_adjusted, filename, transect.length = 10)
+csc.metrics <- csc_metrics(pcl_adjusted, filename = "UVA", transect.length = 10)
 
 }
 \keyword{canopy}

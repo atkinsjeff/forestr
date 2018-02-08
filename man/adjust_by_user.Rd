@@ -26,7 +26,7 @@ return distances in the data frame to estimate true height.
 \examples{
 # Adust raw data to account for user height as PCL is user-mounted and correction
 # gives actual distance from ground.
-\dontrun{
+
 pcl_adjusted <- adjust_by_user(pcl_coded, user_height = 1.05)
-}
+
 }

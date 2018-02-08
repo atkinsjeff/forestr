@@ -41,7 +41,7 @@
 #' @examples
 #'
 #' # with designated file
-#' uva.tls<- system.file("extdata", "UVA_A4_01_tls.csv", package = "forestr")
+#' uva.tls<- system.file("extdata", "UVAX_A4_01_tls.csv", package = "forestr")
 #'
 #' process_tls(uva.tls, slice = 5, pavd = FALSE, hist = FALSE)
 #'
@@ -81,9 +81,7 @@ process_tls<- function(f, slice, pavd = FALSE, hist = FALSE){
   # derive tls mean leaf height
   m2 <- calc_tls_mean_leaf_ht(m1)
 
-
   variable.list <- calc_tls_csc(m2, filename)
-
 
   output.variables  <- cbind(variable.list)
 
