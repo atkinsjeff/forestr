@@ -12,7 +12,7 @@
 #' @examples
 #'
 #' # Get the length of the transect given a known spacing between data markers
-#' transect.length <- get_transect_length(pcl_data, marker.spacing)
+#' transect.length <- get_transect_length(pcl_data, marker.spacing = 10)
 #'
 
 get_transect_length <- function (df, marker.spacing) {

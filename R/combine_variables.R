@@ -15,7 +15,7 @@
 #' @examples
 #' \dontrun{
 #' #This function runs interanlly and collates the slew of CSC metrics and formats them.
-#' combine_Variables(variable.list, csc.metrics, rumple, clumping.index)
+#' #' combine_Variables(variable.list, csc.metrics, rumple, clumping.index)
 #' }
 
 

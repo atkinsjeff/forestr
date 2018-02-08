@@ -7,7 +7,7 @@
 #'
 #' @param df data frame of unprocessed PCL data
 #' @param filename name of file currently being processed
-#'
+#' @export
 #' @return a plot of PCL data showing marker spacing
 #'
 #'

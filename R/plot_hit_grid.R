@@ -15,7 +15,7 @@
 #' @export
 #' @examples
 #' # Calculates metrics of canopy structural complexity.
-#' plot_hit_grid(pcl_Vai, filename = "UVA LiDAR data", transect.length = 40,
+#' plot_hit_grid(pcl_vai, filename = "UVA LiDAR data", transect.length = 40,
 #'  max.ht = 30, max.vai = 8)
 #'
 

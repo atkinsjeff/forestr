@@ -7,7 +7,7 @@
 #' canopy rumple, the relationship between outer canopy surface
 #' and the ground area.
 #'
-#'
+#' @export
 #' @param df LiDAR summary matrix data frame
 #'
 #' @keywords rumple

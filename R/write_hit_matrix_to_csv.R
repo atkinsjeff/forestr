@@ -11,6 +11,8 @@
 #' @param output_directory directory where output goes
 #' @keywords hit matrix
 #'
+#' @export
+#'
 #' @seealso
 #' \code{\link{process_pcl}}
 #' \code{\link{write_pcl_to_csv}}
@@ -36,3 +38,4 @@ write_hit_matrix_to_csv <- function(m, outputname, output_directory) {
   utils::write.csv(m.og, file.path(output_directory, filename3))
 
 }
+

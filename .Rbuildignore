@@ -5,9 +5,10 @@ osbs.png
 hitgrid.png
 pavd.png
 pavd_hist.png
-^.*\.RDA
+                    # ^.*\.RDA
 ^README\.Rmd$       # An Rmarkdown file used to generate README.md
 README.Rmd
 README.html
 README.md
 cran-comments.md
+^data-raw$

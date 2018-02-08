@@ -57,7 +57,7 @@ process_tls<- function(f, slice, pavd = FALSE, hist = FALSE){
 
   if(is.character(f) == TRUE) {
 
-    # Read in PCL transect.
+    # Read in TLS
     df.xyz <- utils::read.csv(f, header = FALSE, col.names = c("x", "y", "z", "vai"), blank.lines.skip = FALSE)
 
   # Cuts off the directory info to give just the filename.
@@ -84,18 +84,6 @@ process_tls<- function(f, slice, pavd = FALSE, hist = FALSE){
 
   variable.list <- calc_tls_csc(m2, filename)
 
-  #
-  # # adjusting to pcl format
-  # m.tls$xbin <- m.tls$xbin + 21
-#
-#   # Summary matrix.
-#   summary.matrix <- make_summary_matrix(test.data.binned, m5)
-#   rumple <- calc_rumple(summary.matrix)
-#   clumping.index <- calc_gap_fraction(m5)
-#
-#
-#   # effective number of layers
-#   enl <- calc_enl(m5)
 
   output.variables  <- cbind(variable.list)
 

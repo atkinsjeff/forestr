@@ -20,6 +20,7 @@
 #'
 #' @format A data frame with 1120 rows:
 #' \describe{
+#'   \item{.id}{column numbering}
 #'   \item{xbin}{x-bin position}
 #'   \item{zbin}{z-bin position}
 #'   \item{bin.hits}{number of LiDAR returns at each x- and z- bin}
@@ -89,6 +90,7 @@
 #'
 #' @format A data frame with 1120 rows:
 #' \describe{
+#'   \item{.id}{column numbering}
 #'   \item{xbin}{x-bin position}
 #'   \item{zbin}{z-bin position}
 #'   \item{bin.hits}{number of LiDAR returns at each x- and z- bin}
