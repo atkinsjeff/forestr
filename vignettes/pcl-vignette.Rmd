@@ -3,10 +3,10 @@ title: "PCL transects with process_pcl"
 author: "Jeff Atkins"
 date: '`r Sys.Date()`'
 output: rmarkdown::html_vignette
-vignette: |
+vignette: >
   %\VignetteIndexEntry{PCL transects with process_pcl}
   %\VignetteEngine{knitr::rmarkdown} 
-  %\VignetteEncoding[UTF-8]{inputenc}
+  \usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, include = FALSE}

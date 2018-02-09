@@ -12,6 +12,9 @@
 #'
 #' @keywords csc
 #' @return a concatenated list of csc variables
+#'
+#' @export
+#'
 #' @examples
 #' \dontrun{
 #' #This function runs interanlly and collates the slew of
