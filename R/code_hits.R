@@ -15,23 +15,19 @@
 #' pcl_coded <- code_hits(pcl_data)
 #'
 code_hits <- function(df) {
-  for(i in 1:nrow(df)){
-    if (is.na(df$return_distance[i]) == TRUE) {
-      df$sky_hit[i] = TRUE
-      df$can_hit[i] = FALSE
-      df$marker[i] = FALSE
-    }else{
-      if (df$return_distance[i] > 0){
-        df$sky_hit[i] = FALSE
-        df$can_hit[i] = TRUE
-        df$marker[i] = FALSE
-      }else{
-        df$sky_hit[i] = FALSE
-        df$can_hit[i] = FALSE
-        df$marker[i] = TRUE
+  # Start with all false
+  df$sky_hit = FALSE
+  df$can_hit = FALSE
+  df$marker = FALSE
 
-      }
-    }
-  }
+  # NA return indicates sky hit
+  df$sky_hit[is.na(df$return_distance)] = TRUE
+
+  # positive return indicates canopy hit
+  df$can_hit[(df$return_distance > 0) & !df$sky_hit] = TRUE
+
+  # If not sky or canopy, it's a marker hit
+  df$marker[!df$sky_hit & !df$can_hit] = TRUE
+
   return(df)
 }
