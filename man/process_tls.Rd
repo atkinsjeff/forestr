@@ -16,7 +16,8 @@ process_tls(f, slice, pavd = FALSE, hist = FALSE)
 \item{hist}{logical input to include histogram of VAI with PAVD plot, if TRUE it is included, if FALSE, it is not.}
 }
 \value{
-writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
+writes the hit matrix, summary matrix, and output variables
+to csv in an output folder, along with hit grid plot
 }
 \description{
 \code{process_tls} imports and processes a slice from a voxelated TLS scan.

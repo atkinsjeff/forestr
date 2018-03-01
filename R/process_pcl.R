@@ -173,6 +173,8 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
   #setting up VAI hit grid
   m6 <- m5
   m6$vai[m6$vai == 0] <- NA
+  message("No. of NA values in hit matrix")
+  print(sum(is.na(m6$vai)))
   #x11(width = 8, height = 6)
   hit.grid <- ggplot2::ggplot(m6, ggplot2::aes(x = xbin, y = zbin))+
     ggplot2::geom_tile(ggplot2::aes(fill = vai))+

@@ -29,7 +29,8 @@
 #' @param hist logical input to include histogram of VAI with PAVD plot, if TRUE it is included, if FALSE, it is not.
 #' @param slice the number of the transect to use from xyz tls data
 #'
-#' @return writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
+#' @return writes the hit matrix, summary matrix, and output variables
+#' to csv in an output folder, along with hit grid plot
 #'
 #' @keywords tls processing
 #'
