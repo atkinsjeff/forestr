@@ -11,6 +11,14 @@ Authors@R: c(person("Jeff", "Atkins", email = "jwatkins6@vcu.edu",
           person("Timothy", "Morin", role = "aut"),
           person("Atticus", "Stovall", role = "aut"),
           person("Naupaka", "Zimmerman", role = "aut"))
+Author: Jeff Atkins [aut, cre],
+    Gil Bohrer [aut],
+    Robert Fahey [aut],
+    Brady Hardiman [aut],
+    Chrisopher Gough [aut],
+    Timothy Morin [aut],
+    Atticus Stovall [aut],
+    Naupaka Zimmerman [aut]
 URL: https://github.com/atkinsjeff/forestr
 Maintainer: Jeff Atkins <jwatkins6@vcu.edu>
 Description: Provides a toolkit for calculating forest and canopy structural complexity metrics from
