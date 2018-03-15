@@ -4,7 +4,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-## ---- fig.show='hold'----------------------------------------------------
+## ---- fig.show = 'hold'--------------------------------------------------
 require(forestr)
 # Link to stored, raw PCL data in .csv form
 uva.pcl <- system.file("extdata", "UVAX_A4_01W.csv", package = "forestr")
