@@ -20,6 +20,12 @@ knitr::opts_chunk$set(
 The forestr package calculates forest structure and canopy structure metrics from multiple data forms, including two-dimensional portable canopy LiDAR (PCL) raw data files and from certain processed three-dimensional terrestrial LiDAR scanner (TLS) data forms. 
 
 ## Installation
+
+To install version 1.0.1 which is on CRAN
+```{r eval = FALSE}
+install_packages("forestr")
+```
+
 To install the development version
 ```{r eval = FALSE}
 devtools::install_github("atkinsjeff/forestr")
@@ -41,7 +47,7 @@ process_pcl(osbs)
 
 The output includes:
 
-1) an output.csv file that contains 24 canopy structral complexity (CSC) metrics including rumple, canopy rugosity, and max canopy height. These metrics are defined in [Hardiman et al. 2013](http://www.mdpi.com/1999-4907/4/3/537/htm).
+1) an output.csv file that contains 24 canopy structral complexity (CSC) metrics including rumple, canopy rugosity, and max canopy height. These metrics are defined in [Hardiman et al. 2013](http://www.mdpi.com/1999-4907/4/3/537/htm) and in Atkins et al. (In review at Methods in Ecology and Evolution.
 
 2) an output_hit_matrix.csv file that is a file that contains the adjusted VAI by x and z position in the canopy. 
 
@@ -56,4 +62,14 @@ The forestr package also produces hit grids--vegetation area index (VAI) for by 
 
 
 ![](http://atkinsjeff.github.io/images/osbs.png)
+
+##Worked Example
+
+Let's do a complete run using data from a red pine plantation in Michigan. These data are saved in the `data` folder as `red_pine.rda` in the master GitHub directory and can be accessed as `red_pine` and processed as such where we will look at all of the optional parameters:
+
+```{r eval = FALSE}
+process_pcl(red_pine, user_height = 1.05, marker.spacing = 10, max.vai = 8, pavd = TRUE, hist = TRUE )
+```
+
+Running the following command produces the following output to the console:
 
