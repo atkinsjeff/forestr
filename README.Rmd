@@ -1,6 +1,6 @@
 ---
 output:
-  md_document:
+  html_document:
     variant: markdown_github
 ---
 
@@ -67,9 +67,15 @@ The forestr package also produces hit grids--vegetation area index (VAI) for by 
 
 Let's do a complete run using data from a red pine plantation in Michigan. These data are saved in the `data` folder as `red_pine.rda` in the master GitHub directory and can be accessed as `red_pine` and processed as such where we will look at all of the optional parameters:
 
-```{r eval = FALSE}
-process_pcl(red_pine, user_height = 1.05, marker.spacing = 10, max.vai = 8, pavd = TRUE, hist = TRUE )
+```{r eval = TRUE}
+red_pine <- "https://raw.githubusercontent.com/atkinsjeff/forestr/master/data-raw/red_pine_plain1.CSV"
+forestr::process_pcl(red_pine, user_height = 1.05, marker.spacing = 10, max.vai = 8, pavd = TRUE, hist = TRUE )
 ```
 
 Running the following command produces the following output to the console:
+
+
+
+![](http://atkinsjeff.github.io/images/red_pine_hit_grid.png)
+![](http://atkinsjeff.github.io/images/red_pine_pavd.png)
 
