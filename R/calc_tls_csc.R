@@ -41,7 +41,7 @@ calc_tls_csc <- function(m, filename){
   # mean.std = mean(super.size$std.bin)
   mean.std = mean(super.size$std.bin)
 
-  print(super.size)
+
 
   # HEIGHT VARIABLES
   message("HEIGHT METRICS")
