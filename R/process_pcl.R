@@ -178,7 +178,7 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
   #x11(width = 8, height = 6)
   hit.grid <- ggplot2::ggplot(m6, ggplot2::aes(x = xbin, y = zbin))+
     ggplot2::geom_tile(ggplot2::aes(fill = vai))+
-    ggplot2::scale_fill_gradient(low="gray88", high="dark green",
+    ggplot2::scale_fill_gradient(low="gray88", high="darkgreen",
                                  na.value = "white",
                                  limits=c(0, 8),
                                  name=vai.label)+
