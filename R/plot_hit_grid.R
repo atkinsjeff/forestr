@@ -51,7 +51,7 @@ plot_hit_grid <- function(m, filename, transect.length, max.ht, max.vai) {
   vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
   ggplot2::ggplot(m, ggplot2::aes(x = xbin, y = zbin))+
     ggplot2::geom_tile(ggplot2::aes(fill = vai))+
-    ggplot2::scale_fill_gradient(low="gray88", high="dark green",
+    ggplot2::scale_fill_gradient(low="gray88", high="darkgreen",
                                  na.value = "white",
                                  limits=c(0, max.vai),
                                  name=vai.label)+
