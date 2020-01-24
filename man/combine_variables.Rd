@@ -4,7 +4,8 @@
 \alias{combine_variables}
 \title{Calculate rugosity and other higher level complexity metrics}
 \usage{
-combine_variables(variable.list, csc.metrics, rumple, clumping.index, enl)
+combine_variables(variable.list, csc.metrics, rumple, clumping.index, enl,
+  intensity_stats)
 }
 \arguments{
 \item{variable.list}{a list of variables from calc_rugosity}
@@ -16,6 +17,8 @@ combine_variables(variable.list, csc.metrics, rumple, clumping.index, enl)
 \item{clumping.index}{clumping index value}
 
 \item{enl}{effective number of layers}
+
+\item{intensity_stats}{statistics on intensity values}
 }
 \value{
 a concatenated list of csc variables

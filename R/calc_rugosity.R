@@ -39,13 +39,17 @@ calc_rugosity <- function(df, m, filename) {
   # HEIGHT VARIABLES
   message("HEIGHT METRICS")
 
-  mean.height = mean(df$height.bin)
+  mean.height.mean = mean(df$height.bin)
   message("Mean Leaf Height (H) - plot mean of column mean leaf height")
-  print(mean.height)
+  print(mean.height.mean)
 
   height.2 <- stats::sd(df$height.bin)
   message("Height2 (H[2]) - standard deviation of column mean leaf height")
   print(height.2)
+
+  mean.height.median <- stats::median(df$height.bin)
+  message("H [median] - median column mean leaf height")
+  print(mean.height.median)
 
   mean.height.var = stats::var(df$height.bin)
   message("Mean Leaf Height variance (H[var]) - variance of column mean leaf height")
@@ -55,35 +59,65 @@ calc_rugosity <- function(df, m, filename) {
   message("Root Mean Square Mean Leaf Height (H[rms]) - the root mean square or quadratic mean of column mean leaf height for the transect")
   print(mean.height.rms)
 
-  max.can.ht = max(df$max.ht)
+  can.max.ht = max(df$max.ht)
   message("Max canopy height (m)")
-  print(max.can.ht)
+  print(can.max.ht)
 
-  mean.max.ht = mean(df$max.ht)
+  moch = mean(df$max.ht)
   message("Mean Outer Canopy Height (m) or MOCH")
-  print(mean.max.ht)
+  print(moch)
+
+  can.max.ht.median = stats::median(df$max.ht)
+  message("Median Column Max Ht ")
+  print(can.max.ht.median)
 
   message("AREA AND DENSITY METRICS")
 
-  mean.vai = mean(df$sum.vai)
+  vai.mean = mean(df$sum.vai)
   message("Mean VAI - mean VAI for entire transect")
-  print(mean.vai)
+  print(vai.mean)
 
-  mode.el = mean(df$max.vai.z)
+  vai.sd = stats::sd(df$sum.vai)
+  message("SD VAI - SD of VAI for entire transect")
+  print(vai.sd)
+
+  vai.median = stats::median(df$sum.vai)
+  message("Median VAI - median VAI for entire transect")
+  print(vai.median)
+
+  vai.column.max = max(df$sum.vai)
+  message("Maximum VAI x,y entire transect -- max el!")
+  print(vai.column.max)
+
+  vai.max.ht.mean = mean(df$max.vai.z)
   message("Mean Height of VAI[max] - modeEl")
-  print(mode.el)
+  print(vai.max.ht.mean)
 
-  mode.2 <- stats::sd(df$max.vai.z)
+  vai.max.ht.sd <- stats::sd(df$max.vai.z)
   message("Mode 2- The standard deviation of VAImax or MaxEl")
-  print(mode.2)
+  print(vai.max.ht.sd)
 
-  max.el = max(df$max.vai)
-  message("Maximum VAI for entire transect -- max el!")
-  print(max.el)
+  vai.max.ht.median = stats::median(df$max.vai.z)
+  message("Median of VAI max or Maxel")
+  print(vai.max.ht.median)
 
-  mean.peak.vai = mean(df$max.vai)
+  vai.max = max(df$max.vai)
+  message("Maximum VAI x,y entire transect -- max el!")
+  print(vai.max)
+
+  vai.mean.peak = mean(df$max.vai)
   message("Mean Peak VAI for entire transect")
-  print(mean.peak.vai)
+  print(vai.mean.peak)
+
+  vai.peak.sd = stats::sd(df$max.vai)
+  message("SD of peak VAI for entire transect")
+  print(vai.peak.sd)
+
+  vai.peak.median = stats::median(df$max.vai)
+  message("Median Peak VAI for entire transect")
+  print(vai.peak.median)
+
+
 
   #added the df thing in front of max ht, but don't know if it works.
   message("CANOPY AND OPENNESS METRICS (cont.)")
@@ -143,18 +177,26 @@ calc_rugosity <- function(df, m, filename) {
   print(jess.rugosity)
 
     variable.list <- list(plot = filename,
-                        mean.height = mean.height,
+                        mean.height.mean = mean.height.mean,
                         height.2 = height.2,
+                        mean.height.median = mean.height.median,
                         mean.height.var = mean.height.var,
                         mean.height.rms = mean.height.rms,
                         transect.length = transect.length,
-                        mode.el = mode.el,
-                        max.el = max.el,
-                        mode.2 = mode.2,
-                        max.can.ht = max.can.ht,
-                        mean.max.ht = mean.max.ht,
-                        mean.vai = mean.vai,
-                        mean.peak.vai = mean.peak.vai,
+                        can.max.ht = can.max.ht,
+                        moch = moch,
+                        can.max.ht.median = can.max.ht.median,
+                        vai.mean = vai.mean,
+                        vai.sd = vai.sd,
+                        vai.median = vai.median,
+                        vai.column.max = vai.column.max,
+                        vai.max.ht.mean = vai.max.ht.mean,
+                        vai.max.ht.sd = vai.max.ht.sd,
+                        vai.max.ht.median = vai.max.ht.median,
+                        vai.max = vai.max,
+                        vai.mean.peak = vai.mean.peak,
+                        vai.peak.sd = vai.peak.sd,
+                        vai.peak.median = vai.peak.median,
                         deep.gaps = deep.gaps,
                         deep.gap.fraction = deep.gap.fraction,
                         porosity = porosity,

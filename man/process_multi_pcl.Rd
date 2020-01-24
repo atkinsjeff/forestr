@@ -5,7 +5,7 @@
 \title{Process multiplie PCL transects.}
 \usage{
 process_multi_pcl(data_dir, user_height, marker.spacing, max.vai,
-  pavd = FALSE, hist = FALSE)
+  pavd = FALSE, hist = FALSE, save_output = TRUE)
 }
 \arguments{
 \item{data_dir}{directory where PCL .csv files are stored}
@@ -19,6 +19,8 @@ process_multi_pcl(data_dir, user_height, marker.spacing, max.vai,
 \item{pavd}{logical input to include Plant Area Volume Density Plot from [plot_pavd], if TRUE it is included, if FALSE, it is not.}
 
 \item{hist}{logical input to include histogram of VAI with PAVD plot, if TRUE it is included, if FALSE, it is not.}
+
+\item{save_output}{needs to be set to true, or else you are just going to get a lot of data on the screen}
 }
 \value{
 writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
@@ -35,10 +37,11 @@ files, producing the same output files described in \code{process_pcl}
 
 # This function works on a directory of raw PCL data
 \dontrun{data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
-process_multi_pcl(data_directory, user_height = 1.05, marker.spacing = 10, max.vai = 8)
+process_multi_pcl(data_directory, user_height = 1.05, marker.spacing = 10,
+max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
 
 process_multi_pcl("./data/PCL_transects/", user_height = 1.05, marker.spacing = 10,
-max.vai = 8)
+max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
 }
 
 }

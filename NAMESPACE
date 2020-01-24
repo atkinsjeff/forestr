@@ -3,6 +3,7 @@
 export(adjust_by_user)
 export(calc_enl)
 export(calc_gap_fraction)
+export(calc_intensity)
 export(calc_rugosity)
 export(calc_rumple)
 export(calc_tls_mean_leaf_ht)

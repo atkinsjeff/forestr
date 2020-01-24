@@ -37,6 +37,8 @@
 #' if TRUE it is included, if FALSE, it is not.
 #' @param hist logical input to include histogram of VAI with PAVD plot, if
 #' TRUE it is included, if FALSE, it is not.
+#' @param save_output the name of the output folder where to write all the output fiels.
+#'
 #' @return writes the hit matrix, summary matrix, and output variables to csv
 #' in an output folder, along with hit grid plot
 #'
@@ -48,21 +50,20 @@
 #'
 #'
 #' @examples
-#' # Link to stored, raw PCL data in .csv form
+#'
+#' # Run process complete PCL transect without storing to disk
 #' uva.pcl <- system.file("extdata", "UVAX_A4_01W.csv", package = "forestr")
-#'
-#' # Run process complete PCL transect, store output to disk
 #' process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05,
-#' max.vai = 8, pavd = FALSE, hist = FALSE)
-#'
+#' max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
 #'
 #' # with data frame
 #' process_pcl(osbs, marker.spacing = 10, user_height = 1.05,
-#' max.vai = 8, pavd = FALSE, hist = FALSE)
+#' max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
 #'
 #'
 
-process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hist = FALSE){
+
+process_pcl <- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hist = FALSE, save_output = TRUE){
   xbin <- NULL
   zbin <- NULL
   vai <- NULL
@@ -81,7 +82,14 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
   if(missing(max.vai)){
     max.vai = 8
   }
-#
+
+  # If output directory name is missing, add it.
+  if(missing(save_output)){
+    save_output == TRUE
+    output_dir = 'output'
+  }
+
+  #
   if(is.character(f) == TRUE) {
 
   # Read in PCL transect.
@@ -94,7 +102,7 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
     df <- f
     filename <- deparse(substitute(f))
   } else {
-    warning('This is not the data you are looking for')
+    warning('These are not the data you are looking for')
   }
 
   # cuts out erroneous high values
@@ -117,6 +125,9 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
   # ground in   meters==default is 1 m.
   df3 <- adjust_by_user(df2, user_height)
 
+  # Calculate Statistics on Intensity Values
+  intensity_stats <- calc_intensity(df3, filename)
+
   # First-order metrics of sky and cover fraction.
   csc.metrics <- csc_metrics(df3, filename, transect.length)
 
@@ -133,6 +144,7 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
 
   # Calculates VAI (vegetation area index m^ 2 m^ -2).
   m5 <- calc_vai(m2, max.vai)
+
   # Summary matrix.
   summary.matrix <- make_summary_matrix(test.data.binned, m5)
   rumple <- calc_rumple(summary.matrix)
@@ -143,30 +155,7 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
   # effective number of layers
   enl <- calc_enl(m5)
 
-  output.variables <- combine_variables(variable.list, csc.metrics, rumple, clumping.index, enl)
-
-  #output procedure for variables
-  outputname = substr(filename,1,nchar(filename)-4)
-  outputname <- paste(outputname, "output", sep = "_")
-  dir.create("output", showWarnings = FALSE)
-  output_directory <- "./output/"
-  print(outputname)
-  print(output_directory)
-
-  write_pcl_to_csv(output.variables, outputname, output_directory)
-  write_summary_matrix_to_csv(summary.matrix, outputname, output_directory)
-  write_hit_matrix_to_csv(m5, outputname, output_directory)
-
-
-
-
-  #get filename first
-  plot.filename <- tools::file_path_sans_ext(filename)
-  plot.filename.full <- paste(plot.filename, "hit_grid", sep = "_")
-  plot.filename.pavd <- paste(plot.filename, "pavd", sep = "_")
-
-  plot.file.path.hg <- file.path(paste(output_directory, plot.filename.full, ".png", sep = ""))
-  plot.file.path.pavd <- file.path(paste(output_directory, plot.filename.pavd, ".png", sep = ""))
+  output.variables <- combine_variables(variable.list, csc.metrics, rumple, clumping.index, enl, intensity_stats)
 
   vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
 
@@ -178,7 +167,7 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
   #x11(width = 8, height = 6)
   hit.grid <- ggplot2::ggplot(m6, ggplot2::aes(x = xbin, y = zbin))+
     ggplot2::geom_tile(ggplot2::aes(fill = vai))+
-    ggplot2::scale_fill_gradient(low="gray88", high="dark green",
+    ggplot2::scale_fill_gradient(low="gray88", high="darkgreen",
                                  na.value = "white",
                                  limits=c(0, 8),
                                  name=vai.label)+
@@ -199,8 +188,6 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
     ggplot2::ggtitle(filename)+
     ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
 
-  ggplot2::ggsave(plot.file.path.hg, hit.grid, width = 8, height = 6, units = c("in"))
-
   # PAVD
   if(pavd == TRUE && hist == FALSE){
 
@@ -211,5 +198,36 @@ process_pcl<- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hi
 
     plot_pavd(m5, filename, plot.file.path.pavd, hist = TRUE, output.file = TRUE)
   }
+
+  if(save_output == TRUE){
+
+    #output procedure for variables
+    dir.create(output_dir, showWarnings = FALSE)
+    outputname = substr(filename,1,nchar(filename)-4)
+    outputname <- paste(outputname, "output", sep = "_")
+    output_directory <- paste("./",output_dir,"/", sep = "")
+    print(outputname)
+    print(output_directory)
+
+    write_pcl_to_csv(output.variables, outputname, output_directory)
+    write_summary_matrix_to_csv(summary.matrix, outputname, output_directory)
+    write_hit_matrix_to_csv(m5, outputname, output_directory)
+
+
+
+
+    #get filename first
+    plot.filename <- tools::file_path_sans_ext(filename)
+    plot.filename.full <- paste(plot.filename, "hit_grid", sep = "_")
+    plot.filename.pavd <- paste(plot.filename, "pavd", sep = "_")
+
+    plot.file.path.hg <- file.path(paste(output_directory, plot.filename.full, ".png", sep = ""))
+    plot.file.path.pavd <- file.path(paste(output_directory, plot.filename.pavd, ".png", sep = ""))
+
+
+  ggplot2::ggsave(plot.file.path.hg, hit.grid, width = 8, height = 6, units = c("in"))
+
+  }
+
 
 }

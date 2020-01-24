@@ -9,6 +9,7 @@
 #' @param rumple rumple value from calc_rumple
 #' @param clumping.index clumping index value
 #' @param enl effective number of layers
+#' @param intensity_stats statistics on intensity values
 #'
 #' @keywords csc
 #' @return a concatenated list of csc variables
@@ -23,9 +24,9 @@
 #' }
 
 
-combine_variables <- function(variable.list, csc.metrics, rumple, clumping.index, enl){
+combine_variables <- function(variable.list, csc.metrics, rumple, clumping.index, enl, intensity_stats){
 
-  output.variables <- cbind(variable.list, csc.metrics, rumple, clumping.index, enl)
+  output.variables <- cbind(variable.list, csc.metrics, rumple, clumping.index, enl, intensity_stats)
   return(output.variables)
 
 }

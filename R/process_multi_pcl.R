@@ -12,6 +12,7 @@
 #' @param max.vai the maximum value of column VAI. The default is 8. Should be a max value, not a mean.
 #' @param pavd logical input to include Plant Area Volume Density Plot from [plot_pavd], if TRUE it is included, if FALSE, it is not.
 #' @param hist logical input to include histogram of VAI with PAVD plot, if TRUE it is included, if FALSE, it is not.
+#' @param save_output needs to be set to true, or else you are just going to get a lot of data on the screen
 #' @return writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
 #' @keywords pcl processing, multiple files
 
@@ -25,15 +26,17 @@
 #'
 #' # This function works on a directory of raw PCL data
 #' \dontrun{data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
-#' process_multi_pcl(data_directory, user_height = 1.05, marker.spacing = 10, max.vai = 8)
+#' process_multi_pcl(data_directory, user_height = 1.05, marker.spacing = 10,
+#' max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
 #'
 #' process_multi_pcl("./data/PCL_transects/", user_height = 1.05, marker.spacing = 10,
-#' max.vai = 8)
+#' max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
 #' }
 #'
-process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pavd = FALSE, hist = FALSE){
+process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pavd = FALSE, hist = FALSE, save_output = TRUE){
   #Global Variables
   output_directory <- NULL
+
   message("Transect Marker Spacing is:")
   print(marker.spacing)
 
@@ -66,9 +69,16 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
         max.vai = 8
       }
 
+      # If output directory name is missing, add it.
+      if(missing(save_output)){
+        save_output == TRUE
+        output_dir = 'output'
+      }
+
+
       if(is.character(f) == TRUE) {
         # Read in PCL transect.
-        df<- read_pcl_multi(data_dir, f)
+        df <- read_pcl_multi(data_dir, f)
 
         # Cuts off the directory info to give just the filename.
         filename <- sub(".*/", "", f)
@@ -94,71 +104,49 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
       # Adjusts by the height of the  user to account for difference in laser height to ground in meters==default is 1 m.
       df <- adjust_by_user(df, user_height)
 
+      # Calculate Statistics on Intensity Values
+      intensity_stats <- calc_intensity(df, filename)
+
+      # First-order metrics of sky and cover fraction.
+      csc.metrics <- csc_metrics(df, filename, transect.length)
 
       # Splits transects from code into segments (distances between markers as designated by marker.spacing
       # and chunks (1 m chunks in each marker).
       test.data.binned <- split_transects_from_pcl(df, transect.length, marker.spacing)
-
-      # First-order metrics of sky and cover fraction.
-      csc.metrics <- csc_metrics(df, filename, transect.length)
 
       # Makes matrix of z and x coordinated pcl data.
       m1 <- make_matrix(test.data.binned)
 
       # Normalizes date by column based on assumptions of Beer-Lambert Law of light extinction vertically
       # through the canopy.
-      m4 <- normalize_pcl(m1)
+      m2 <- normalize_pcl(m1)
 
       # Calculates VAI (vegetation area index m^ 2 m^ -2).
-      m5 <- calc_vai(m4, max.vai)
+      m5 <- calc_vai(m2, max.vai)
 
       # Summary matrix.
       summary.matrix <- make_summary_matrix(test.data.binned, m5)
       rumple <- calc_rumple(summary.matrix)
       clumping.index <- calc_gap_fraction(m5)
+
       # effective number of layers
       enl <- calc_enl(m5)
 
       variable.list <- calc_rugosity(summary.matrix, m5, filename)
 
-      output.variables <- combine_variables(variable.list, csc.metrics, rumple, clumping.index, enl)
-      #print(output.variables)
+      output.variables <- combine_variables(variable.list, csc.metrics, rumple, clumping.index, enl, intensity_stats)
 
-      #output procedure for variables
-      outputname = substr(filename,1,nchar(filename)-4)
-      outputname <- paste(outputname, "output", sep = "_")
-      dir.create("output", showWarnings = FALSE)
-      output_directory <- "./output/"
-      print(outputname)
-      print(output_directory)
-
-      write_pcl_to_csv(output.variables, outputname, output_directory)
-      write_summary_matrix_to_csv(summary.matrix, outputname, output_directory)
-      write_hit_matrix_to_csv(m5, outputname, output_directory)
-
-
-
-
-      #get filename first
-      plot.filename <- tools::file_path_sans_ext(filename)
-      plot.filename.full <- paste(plot.filename, "hit_grid", sep = "_")
-      plot.filename.pavd <- paste(plot.filename, "pavd", sep = "_")
-
-
-      plot.file.path.hg <- file.path(paste(output_directory, plot.filename.full, ".png", sep = ""))
-      plot.file.path.pavd <- file.path(paste(output_directory, plot.filename.pavd, ".png", sep = ""))
-
-      #label for VAI
       vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
 
-      #setting up hit grid
+      #setting up VAI hit grid
       m6 <- m5
       m6$vai[m6$vai == 0] <- NA
-
-
+      message("No. of NA values in hit matrix")
+      print(sum(is.na(m6$vai)))
+      #x11(width = 8, height = 6)
       hit.grid <- ggplot2::ggplot(m6, ggplot2::aes(x = xbin, y = zbin))+
         ggplot2::geom_tile(ggplot2::aes(fill = vai))+
-        ggplot2::scale_fill_gradient(low="gray88", high="dark green",
+        ggplot2::scale_fill_gradient(low="gray88", high="darkgreen",
                                      na.value = "white",
                                      limits=c(0, 8),
                                      name=vai.label)+
@@ -179,18 +167,47 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
         ggplot2::ggtitle(filename)+
         ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
 
-      ggplot2::ggsave(plot.file.path.hg, hit.grid, width = 8, height = 6, units = c("in"))
-
-
       # PAVD
       if(pavd == TRUE && hist == FALSE){
 
-        plot_pavd(m5, filename, plot.file.path.pavd)
+        plot_pavd(m5, filename, plot.file.path.pavd, output.file = TRUE)
+
       }
       if(pavd == TRUE && hist == TRUE){
 
-        plot_pavd(m5, filename, plot.file.path.pavd, hist = TRUE)
+        plot_pavd(m5, filename, plot.file.path.pavd, hist = TRUE, output.file = TRUE)
       }
+
+      if(save_output == TRUE){
+
+        #output procedure for variables
+        dir.create(output_dir, showWarnings = FALSE)
+        outputname = substr(filename,1,nchar(filename)-4)
+        outputname <- paste(outputname, "output", sep = "_")
+        output_directory <- paste("./",output_dir,"/", sep = "")
+        print(outputname)
+        print(output_directory)
+
+        write_pcl_to_csv(output.variables, outputname, output_directory)
+        write_summary_matrix_to_csv(summary.matrix, outputname, output_directory)
+        write_hit_matrix_to_csv(m5, outputname, output_directory)
+
+
+
+
+        #get filename first
+        plot.filename <- tools::file_path_sans_ext(filename)
+        plot.filename.full <- paste(plot.filename, "hit_grid", sep = "_")
+        plot.filename.pavd <- paste(plot.filename, "pavd", sep = "_")
+
+        plot.file.path.hg <- file.path(paste(output_directory, plot.filename.full, ".png", sep = ""))
+        plot.file.path.pavd <- file.path(paste(output_directory, plot.filename.pavd, ".png", sep = ""))
+
+
+        ggplot2::ggsave(plot.file.path.hg, hit.grid, width = 8, height = 6, units = c("in"))
+
+      }
+
 
   }
 

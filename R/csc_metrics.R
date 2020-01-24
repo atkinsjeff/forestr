@@ -48,6 +48,10 @@ csc_metrics <- function(df, filename, transect.length) {
   message("Standard Deviation of raw  Canopy Height returns-- meanStd in old code")
   print(sd.ht)
 
+  median.ht = stats::median(z$return_distance, na.rm = TRUE)
+  message("Median of raw  Canopy Height returns")
+  print(median.ht)
+
   max.ht = max(df$return_distance, na.rm = TRUE)
   message("Max Measured Canopy Height (m)")
   print(max.ht)
@@ -70,6 +74,7 @@ csc_metrics <- function(df, filename, transect.length) {
   csc.variable.list <- list(plot = filename,
                             mean.return.ht = mean.return.ht,
                             sd.return.ht = sd.ht,
+                            median.ht = median.ht,
                             sky.fraction = sky.fraction,
                             cover.fraction = cover.fraction,
                             max.ht = max.ht,

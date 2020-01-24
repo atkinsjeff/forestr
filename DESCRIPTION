@@ -1,6 +1,6 @@
 Package: forestr
 Type: Package
-Version: 1.0.1
+Version: 2.0.1
 Title: Ecosystem and Canopy Structural Complexity Metrics from LiDAR
 Authors@R: c(person("Jeff", "Atkins", email = "jwatkins6@vcu.edu",
                   role = c("aut", "cre")),
@@ -10,7 +10,8 @@ Authors@R: c(person("Jeff", "Atkins", email = "jwatkins6@vcu.edu",
           person("Chrisopher", "Gough", role = "aut"),
           person("Timothy", "Morin", role = "aut"),
           person("Atticus", "Stovall", role = "aut"),
-          person("Naupaka", "Zimmerman", role = "aut"))
+          person("Naupaka", "Zimmerman", role = c("ctb", "aut")),
+          person("Chris", "Black", role = "ctb"))
 Author: Jeff Atkins [aut, cre],
     Gil Bohrer [aut],
     Robert Fahey [aut],
@@ -19,10 +20,11 @@ Author: Jeff Atkins [aut, cre],
     Timothy Morin [aut],
     Atticus Stovall [aut],
     Naupaka Zimmerman [aut]
+    Chris Black [ctb]
 URL: https://github.com/atkinsjeff/forestr
 Maintainer: Jeff Atkins <jwatkins6@vcu.edu>
 Description: Provides a toolkit for calculating forest and canopy structural complexity metrics from
-    terrestrial LiDAR (light detection and ranging). References:  Atkins et al. In Review; Hardiman et al. 2013 <doi:10.3390/f4030537>;
+    terrestrial LiDAR (light detection and ranging). References:  Atkins et al. 2018 <doi:10.1111/2041-210X.13061>; Hardiman et al. 2013 <doi:10.3390/f4030537>;
     Parker et al. 2004 <doi:10.1111/j.0021-8901.2004.00925.x>.
 Depends:
     R (>= 3.1.2)
@@ -31,11 +33,14 @@ Imports:
     plyr,
     dplyr,
     stats,
-    tools
+    tools,
+    viridis,
+    moments
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
+

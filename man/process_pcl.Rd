@@ -5,7 +5,7 @@
 \title{Process single PCL transects.}
 \usage{
 process_pcl(f, user_height, marker.spacing, max.vai, pavd = FALSE,
-  hist = FALSE)
+  hist = FALSE, save_output = TRUE)
 }
 \arguments{
 \item{f}{the name of the filename to input <character> or a data frame <data frame>.}
@@ -23,6 +23,8 @@ if TRUE it is included, if FALSE, it is not.}
 
 \item{hist}{logical input to include histogram of VAI with PAVD plot, if
 TRUE it is included, if FALSE, it is not.}
+
+\item{save_output}{the name of the output folder where to write all the output fiels.}
 }
 \value{
 writes the hit matrix, summary matrix, and output variables to csv
@@ -57,17 +59,15 @@ subfunction \code{write_hit_matrix_to_pcl}
 \code{hist = TRUE} in the \code{process_pcl} call.
 }
 \examples{
-# Link to stored, raw PCL data in .csv form
+
+# Run process complete PCL transect without storing to disk
 uva.pcl <- system.file("extdata", "UVAX_A4_01W.csv", package = "forestr")
-
-# Run process complete PCL transect, store output to disk
 process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05,
-max.vai = 8, pavd = FALSE, hist = FALSE)
-
+max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
 
 # with data frame
 process_pcl(osbs, marker.spacing = 10, user_height = 1.05,
-max.vai = 8, pavd = FALSE, hist = FALSE)
+max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
 
 
 }
