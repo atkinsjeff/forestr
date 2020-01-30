@@ -22,4 +22,4 @@
 #' data(red_pine)
 #' head(red_pine)
 #' \donttest{
-#' process_pcl(red_pine, marker.spacing = 10, user_height = 1)
+#' process_pcl(red_pine, marker.spacing = 10, user_height = 1, save_output = FALSE)

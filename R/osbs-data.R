@@ -22,4 +22,4 @@
 #' data(osbs)
 #' head(osbs)
 #' \donttest{
-#' process_pcl(osbs, marker.spacing = 10, user_height = 1)
+#' process_pcl(osbs, marker.spacing = 10, user_height = 1, save_output = FALSE)

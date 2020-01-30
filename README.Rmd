@@ -42,7 +42,7 @@ The `process_pcl` function writes data to an output folder that is created in th
 
 require(forestr)
 
-process_pcl(osbs)
+process_pcl(osbs, save_output = FALSE)
 ```
 
 The output includes:
@@ -69,7 +69,7 @@ Let's do a complete run using data from a red pine plantation in Michigan. These
 
 ```{r eval = TRUE}
 red_pine <- "https://raw.githubusercontent.com/atkinsjeff/forestr/master/data-raw/red_pine_plain1.CSV"
-forestr::process_pcl(red_pine, user_height = 1.05, marker.spacing = 10, max.vai = 8, pavd = TRUE, hist = TRUE )
+forestr::process_pcl(red_pine, user_height = 1.05, marker.spacing = 10, max.vai = 8, pavd = TRUE, hist = TRUE, output.file = TRUE )
 ```
 
 Running the following command produces the following output to the console:
