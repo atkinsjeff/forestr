@@ -4,8 +4,14 @@
 \alias{combine_variables}
 \title{Calculate rugosity and other higher level complexity metrics}
 \usage{
-combine_variables(variable.list, csc.metrics, rumple, clumping.index, enl,
-  intensity_stats)
+combine_variables(
+  variable.list,
+  csc.metrics,
+  rumple,
+  clumping.index,
+  enl,
+  intensity_stats
+)
 }
 \arguments{
 \item{variable.list}{a list of variables from calc_rugosity}

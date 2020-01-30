@@ -4,7 +4,7 @@
 \alias{process_tls}
 \title{Process single PCL transects.}
 \usage{
-process_tls(f, slice, pavd = FALSE, hist = FALSE)
+process_tls(f, slice, pavd = FALSE, hist = FALSE, save_output = TRUE)
 }
 \arguments{
 \item{f}{the name of the filename to input <character> or a data frame <data frame>.}
@@ -14,6 +14,8 @@ process_tls(f, slice, pavd = FALSE, hist = FALSE)
 \item{pavd}{logical input to include Plant Area Volume Density Plot from \code{plot_pavd}, if TRUE it is included, if FALSE, it is not.}
 
 \item{hist}{logical input to include histogram of VAI with PAVD plot, if TRUE it is included, if FALSE, it is not.}
+
+\item{save_output}{needs to be set to true, or else you are just going to get a lot of data on the screen}
 }
 \value{
 writes the hit matrix, summary matrix, and output variables
@@ -50,7 +52,7 @@ subfunction \code{write_hit_matrix_to_pcl}
 # with designated file
 uva.tls<- system.file("extdata", "UVAX_A4_01_tls.csv", package = "forestr")
 
-process_tls(uva.tls, slice = 5, pavd = FALSE, hist = FALSE)
+process_tls(uva.tls, slice = 5, pavd = FALSE, hist = FALSE, save_output = FALSE)
 
 
 }

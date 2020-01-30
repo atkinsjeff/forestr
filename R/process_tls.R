@@ -28,6 +28,7 @@
 #' @param pavd logical input to include Plant Area Volume Density Plot from \code{plot_pavd}, if TRUE it is included, if FALSE, it is not.
 #' @param hist logical input to include histogram of VAI with PAVD plot, if TRUE it is included, if FALSE, it is not.
 #' @param slice the number of the transect to use from xyz tls data
+#' @param save_output needs to be set to true, or else you are just going to get a lot of data on the screen
 #'
 #' @return writes the hit matrix, summary matrix, and output variables
 #' to csv in an output folder, along with hit grid plot
@@ -44,11 +45,11 @@
 #' # with designated file
 #' uva.tls<- system.file("extdata", "UVAX_A4_01_tls.csv", package = "forestr")
 #'
-#' process_tls(uva.tls, slice = 5, pavd = FALSE, hist = FALSE)
+#' process_tls(uva.tls, slice = 5, pavd = FALSE, hist = FALSE, save_output = FALSE)
 #'
 #'
 
-process_tls<- function(f, slice, pavd = FALSE, hist = FALSE){
+process_tls<- function(f, slice, pavd = FALSE, hist = FALSE, save_output = TRUE){
   xbin <- NULL
   zbin <- NULL
   vai <- NULL
@@ -71,6 +72,12 @@ process_tls<- function(f, slice, pavd = FALSE, hist = FALSE){
     warning('This is not the data you are looking for')
   }
 
+  # If output directory name is missing, add it.
+  if(missing(save_output)){
+    save_output == TRUE
+    output_dir = 'output'
+  }
+
   # Data munging TLS df to PCL style slice
 
   # this selects the east most transect
@@ -86,29 +93,12 @@ process_tls<- function(f, slice, pavd = FALSE, hist = FALSE){
 
   output.variables  <- cbind(variable.list)
 
-  #output procedure for variables
-  outputname = substr(filename,1,nchar(filename)-4)
-  outputname <- paste(outputname, "output", sep = "_")
-  dir.create("output", showWarnings = FALSE)
-  output_directory <- "./output/"
-  print(outputname)
-  print(output_directory)
-
-  write_pcl_to_csv(output.variables, outputname, output_directory)
-  write_summary_matrix_to_csv(summary.matrix, outputname, output_directory)
-  write_hit_matrix_to_csv(m5, outputname, output_directory)
 
   transect.length <- max(m2$xbin)
 
 
 
-  #get filename first
-  plot.filename <- tools::file_path_sans_ext(filename)
-  plot.filename.full <- paste(plot.filename, "hit_grid", sep = "_")
-  plot.filename.pavd <- paste(plot.filename, "pavd", sep = "_")
 
-  plot.file.path.hg <- file.path(paste(output_directory, plot.filename.full, ".png", sep = ""))
-  plot.file.path.pavd <- file.path(paste(output_directory, plot.filename.pavd, ".png", sep = ""))
 
   vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
 
@@ -141,7 +131,6 @@ process_tls<- function(f, slice, pavd = FALSE, hist = FALSE){
     ggplot2::ggtitle(filename)+
     ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
 
-  ggplot2::ggsave(plot.file.path.hg, hit.grid, width = 8, height = 6, units = c("in"))
 
   # PAVD
   if(pavd == TRUE && hist == FALSE){
@@ -153,4 +142,32 @@ process_tls<- function(f, slice, pavd = FALSE, hist = FALSE){
     plot_pavd(m2, filename, plot.file.path.pavd, hist = TRUE)
   }
 
+
+
+
+if(save_output == TRUE){
+  #output procedure for variables
+  outputname = substr(filename,1,nchar(filename)-4)
+  outputname <- paste(outputname, "output", sep = "_")
+  dir.create("output", showWarnings = FALSE)
+  output_directory <- "./output/"
+  print(outputname)
+  print(output_directory)
+
+
+  #get filename first
+  plot.filename <- tools::file_path_sans_ext(filename)
+  plot.filename.full <- paste(plot.filename, "hit_grid", sep = "_")
+  plot.filename.pavd <- paste(plot.filename, "pavd", sep = "_")
+
+  plot.file.path.hg <- file.path(paste(output_directory, plot.filename.full, ".png", sep = ""))
+  plot.file.path.pavd <- file.path(paste(output_directory, plot.filename.pavd, ".png", sep = ""))
+
+  write_pcl_to_csv(output.variables, outputname, output_directory)
+  write_summary_matrix_to_csv(summary.matrix, outputname, output_directory)
+  write_hit_matrix_to_csv(m5, outputname, output_directory)
+
+  ggplot2::ggsave(plot.file.path.hg, hit.grid, width = 8, height = 6, units = c("in"))
+
+}
 }

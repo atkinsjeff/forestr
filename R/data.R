@@ -12,6 +12,19 @@
 #' @source \url{http://atkinsjeff.github.io}
 "osbs"
 
+#' PCL transect from a red pine plantation in Northern Michigan, US.
+#'
+#' A dataset that consists of one 40 m transect taken in a red pine plantations
+#' in Northern Michigan. Data collected July, 2017 by J. Atkins.
+#'
+#' @format A data frame with 17559 rows:
+#' \describe{
+#'   \item{index}{index of raw data--position along transect}
+#'   \item{return_distance}{raw, uncorrected LiDAR return distances from laser}
+#'   \item{intensity}{intensity values as recorded by LiDAR system}
+#' }
+#' @source \url{http://atkinsjeff.github.io}
+"red_pine"
 
 #' a data frame of vegetation area index (VAI)
 #'

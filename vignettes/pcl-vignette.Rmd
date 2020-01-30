@@ -2,11 +2,11 @@
 title: "PCL transects with process_pcl"
 author: "Jeff Atkins"
 date: '`r Sys.Date()`'
-output: rmarkdown::html_vignette
+output: rmarkdown::pdf_document
 vignette: >
   %\VignetteIndexEntry{PCL transects with process_pcl}
-  %\VignetteEngine{knitr::rmarkdown} 
-  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::knitr} 
+  \usepackage[UTF-8]{inputenc}
 ---
 
 ```{r setup, include = FALSE}
@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+options(tinytex.verbose = TRUE)
 ```
 
 This vignette is aimed at those working with portable canopy LiDAR (PCL) data. Raw PCL data is most typically stored in comma separated values (.csv) files that contain a series of ASCII strings of return distances and return intensities. These return distances are interspersed with data markers that correspond to known distance measures on the ground as described in Hardiman et al. (2013). The spacing between these markers, typically at 10 m, is used as an input into the forestr processing algorithm (Atkins et al. in review). 
@@ -52,10 +53,10 @@ process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05, max.vai = 8, pavd 
 
 `process_pcl()` creates two types of figures:   
 
-![A canopy hit grid that shows the density of VAI aggregated to 1 meter pixels in the canopy.](hitgrid.png){width=500px}
+![A canopy hit grid that shows the density of VAI aggregated to 1 meter pixels in the canopy.](files/hitgrid.png){width=500px}
 
-![A plant area volume density plot](pavd.png){width=500px}
+![A plant area volume density plot](files/pavd.png){width=500px}
 
-![A plant area volume density plot with histogram](pavd_hist.png){width=500px}
+![A plant area volume density plot with histogram](files/pavd_hist.png){width=500px}
 
 

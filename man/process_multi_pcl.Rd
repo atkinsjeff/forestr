@@ -4,8 +4,15 @@
 \alias{process_multi_pcl}
 \title{Process multiplie PCL transects.}
 \usage{
-process_multi_pcl(data_dir, user_height, marker.spacing, max.vai,
-  pavd = FALSE, hist = FALSE, save_output = TRUE)
+process_multi_pcl(
+  data_dir,
+  user_height,
+  marker.spacing,
+  max.vai,
+  pavd = FALSE,
+  hist = FALSE,
+  save_output = TRUE
+)
 }
 \arguments{
 \item{data_dir}{directory where PCL .csv files are stored}

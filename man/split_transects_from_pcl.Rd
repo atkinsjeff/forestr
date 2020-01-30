@@ -4,8 +4,14 @@
 \alias{split_transects_from_pcl}
 \title{Split transects from PCL}
 \usage{
-split_transects_from_pcl(pcl_data, transect.length, marker.spacing,
-  DEBUG = FALSE, data_dir, output_file_name)
+split_transects_from_pcl(
+  pcl_data,
+  transect.length,
+  marker.spacing,
+  DEBUG = FALSE,
+  data_dir,
+  output_file_name
+)
 }
 \arguments{
 \item{pcl_data}{data frame of unprocessed PCL data.}

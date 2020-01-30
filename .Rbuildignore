@@ -2,12 +2,14 @@
 ^\.Rproj\.user$
 figure/
 osbs.png
+^vignettes/files
 
-                    # ^.*\.RDA
+
 ^README\.Rmd$       # An Rmarkdown file used to generate README.md
 README.Rmd
 README.html
 README.md
 cran-comments.md
+
 ^data-raw$
 .travis.yml
