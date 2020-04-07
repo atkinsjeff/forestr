@@ -89,16 +89,10 @@ process_tls<- function(f, slice, pavd = FALSE, hist = FALSE, save_output = TRUE)
   # derive tls mean leaf height
   m2 <- calc_tls_mean_leaf_ht(m1)
 
+  # making summary data information.
   variable.list <- calc_tls_csc(m2, filename)
-
   output.variables  <- cbind(variable.list)
-
-
   transect.length <- max(m2$xbin)
-
-
-
-
 
   vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
 
@@ -164,8 +158,8 @@ if(save_output == TRUE){
   plot.file.path.pavd <- file.path(paste(output_directory, plot.filename.pavd, ".png", sep = ""))
 
   write_pcl_to_csv(output.variables, outputname, output_directory)
-  write_summary_matrix_to_csv(summary.matrix, outputname, output_directory)
-  write_hit_matrix_to_csv(m5, outputname, output_directory)
+  #write_summary_matrix_to_csv(summary.matrix, outputname, output_directory)
+  write_hit_matrix_to_csv(m6, outputname, output_directory)
 
   ggplot2::ggsave(plot.file.path.hg, hit.grid, width = 8, height = 6, units = c("in"))
 
