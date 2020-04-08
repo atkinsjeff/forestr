@@ -126,18 +126,6 @@ process_tls<- function(f, slice, pavd = FALSE, hist = FALSE, save_output = TRUE)
     ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
 
 
-  # PAVD
-  if(pavd == TRUE && hist == FALSE){
-
-    plot_pavd(m2, filename, plot.file.path.pavd)
-  }
-  if(pavd == TRUE && hist == TRUE){
-
-    plot_pavd(m2, filename, plot.file.path.pavd, hist = TRUE)
-  }
-
-
-
 
 if(save_output == TRUE){
   #output procedure for variables
@@ -164,4 +152,14 @@ if(save_output == TRUE){
   ggplot2::ggsave(plot.file.path.hg, hit.grid, width = 8, height = 6, units = c("in"))
 
 }
+
+  # PAVD
+  if(pavd == TRUE && hist == FALSE && save_output == TRUE){
+
+    plot_pavd(m2, filename, plot.file.path.pavd)
+  }
+  if(pavd == TRUE && hist == TRUE && save_output == TRUE){
+
+    plot_pavd(m2, filename, plot.file.path.pavd, hist = TRUE)
+  }
 }
