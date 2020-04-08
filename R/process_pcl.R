@@ -87,7 +87,7 @@ process_pcl <- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, h
   # If output directory name is missing, add it.
   if(missing(save_output)){
     save_output == TRUE
-    output_dir = 'output'
+    output_dir = "output"
   }
 
   #
@@ -145,6 +145,7 @@ process_pcl <- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, h
 
   # Calculates VAI (vegetation area index m^ 2 m^ -2).
   m5 <- calc_vai(m2, max.vai)
+  m5$.id <- NULL #this removes the weird column I can't tell where it comes from
 
   # Summary matrix.
   summary.matrix <- make_summary_matrix(test.data.binned, m5)
@@ -156,8 +157,13 @@ process_pcl <- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, h
   # effective number of layers
   enl <- calc_enl(m5)
 
+  # combine data and clean data frames before so
+  csc.metrics$plot <- NULL
+  intensity_stats$plot <- NULL
+
   output.variables <- combine_variables(variable.list, csc.metrics, rumple, clumping.index, enl, intensity_stats)
 
+  # label for plot
   vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
 
   #setting up VAI hit grid
@@ -189,18 +195,8 @@ process_pcl <- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, h
     ggplot2::ggtitle(filename)+
     ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
 
-  # PAVD
-  if(pavd == TRUE && hist == FALSE){
-
-    plot_pavd(m5, filename, plot.file.path.pavd, output.file = TRUE)
-
-  }
-  if(pavd == TRUE && hist == TRUE){
-
-    plot_pavd(m5, filename, plot.file.path.pavd, hist = TRUE, output.file = TRUE)
-  }
-
   if(save_output == TRUE){
+    output_dir = "output"
 
     #output procedure for variables
     dir.create(output_dir, showWarnings = FALSE)
@@ -214,9 +210,6 @@ process_pcl <- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, h
     write_summary_matrix_to_csv(summary.matrix, outputname, output_directory)
     write_hit_matrix_to_csv(m5, outputname, output_directory)
 
-
-
-
     #get filename first
     plot.filename <- tools::file_path_sans_ext(filename)
     plot.filename.full <- paste(plot.filename, "hit_grid", sep = "_")
@@ -227,8 +220,18 @@ process_pcl <- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, h
 
 
   ggplot2::ggsave(plot.file.path.hg, hit.grid, width = 8, height = 6, units = c("in"))
+  #ggplot2::ggsave(plot.file.path.pavd, plot.pavd, width = 8, height = 6, units = c("in") )
 
   }
 
+  # PAVD
+  if(pavd == TRUE && hist == FALSE && save_output == TRUE){
 
+    pavd.plot <- plot_pavd(m5, filename, plot.file.path.pavd, output.file = TRUE)
+
+  }
+  if(pavd == TRUE && hist == TRUE && save_output == TRUE){
+
+    pavd.plot <- plot_pavd(m5, filename, plot.file.path.pavd, hist = TRUE, output.file = TRUE)
+  }
 }

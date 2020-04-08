@@ -123,6 +123,8 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
 
       # Calculates VAI (vegetation area index m^ 2 m^ -2).
       m5 <- calc_vai(m2, max.vai)
+      m5$.id <- NULL #this removes the weird column I can't tell where it comes from
+
 
       # Summary matrix.
       summary.matrix <- make_summary_matrix(test.data.binned, m5)
@@ -134,6 +136,9 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
 
       variable.list <- calc_rugosity(summary.matrix, m5, filename)
 
+      # cleans up data frames and formats output variables
+      csc.metrics$plot <- NULL
+      intensity_stats$plot <- NULL
       output.variables <- combine_variables(variable.list, csc.metrics, rumple, clumping.index, enl, intensity_stats)
 
       vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
@@ -167,19 +172,8 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
         ggplot2::ggtitle(filename)+
         ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
 
-      # PAVD
-      if(pavd == TRUE && hist == FALSE){
-
-        plot_pavd(m5, filename, plot.file.path.pavd, output.file = TRUE)
-
-      }
-      if(pavd == TRUE && hist == TRUE){
-
-        plot_pavd(m5, filename, plot.file.path.pavd, hist = TRUE, output.file = TRUE)
-      }
-
       if(save_output == TRUE){
-
+        output_dir = "output"
         #output procedure for variables
         dir.create(output_dir, showWarnings = FALSE)
         outputname = substr(filename,1,nchar(filename)-4)
@@ -205,32 +199,22 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
 
 
         ggplot2::ggsave(plot.file.path.hg, hit.grid, width = 8, height = 6, units = c("in"))
-
       }
 
 
+  }
+  # PAVD
+  if(pavd == TRUE && hist == FALSE && save_output == TRUE){
+
+    pavd.plot <- plot_pavd(m5, filename, plot.file.path.pavd, output.file = TRUE)
+
+  }
+  if(pavd == TRUE && hist == TRUE && save_output == TRUE){
+
+    pavd.plot <- plot_pavd(m5, filename, plot.file.path.pavd, hist = TRUE, output.file = TRUE)
   }
 
 }
 
 
-  #   write.pcl.to.csv <- function(output.variables, filename) {
   #
-  #     filename2 <- paste(filename, ".csv", sep="")
-  #     utils::write.csv(output.variables, file.path(output_directory, filename2))
-  #   }
-  #
-  #   write.summary.matrix.to.csv <- function(m, filename) {
-  #
-  #     filename2 <- paste(filename, "_summary_matrix.csv", sep="")
-  #     utils::write.csv(m, file.path(output_directory, filename2))
-  #   }
-  #
-  #   write.hit.matrix.to.csv <- function(m, filename) {
-  #     m <- m[, c("xbin", "zbin", "vai")]
-  #
-  #     filename2 <- paste(filename, "_hit_matrix.csv", sep="")
-  #     utils::write.csv(m, file.path(output_directory, filename2))
-  #   }
-  # }
-# }

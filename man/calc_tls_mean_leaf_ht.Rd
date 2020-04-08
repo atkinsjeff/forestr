@@ -25,7 +25,7 @@ This function derives mean leaf height from x, z vai from TLS data.
 }
 
 # with data frame
-process_pcl(osbs, marker.spacing = 10, user_height = 1.05, max.vai = 8)
+process_pcl(osbs, marker.spacing = 10, user_height = 1.05, max.vai = 8, save_output = FALSE)
 
 
 }
