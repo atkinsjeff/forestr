@@ -156,10 +156,10 @@ if(save_output == TRUE){
   # PAVD
   if(pavd == TRUE && hist == FALSE && save_output == TRUE){
 
-    plot_pavd(m2, filename, plot.file.path.pavd)
+    plot_pavd(m2, filename, plot.file.path.pavd, hist = FALSE, save_output = TRUE)
   }
   if(pavd == TRUE && hist == TRUE && save_output == TRUE){
 
-    plot_pavd(m2, filename, plot.file.path.pavd, hist = TRUE)
+    plot_pavd(m2, filename, plot.file.path.pavd, hist = TRUE, save_output = TRUE)
   }
 }

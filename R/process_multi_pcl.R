@@ -41,7 +41,8 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
   print(marker.spacing)
 
 
-  file.names <- dir(data_dir, pattern =".CSV")
+  file.names <- dir(data_dir, pattern =".CSV", ignore.case = TRUE)
+
 
 
   #for loop that moves through files in directory
@@ -53,6 +54,8 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
       xbin <- NULL
       zbin <- NULL
       vai <- NULL
+      key <- NULL
+      value <- NULL
 
       # If missing user height default is 1 m.
       if(missing(user_height)){
@@ -114,6 +117,18 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
       # and chunks (1 m chunks in each marker).
       test.data.binned <- split_transects_from_pcl(df, transect.length, marker.spacing)
 
+      # creates quantiles from raw data returns...should become it's own function at some point probably
+      quantiles <- data.frame(stats::quantile(df$return_distance, probs = c(0.1, 0.25, 0.5, 0.75, 0.9), na.rm = TRUE))
+      quantiles$key <- as.character(rownames(quantiles))
+      # remove the percent symbol
+      quantiles$key <- gsub("[\\%,]", "", quantiles$key)
+      quantiles$key <- paste0("p", quantiles$key)
+
+      names(quantiles)[1] <- "value"
+      quantiles2 <- tidyr::spread(quantiles, key, value)
+
+      print(quantiles)
+
       # Makes matrix of z and x coordinated pcl data.
       m1 <- make_matrix(test.data.binned)
 
@@ -139,7 +154,7 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
       # cleans up data frames and formats output variables
       csc.metrics$plot <- NULL
       intensity_stats$plot <- NULL
-      output.variables <- combine_variables(variable.list, csc.metrics, rumple, clumping.index, enl, intensity_stats)
+      output.variables <-  cbind(variable.list, csc.metrics, rumple, clumping.index, enl, intensity_stats, quantiles2)
 
       vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
 
@@ -206,12 +221,12 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
   # PAVD
   if(pavd == TRUE && hist == FALSE && save_output == TRUE){
 
-    pavd.plot <- plot_pavd(m5, filename, plot.file.path.pavd, output.file = TRUE)
+    pavd.plot <- plot_pavd(m5, filename, plot.file.path.pavd)
 
   }
   if(pavd == TRUE && hist == TRUE && save_output == TRUE){
 
-    pavd.plot <- plot_pavd(m5, filename, plot.file.path.pavd, hist = TRUE, output.file = TRUE)
+    pavd.plot <- plot_pavd(m5, filename, plot.file.path.pavd, hist = TRUE)
   }
 
 }

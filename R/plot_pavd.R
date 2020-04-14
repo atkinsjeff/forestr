@@ -12,7 +12,7 @@
 #' from \code{process_pcl} or \code{process_multi_pcl}
 #' @param hist logical input to include histogram of VAI, if TRUE it is included,
 #' if FALSE, it is not.
-#' @param output.file TRUE or FALSE whether to write PAVD to disk
+#' @param save_output if TRUE it saves the plot, if false it just runs
 #' @keywords plant area volume density profile, pavd
 #' @return plant area volume density plots
 #'
@@ -23,33 +23,43 @@
 #'
 #' @examples
 #' # Calculates metrics of canopy structural complexity.
-#' plot_pavd(pcl_vai, hist = FALSE, output.file = FALSE)
-#' plot_pavd(pcl_vai, hist = TRUE, output.file = FALSE)
+#' plot_pavd(pcl_vai, filename = "pcl_test", hist = FALSE, save_output = FALSE)
+#' plot_pavd(pcl_vai, filename = "pcl_test", hist = TRUE, save_output = FALSE)
 #'
 
 
 # PAVD script
-plot_pavd <- function(m, filename, plot.file.path.pavd, hist = FALSE, output.file = FALSE) {
+plot_pavd <- function(m, filename, plot.file.path.pavd, hist = FALSE, save_output = FALSE) {
   #m = vai matrix
 
 pavd <- NULL
 
 # Deal with missing stuff
 if(missing(filename)){
-  filename = ""
+  filename = "test"
 }
 
 if(missing(plot.file.path.pavd)){
-  plot.file.path.pavd = ""
+  output_dir = 'output'
+  outputname = substr(filename,1,nchar(filename)-4)
+  outputname <- paste(outputname, "output", sep = "_")
+  output_directory <- paste("./",output_dir,"/", sep = "")
+
+  print(outputname)
+  print(output_directory)
+
+  plot.filename.pavd <- paste(filename, "pavd", sep = "_")
+
+  plot.file.path.pavd <- file.path(paste(output_directory, plot.filename.pavd, ".png", sep = ""))
+
 }
+print(plot.file.path.pavd)
 
 if(missing(hist)){
   hist = FALSE
 }
 
-if(missing(output.file)){
-  output.file = FALSE
-}
+
 
 # Creates the total value of VAI for the whole transect/plot
 total.vai <- sum(m$vai)
@@ -60,14 +70,16 @@ df.z <- stats::aggregate(vai ~ zbin, data = m, FUN = sum)
 # A new column with the proportion of the VAI in each height level to overall VAI
 df.z$ratio.vai <- df.z$vai / total.vai
 
-# Shape factor for spline
-sf <- sum(df.z$ratio.vai > 0)
+# adding an origing
+origin <- data.frame(zbin = 0, vai = 0, ratio.vai = 0)
+
+df.z <- rbind(origin, df.z)
+
 
 if(hist == TRUE){
 # Making PAVD plot
 pavd <- ggplot2::ggplot(df.z, ggplot2::aes(y = df.z$ratio.vai, x = df.z$zbin))+
-  ggplot2::geom_bar(stat = "identity", color = "light grey")+
-  ggplot2::geom_smooth(method = "lm", se = FALSE, formula = y ~ splines::ns(x, sf))+
+  ggplot2::geom_bar(stat = "identity", color = "light grey", alpha = 0.5)+
   ggplot2::theme_classic()+
   ggplot2::theme(axis.line = ggplot2::element_line(colour = "black"),
         panel.grid.major = ggplot2::element_blank(),
@@ -86,8 +98,7 @@ pavd <- ggplot2::ggplot(df.z, ggplot2::aes(y = df.z$ratio.vai, x = df.z$zbin))+
 pavd
 } else {
   pavd <- ggplot2::ggplot(df.z, ggplot2::aes(y = df.z$ratio.vai, x = df.z$zbin))+
-    #geom_bar(stat = "identity", color = "light grey")+
-    ggplot2::geom_smooth(method = "lm", se = FALSE, formula = y ~ splines::ns(x, sf))+
+    ggplot2::geom_line(size = 1.5, color = "darkblue")+
     ggplot2::theme_classic()+
     ggplot2::theme(axis.line = ggplot2::element_line(colour = "black"),
                    panel.grid.major = ggplot2::element_blank(),
@@ -105,10 +116,13 @@ pavd
 
 pavd
 }
-if(output.file == TRUE){
-  ggplot2::ggsave(plot.file.path.pavd, pavd, width = 8, height = 6, units = c("in"))
-}
 
+if(save_output == TRUE){
+  output_dir = "output"
+  #output procedure for variables
+  dir.create(output_dir, showWarnings = FALSE)
+  ggplot2::ggsave(plot.file.path.pavd, pavd, width = 6, height = 4, units = c("in"))
+}
 }
 
 

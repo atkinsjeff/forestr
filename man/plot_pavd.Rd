@@ -4,7 +4,7 @@
 \alias{plot_pavd}
 \title{Graphs Plant Area Volume Density Profiles}
 \usage{
-plot_pavd(m, filename, plot.file.path.pavd, hist = FALSE, output.file = FALSE)
+plot_pavd(m, filename, plot.file.path.pavd, hist = FALSE, save_output = FALSE)
 }
 \arguments{
 \item{m}{matrix of light adjusted vai values.}
@@ -17,7 +17,7 @@ from \code{process_pcl} or \code{process_multi_pcl}}
 \item{hist}{logical input to include histogram of VAI, if TRUE it is included,
 if FALSE, it is not.}
 
-\item{output.file}{TRUE or FALSE whether to write PAVD to disk}
+\item{save_output}{if TRUE it saves the plot, if false it just runs}
 }
 \value{
 plant area volume density plots
@@ -32,8 +32,8 @@ output files created from running \code{procesS_pcl} as well.
 }
 \examples{
 # Calculates metrics of canopy structural complexity.
-plot_pavd(pcl_vai, hist = FALSE, output.file = FALSE)
-plot_pavd(pcl_vai, hist = TRUE, output.file = FALSE)
+plot_pavd(pcl_vai, filename = "pcl_test", hist = FALSE, save_output = FALSE)
+plot_pavd(pcl_vai, filename = "pcl_test", hist = TRUE, save_output = FALSE)
 
 }
 \seealso{

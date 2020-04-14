@@ -19,14 +19,11 @@
 #' \dontrun{process_pcl("pcl_data.csv", marker.spacing = 10, user_height = 1.05, max.vai = 8)
 #' }
 #'
-#' # with data frame
-#' process_pcl(osbs, marker.spacing = 10, user_height = 1.05, max.vai = 8, save_output = FALSE)
-#'
-#'
+
 calc_tls_mean_leaf_ht <- function(m){
   #mean column leaf height that is the "heightBin" from Matlab code
 
-  m$vai.z <- m$vai * (m$zbin +0.5)
+  m$vai.z <- m$vai * (m$zbin + 0.5)
   h <- stats::setNames(stats::aggregate(vai.z ~ xbin, data = m, FUN = sum, na.rm = FALSE,  na.action = 'na.pass'), c("xbin", "vai.z.sum"))
 
   e <- stats::setNames(stats::aggregate(vai ~ xbin, data = m, FUN = sum, na.rm = FALSE, na.action = 'na.pass'), c("xbin", "sum.vai"))
