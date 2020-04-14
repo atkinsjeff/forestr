@@ -9,7 +9,7 @@
 #' @param transect.length the length of the transect used to create the x-axis
 #' @param max.ht the maximum measured height used to create the y-axis
 #' @param max.vai the maximum density of VAI, defaul = 8
-#' @keywords hitgrid, plot,
+#' @keywords graphics
 #' @return a hit gride of VAI
 #'
 #' @export

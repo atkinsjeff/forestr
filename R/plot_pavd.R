@@ -13,7 +13,7 @@
 #' @param hist logical input to include histogram of VAI, if TRUE it is included,
 #' if FALSE, it is not.
 #' @param save_output if TRUE it saves the plot, if false it just runs
-#' @keywords plant area volume density profile, pavd
+#' @keywords graphics
 #' @return plant area volume density plots
 #'
 #' @export

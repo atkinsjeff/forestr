@@ -14,7 +14,7 @@
 #' @param hist logical input to include histogram of VAI with PAVD plot, if TRUE it is included, if FALSE, it is not.
 #' @param save_output needs to be set to true, or else you are just going to get a lot of data on the screen
 #' @return writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
-#' @keywords pcl processing, multiple files
+#' @keywords file import
 
 #'
 #' @export

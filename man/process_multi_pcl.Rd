@@ -55,7 +55,5 @@ max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
 \seealso{
 \code{\link{process_pcl}}
 }
-\keyword{files}
-\keyword{multiple}
-\keyword{pcl}
-\keyword{processing,}
+\keyword{file}
+\keyword{import}

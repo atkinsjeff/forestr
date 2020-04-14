@@ -39,9 +39,4 @@ plot_pavd(pcl_vai, filename = "pcl_test", hist = TRUE, save_output = FALSE)
 \seealso{
 \code{\link{plot_hit_grid}}
 }
-\keyword{area}
-\keyword{density}
-\keyword{pavd}
-\keyword{plant}
-\keyword{profile,}
-\keyword{volume}
+\keyword{graphics}

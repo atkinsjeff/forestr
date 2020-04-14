@@ -26,5 +26,4 @@ data in the PCL data, including min, max, sd, mean, median.
 intensity_stats <- calc_intensity(pcl_adjusted, filename = "UVA")
 
 }
-\keyword{intensity,}
 \keyword{statisitcs}
