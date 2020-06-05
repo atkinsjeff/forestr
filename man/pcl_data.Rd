@@ -4,7 +4,9 @@
 \name{pcl_data}
 \alias{pcl_data}
 \title{PCL transect from the University of Virginia}
-\format{An object of class \code{data.frame} with 14576 rows and 3 columns.}
+\format{
+An object of class \code{data.frame} with 14576 rows and 3 columns.
+}
 \source{
 \url{http://atkinsjeff.github.io}
 }

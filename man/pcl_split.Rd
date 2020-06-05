@@ -4,7 +4,8 @@
 \name{pcl_split}
 \alias{pcl_split}
 \title{a data frame LiDAR returns that have been split to x and z position}
-\format{A data frame with 13982 rows:
+\format{
+A data frame with 13982 rows:
 \describe{
   \item{index}{index of raw data--position along transect}
   \item{return_distance}{raw, uncorrected LiDAR return distances from laser}
@@ -16,7 +17,8 @@
   \item{chunk_num}{intermediate to get x position}
   \item{xbin}{position along horizontal axis}
   \item{zbin}{position along vertical axis}
-}}
+}
+}
 \source{
 \url{http://atkinsjeff.github.io}
 }

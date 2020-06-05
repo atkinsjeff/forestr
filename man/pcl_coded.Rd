@@ -4,7 +4,8 @@
 \name{pcl_coded}
 \alias{pcl_coded}
 \title{a data frame LiDAR returns that have been split to x and z position and coded}
-\format{A data frame with 14576 rows:
+\format{
+A data frame with 14576 rows:
 \describe{
   \item{index}{index of raw data--position along transect}
   \item{return_distance}{raw, uncorrected LiDAR return distances from laser}
@@ -13,7 +14,8 @@
   \item{can_hit}{lidar return that hits the canopy}
   \item{marker}{negative value that indicates marker}
   }
-  @source \url{http://atkinsjeff.github.io}}
+  @source \url{http://atkinsjeff.github.io}
+}
 \usage{
 pcl_coded
 }

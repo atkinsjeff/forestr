@@ -1,0 +1,29 @@
+citHeader("To cite forestr in publications use:")
+
+citEntry(entry="Article",
+         title = "Quantifying vegetation and
+         canopy structural complexity from terrestrial LiDAR data using
+         the forestr r package",
+         author = personList(person(family="Atkins", given="Jeff"),
+                             person(family="Bohrer", given="Gil"),
+                             person(family="Fahey", given="Robert"),
+                             person(family="Hardiman", given="Brady"),
+                             person(family="Morin", given="Timothy"),
+                             person(family="Stovall", given="Atticus"),
+                             person(family="Zimmerman", given="Naupaka"),
+                             person(family="Gough", given="Christopher")),
+         journal = "Methods in Ecology and Evolution",
+         year         = "2018",
+         volume       = "9",
+         number       = "10",
+         pages        = "2057-2066",
+         url          = "https://CRAN.R-project.org/doc/Rnews/",
+
+         textVersion =
+           paste("J.W. Atkins, G. Bohrer, R.T. Fahey, B.S. Hardiman,
+                 T.H. Morin, A.E.L. Stovall, N. Zimmerman and C.M. Gough. ",
+                 "Quantifying vegetation and canopy structural complexity from
+                 terrestrial LiDAR data using the forestr r package. ",
+                 "Methods in Ecology and Evolution 9(10), 2057-2066.",
+                 sep=""))
+

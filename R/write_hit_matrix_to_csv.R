@@ -31,11 +31,11 @@ write_hit_matrix_to_csv <- function(m, outputname, output_directory) {
 
   #Write just thie hit matrix
   filename2 <- paste(outputname, "_hit_matrix.csv", sep="")
-  utils::write.csv(m, file.path(output_directory, filename2))
+  utils::write.csv(m, file.path(output_directory, filename2), row.names = FALSE)
 
   #full matrix
   filename3 <- paste(outputname, "_full_matrix.csv", sep = "")
-  utils::write.csv(m.og, file.path(output_directory, filename3))
+  utils::write.csv(m.og, file.path(output_directory, filename3), row.names = FALSE)
 
 }
 

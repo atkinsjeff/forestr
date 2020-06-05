@@ -4,7 +4,8 @@
 \name{pcl_matrix}
 \alias{pcl_matrix}
 \title{a LiDAR hit density by x, z position}
-\format{A data frame with 1120 rows:
+\format{
+A data frame with 1120 rows:
 \describe{
   \item{xbin}{x-bin position}
   \item{zbin}{z-bin position}
@@ -14,7 +15,8 @@
   \item{lidar.pulses}{no. of lidar pulses emitted per column}
   \item{Freq}{no idea}
   }
-  @source \url{http://atkinsjeff.github.io}}
+  @source \url{http://atkinsjeff.github.io}
+}
 \usage{
 pcl_matrix
 }

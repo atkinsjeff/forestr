@@ -9,6 +9,7 @@ process_multi_pcl(
   user_height,
   marker.spacing,
   max.vai,
+  ht.thresh,
   pavd = FALSE,
   hist = FALSE,
   save_output = TRUE
@@ -22,6 +23,8 @@ process_multi_pcl(
 \item{marker.spacing}{space between markers in the PCL data, in meters}
 
 \item{max.vai}{the maximum value of column VAI. The default is 8. Should be a max value, not a mean.}
+
+\item{ht.thresh}{the height at which to filter values below}
 
 \item{pavd}{logical input to include Plant Area Volume Density Plot from [plot_pavd], if TRUE it is included, if FALSE, it is not.}
 
@@ -45,10 +48,10 @@ files, producing the same output files described in \code{process_pcl}
 # This function works on a directory of raw PCL data
 \dontrun{data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
 process_multi_pcl(data_directory, user_height = 1.05, marker.spacing = 10,
-max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
+max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 
 process_multi_pcl("./data/PCL_transects/", user_height = 1.05, marker.spacing = 10,
-max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
+max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 }
 
 }

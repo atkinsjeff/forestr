@@ -10,6 +10,7 @@
 #' @param user_height height of laser from ground based on user in meters
 #' @param marker.spacing space between markers in the PCL data, in meters
 #' @param max.vai the maximum value of column VAI. The default is 8. Should be a max value, not a mean.
+#' @param ht.thresh the height at which to filter values below
 #' @param pavd logical input to include Plant Area Volume Density Plot from [plot_pavd], if TRUE it is included, if FALSE, it is not.
 #' @param hist logical input to include histogram of VAI with PAVD plot, if TRUE it is included, if FALSE, it is not.
 #' @param save_output needs to be set to true, or else you are just going to get a lot of data on the screen
@@ -27,13 +28,13 @@
 #' # This function works on a directory of raw PCL data
 #' \dontrun{data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
 #' process_multi_pcl(data_directory, user_height = 1.05, marker.spacing = 10,
-#' max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
+#' max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 #'
 #' process_multi_pcl("./data/PCL_transects/", user_height = 1.05, marker.spacing = 10,
-#' max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
+#' max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 #' }
 #'
-process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pavd = FALSE, hist = FALSE, save_output = TRUE){
+process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, ht.thresh, pavd = FALSE, hist = FALSE, save_output = TRUE){
   #Global Variables
   output_directory <- NULL
 
@@ -72,6 +73,11 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
         max.vai = 8
       }
 
+      # If missing ht.thresh default is 60
+      if(missing(ht.thresh)){
+        ht.thresh = 60
+      }
+
       # If output directory name is missing, add it.
       if(missing(save_output)){
         save_output == TRUE
@@ -81,7 +87,7 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
 
       if(is.character(f) == TRUE) {
         # Read in PCL transect.
-        df <- read_pcl_multi(data_dir, f)
+        df <- read_pcl_multi(data_dir, f, ht.thresh)
 
         # Cuts off the directory info to give just the filename.
         filename <- sub(".*/", "", f)
@@ -146,15 +152,28 @@ process_multi_pcl <- function(data_dir, user_height, marker.spacing, max.vai, pa
       rumple <- calc_rumple(summary.matrix)
       clumping.index <- calc_gap_fraction(m5)
 
+
+      # foliage height diversity
+      fhd <- calc_fhd(m5)
+
+      # gini coefficient
+      gini <- calc_gini(m5)
+
       # effective number of layers
       enl <- calc_enl(m5)
 
-      variable.list <- calc_rugosity(summary.matrix, m5, filename)
-
-      # cleans up data frames and formats output variables
+      # combine data and clean data frames
       csc.metrics$plot <- NULL
       intensity_stats$plot <- NULL
-      output.variables <-  cbind(variable.list, csc.metrics, rumple, clumping.index, enl, intensity_stats, quantiles2)
+
+      variable.list <- calc_rugosity(summary.matrix, m5, filename)
+
+      output.variables <- cbind(variable.list, csc.metrics, rumple,
+                                clumping.index, enl, fhd, gini, intensity_stats, quantiles2)
+
+
+
+
 
       vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
 

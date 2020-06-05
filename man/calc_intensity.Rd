@@ -15,7 +15,7 @@ calc_intensity(df, filename)
 statisics on the intensity data
 }
 \description{
-\code{calc_intensity} calcualtes statisitcs from the intensity column of the PCL data
+\code{calc_intensity} calcualtes statistics from the intensity column of the PCL data
 }
 \details{
 The \code{calc_intensity} function calculates statistics about the intensity

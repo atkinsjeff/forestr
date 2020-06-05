@@ -23,6 +23,6 @@
 write_summary_matrix_to_csv <- function(m, outputname, output_directory) {
 
    filename2 <- paste(outputname, "_summary_matrix.csv", sep="")
-   utils::write.csv(m, file.path(output_directory, filename2))
+   utils::write.csv(m, file.path(output_directory, filename2), row.names = FALSE)
 }
 

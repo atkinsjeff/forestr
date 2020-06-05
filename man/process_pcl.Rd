@@ -9,6 +9,7 @@ process_pcl(
   user_height,
   marker.spacing,
   max.vai,
+  ht.thresh,
   pavd = FALSE,
   hist = FALSE,
   save_output = TRUE
@@ -24,6 +25,8 @@ in meters. default is 1 m}
 
 \item{max.vai}{the maximum value of column VAI. The default is 8. Should be
 a max value, not a mean.}
+
+\item{ht.thresh}{the height at which to filter values below default is 60 m}
 
 \item{pavd}{logical input to include Plant Area Volume Density Plot from {plot_pavd},
 if TRUE it is included, if FALSE, it is not.}
@@ -71,11 +74,11 @@ subfunction \code{write_hit_matrix_to_pcl}
 uva.pcl <- system.file("extdata", "UVAX_A4_01W.csv", package = "forestr")
 
 process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05,
-max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
+max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 
 # with data frame
 process_pcl(osbs, marker.spacing = 10, user_height = 1.05,
-max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
+max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 
 
 }

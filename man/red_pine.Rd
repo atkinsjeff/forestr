@@ -4,12 +4,14 @@
 \name{red_pine}
 \alias{red_pine}
 \title{PCL transect from a red pine plantation in Northern Michigan, US.}
-\format{A data frame with 17559 rows:
+\format{
+A data frame with 17559 rows:
 \describe{
   \item{index}{index of raw data--position along transect}
   \item{return_distance}{raw, uncorrected LiDAR return distances from laser}
   \item{intensity}{intensity values as recorded by LiDAR system}
-}}
+}
+}
 \source{
 \url{http://atkinsjeff.github.io}
 }

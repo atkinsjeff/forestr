@@ -4,7 +4,8 @@
 \name{pcl_summary}
 \alias{pcl_summary}
 \title{summary matrix}
-\format{A data frame with 40 rows:
+\format{
+A data frame with 40 rows:
 \describe{
   \item{xbin}{x-bin position}
   \item{mean.ht}{mean height}
@@ -16,7 +17,8 @@
   \item{vai.z.sum}{density adjuste height}
   \item{max.vai.z}{height of peak VAI}
   \item{height.bin}{mean leaf height}
-}}
+}
+}
 \source{
 \url{http://atkinsjeff.github.io}
 }

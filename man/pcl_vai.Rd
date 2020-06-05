@@ -4,7 +4,8 @@
 \name{pcl_vai}
 \alias{pcl_vai}
 \title{a data frame of vegetation area index (VAI)}
-\format{A data frame with 1120 rows:
+\format{
+A data frame with 1120 rows:
 \describe{
   \item{.id}{column numbering}
   \item{xbin}{x-bin position}
@@ -23,7 +24,8 @@
   \item{cvr}{cover proportion}
   \item{olai}{max LAI or VAI number}
   \item{vai}{calculated VAI}
-}}
+}
+}
 \source{
 \url{http://atkinsjeff.github.io}
 }

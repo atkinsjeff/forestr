@@ -4,7 +4,8 @@
 \name{pcl_norm}
 \alias{pcl_norm}
 \title{a data frame of normalized LiDAR return density}
-\format{A data frame with 1120 rows:
+\format{
+A data frame with 1120 rows:
 \describe{
   \item{.id}{column numbering}
   \item{xbin}{x-bin position}
@@ -20,7 +21,8 @@
   \item{x.counter}{counting variable}
   \item{sum.dee}{distributed proportion}
   \item{fee}{coefficent}
-}}
+}
+}
 \source{
 \url{http://atkinsjeff.github.io}
 }

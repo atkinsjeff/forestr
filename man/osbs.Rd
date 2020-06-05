@@ -4,12 +4,14 @@
 \name{osbs}
 \alias{osbs}
 \title{PCL transect from Ordway-Swisher Biological Station, Florida, US.}
-\format{A data frame with 10506 rows:
+\format{
+A data frame with 10506 rows:
 \describe{
   \item{index}{index of raw data--position along transect}
   \item{return_distance}{raw, uncorrected LiDAR return distances from laser}
   \item{intensity}{intensity values as recorded by LiDAR system}
-}}
+}
+}
 \source{
 \url{http://atkinsjeff.github.io}
 }

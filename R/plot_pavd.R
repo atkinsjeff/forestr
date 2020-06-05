@@ -70,7 +70,7 @@ df.z <- stats::aggregate(vai ~ zbin, data = m, FUN = sum)
 # A new column with the proportion of the VAI in each height level to overall VAI
 df.z$ratio.vai <- df.z$vai / total.vai
 
-# adding an origing
+# adding an origin
 origin <- data.frame(zbin = 0, vai = 0, ratio.vai = 0)
 
 df.z <- rbind(origin, df.z)

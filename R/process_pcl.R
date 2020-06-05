@@ -33,6 +33,7 @@
 #' @param marker.spacing distance between markers, defaults is 10 m
 #' @param max.vai the maximum value of column VAI. The default is 8. Should be
 #' a max value, not a mean.
+#' @param ht.thresh the height at which to filter values below default is 60 m
 #' @param pavd logical input to include Plant Area Volume Density Plot from {plot_pavd},
 #' if TRUE it is included, if FALSE, it is not.
 #' @param hist logical input to include histogram of VAI with PAVD plot, if
@@ -55,16 +56,16 @@
 #' uva.pcl <- system.file("extdata", "UVAX_A4_01W.csv", package = "forestr")
 #'
 #' process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05,
-#' max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
+#' max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 #'
 #' # with data frame
 #' process_pcl(osbs, marker.spacing = 10, user_height = 1.05,
-#' max.vai = 8, pavd = FALSE, hist = FALSE, save_output = FALSE)
+#' max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 #'
 #'
 
 
-process_pcl <- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, hist = FALSE, save_output = TRUE){
+process_pcl <- function(f, user_height, marker.spacing, max.vai, ht.thresh, pavd = FALSE, hist = FALSE, save_output = TRUE){
   xbin <- NULL
   zbin <- NULL
   vai <- NULL
@@ -86,6 +87,11 @@ process_pcl <- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, h
     max.vai = 8
   }
 
+  # If missing ht.thresh default is 60
+  if(missing(ht.thresh)){
+    ht.thresh = 60
+  }
+
   # If output directory name is missing, add it.
   if(missing(save_output)){
     save_output == TRUE
@@ -96,7 +102,7 @@ process_pcl <- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, h
   if(is.character(f) == TRUE) {
 
   # Read in PCL transect.
-  df<- read_pcl(f)
+  df<- read_pcl(f, ht.thresh)
 
 
     # Cuts off the directory info to give just the filename.
@@ -150,7 +156,7 @@ process_pcl <- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, h
   names(quantiles)[1] <- "value"
   quantiles2 <- tidyr::spread(quantiles, key, value)
 
-    print(quantiles)
+  print(quantiles)
 
   # Makes matrix of z and x coordinated pcl data.
   m1 <- make_matrix(test.data.binned)
@@ -171,15 +177,22 @@ process_pcl <- function(f, user_height, marker.spacing, max.vai, pavd = FALSE, h
 
   variable.list <- calc_rugosity(summary.matrix, m5, filename)
 
+  # foliage height diversity
+  fhd <- calc_fhd(m5)
+
+  # gini coefficient
+  gini <- calc_gini(m5)
+
   # effective number of layers
   enl <- calc_enl(m5)
 
-  # combine data and clean data frames before so
+  # combine data and clean data frames
   csc.metrics$plot <- NULL
   intensity_stats$plot <- NULL
 
-  output.variables <- cbind(variable.list, csc.metrics, rumple, clumping.index, enl, intensity_stats, quantiles2)
-    #combine_variables(variable.list, csc.metrics, rumple, clumping.index, enl, intensity_stats, quantiles)
+  output.variables <- cbind(variable.list, csc.metrics, rumple,
+                            clumping.index, enl, fhd, gini, intensity_stats, quantiles2)
+
 
   # label for plot
   vai.label =  expression(paste(VAI~(m^2 ~m^-2)))

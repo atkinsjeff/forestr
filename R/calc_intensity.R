@@ -1,6 +1,6 @@
 #' Intensity Statistics
 #'
-#' \code{calc_intensity} calcualtes statisitcs from the intensity column of the PCL data
+#' \code{calc_intensity} calcualtes statistics from the intensity column of the PCL data
 #'
 #' The \code{calc_intensity} function calculates statistics about the intensity
 #' data in the PCL data, including min, max, sd, mean, median.
