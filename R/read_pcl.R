@@ -45,7 +45,7 @@ read_pcl <- function(f, ht.thresh) {
 
   # filter by height thershold
   df %>%
-    dplyr::filter(df$return_distance < ht.thresh) %>%
+    dplyr::filter(df$return_distance < ht.thresh | is.na(df$return_distance)) %>%
     data.frame() -> df
 
   message("how many in base df have NA")
