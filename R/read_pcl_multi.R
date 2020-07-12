@@ -41,7 +41,7 @@ read_pcl_multi <- function(data_directory, filename, ht.thresh) {
 
   # filter by height thershold
   df %>%
-    dplyr::filter(df$return_distance < ht.thresh | is.na(df$return_distance) %>%
+    dplyr::filter(df$return_distance < ht.thresh | is.na(df$return_distance)) %>%
     data.frame() -> df
 
   df$index <- as.numeric(rownames(df))
