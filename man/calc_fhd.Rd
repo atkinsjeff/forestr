@@ -4,10 +4,12 @@
 \alias{calc_fhd}
 \title{foliar height diversity}
 \usage{
-calc_fhd(m)
+calc_fhd(m, method)
 }
 \arguments{
 \item{m}{matrix of light adjusted vai values.}
+
+\item{method}{"MH" is MacArthur-Horn and "Bohrer" is the Bohrer method}
 }
 \value{
 foliage height diveristy
@@ -21,7 +23,7 @@ diversity index is applied to through canopy measures of gap fraction
 }
 \examples{
 
-calc_fhd(pcl_vai)
+calc_fhd(pcl_vai, method = "Bohrer")
 
 }
 \keyword{statisitcs}

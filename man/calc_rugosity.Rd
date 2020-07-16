@@ -4,7 +4,7 @@
 \alias{calc_rugosity}
 \title{Calculate rugosity and other higher level complexity metrics}
 \usage{
-calc_rugosity(df, m, filename)
+calc_rugosity(df, m, filename, method)
 }
 \arguments{
 \item{df}{is a LiDAR summary matrix data frame}
@@ -12,6 +12,8 @@ calc_rugosity(df, m, filename)
 \item{m}{matrix of light adjusted vai values.}
 
 \item{filename}{the name of the file currently being processed.}
+
+\item{method}{"MH" is MacArthur-Horn and "Bohrer" is the Bohrer method}
 }
 \value{
 a series of metrics that describe canopy and
@@ -27,7 +29,7 @@ and other metrics, including rumple, height metrics, etc.
 }
 \examples{
 # Calculates metrics of canopy structural complexity.
-calc_rugosity(pcl_summary, pcl_vai, filename = "")
+calc_rugosity(pcl_summary, pcl_vai, filename = "", method = "Bohrer")
 
 }
 \keyword{complexity}

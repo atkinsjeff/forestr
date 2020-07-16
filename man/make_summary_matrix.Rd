@@ -4,12 +4,14 @@
 \alias{make_summary_matrix}
 \title{Creates summary matrix}
 \usage{
-make_summary_matrix(df, m)
+make_summary_matrix(df, m, method)
 }
 \arguments{
 \item{df}{sorted data frame of processed PCL data}
 
 \item{m}{matrix of PCL hit density with x and z coordinates}
+
+\item{method}{"MH" is MacArthur-Horn and "Bohrer" is the Bohrer method}
 }
 \value{
 a matrix of summary stats by each x and z coordinate position
@@ -29,7 +31,7 @@ the data frame of VAI from the function \code{calc_vai}.
 }
 \examples{
 
-pcl_summary <- make_summary_matrix(pcl_split, pcl_vai)
+pcl_summary <- make_summary_matrix(pcl_split, pcl_vai, method = "Bohrer")
 
 }
 \keyword{matrix}

@@ -4,10 +4,12 @@
 \alias{calc_enl}
 \title{Calculate rugosity and other higher level complexity metrics}
 \usage{
-calc_enl(m)
+calc_enl(m, method)
 }
 \arguments{
 \item{m}{a data frame of VAI for x, z bins from}
+
+\item{method}{"MH" is MacArthur-Horn and "Bohrer" is the Bohrer method}
 }
 \value{
 the effective number of layers
@@ -17,7 +19,7 @@ the effective number of layers
 }
 \examples{
 # Calculates the effective number of layers
-calc_enl(pcl_vai)
+calc_enl(pcl_vai, method = "Bohrer")
 
 }
 \keyword{enl}

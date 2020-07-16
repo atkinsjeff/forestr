@@ -1,6 +1,6 @@
 Package: forestr
 Type: Package
-Version: 2.0.3
+Version: 2.1.0
 Title: Ecosystem and Canopy Structural Complexity Metrics from LiDAR
 Authors@R: c(person("Jeff", "Atkins", email = "jwatkins6@vcu.edu",
                   role = c("aut", "cre")),

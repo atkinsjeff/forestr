@@ -9,6 +9,7 @@
 #' @param df is a LiDAR summary matrix data frame
 #' @param m matrix of light adjusted vai values.
 #' @param filename the name of the file currently being processed.
+#' @param method "MH" is MacArthur-Horn and "Bohrer" is the Bohrer method
 #'
 #' @keywords complexity
 #'
@@ -18,15 +19,14 @@
 #' @export
 #' @examples
 #' # Calculates metrics of canopy structural complexity.
-#' calc_rugosity(pcl_summary, pcl_vai, filename = "")
+#' calc_rugosity(pcl_summary, pcl_vai, filename = "", method = "Bohrer")
 #'
 
 
 # RUGOSITY
-calc_rugosity <- function(df, m, filename) {
-  #df = the summary matrix
-  #m = vai matrix
+calc_rugosity <- function(df, m, filename, method) {
 
+  if(method == "Bohrer"){
   # Setting global variables
   max.vai.z  <-NULL
   max.ht <- NULL
@@ -209,5 +209,189 @@ calc_rugosity <- function(df, m, filename) {
   #now to write to csv
   variable.list <- data.frame(variable.list)
   return(variable.list)
+  } else if(method == "MH"){
+    # Setting global variables
+    max.lad.z  <-NULL
+    max.ht <- NULL
+
+
+    transect.length = max(df$xbin)
+    message("Transect Length (m)")
+    print(transect.length)
+
+    # HEIGHT VARIABLES
+    message("HEIGHT METRICS")
+
+    mean.height.mean = mean(df$height.bin)
+    message("Mean Leaf Height (H) - plot mean of column mean leaf height")
+    print(mean.height.mean)
+
+    height.2 <- stats::sd(df$height.bin)
+    message("Height2 (H[2]) - standard deviation of column mean leaf height")
+    print(height.2)
+
+    mean.height.median <- stats::median(df$height.bin)
+    message("H [median] - median column mean leaf height")
+    print(mean.height.median)
+
+    mean.height.var = stats::var(df$height.bin)
+    message("Mean Leaf Height variance (H[var]) - variance of column mean leaf height")
+    print(mean.height.var)
+
+    mean.height.rms = sqrt(mean(df$height.bin^2))
+    message("Root Mean Square Mean Leaf Height (H[rms]) - the root mean square or quadratic mean of column mean leaf height for the transect")
+    print(mean.height.rms)
+
+    can.max.ht = max(df$max.ht)
+    message("Max canopy height (m)")
+    print(can.max.ht)
+
+    moch = mean(df$max.ht)
+    message("Mean Outer Canopy Height (m) or MOCH")
+    print(moch)
+
+    can.max.ht.median = stats::median(df$max.ht)
+    message("Median Column Max Ht ")
+    print(can.max.ht.median)
+
+    message("AREA AND DENSITY METRICS")
+
+    lad.mean = mean(df$sum.lad)
+    message("Mean lad - mean lad for entire transect")
+    print(lad.mean)
+
+    lad.sd = stats::sd(df$sum.lad)
+    message("SD lad - SD of lad for entire transect")
+    print(lad.sd)
+
+    lad.median = stats::median(df$sum.lad)
+    message("Median lad - median lad for entire transect")
+    print(lad.median)
+
+    lad.column.max = max(df$sum.lad)
+    message("Maximum lad x,y entire transect -- max el!")
+    print(lad.column.max)
+
+    lad.max.ht.mean = mean(df$max.lad.z)
+    message("Mean Height of lad[max] - modeEl")
+    print(lad.max.ht.mean)
+
+    lad.max.ht.sd <- stats::sd(df$max.lad.z)
+    message("Mode 2- The standard deviation of ladmax or MaxEl")
+    print(lad.max.ht.sd)
+
+    lad.max.ht.median = stats::median(df$max.lad.z)
+    message("Median of lad max or Maxel")
+    print(lad.max.ht.median)
+
+    lad.max = max(df$max.lad)
+    message("Maximum lad x,y entire transect -- max el!")
+    print(lad.max)
+
+    lad.mean.peak = mean(df$max.lad)
+    message("Mean Peak lad for entire transect")
+    print(lad.mean.peak)
+
+    lad.peak.sd = stats::sd(df$max.lad)
+    message("SD of peak lad for entire transect")
+    print(lad.peak.sd)
+
+    lad.peak.median = stats::median(df$max.lad)
+    message("Median Peak lad for entire transect")
+    print(lad.peak.median)
+
+
+
+    #added the df thing in front of max ht, but don't know if it works.
+    message("CANOPY AND OPENNESS METRICS (cont.)")
+    e <- subset(df, df$max.ht == 0)
+    deep.gaps <- nrow(e)
+    message("Deep Gaps")
+    print(deep.gaps)
+
+    deep.gap.fraction <- deep.gaps/transect.length
+    message("Deep Gap Fraction (0-1)")
+    print(deep.gap.fraction)
+
+    message("ARRANGEMENT METRICS")
+    porosity = sum(m$bin.hits == 0) / length(m$bin.hits)
+    message("Canopy porosity")
+    print(porosity)
+
+    #being rugosity intermediates
+
+    #first we adjust the lad at each x,z by the z height of the bin
+    combo.meal <- merge(df, m, by = "xbin")
+
+    combo.meal$std.bin.num <- combo.meal$lad * (((combo.meal$zbin + 0.5)  - combo.meal$height.bin)^2)
+
+    j <- stats::aggregate(std.bin.num ~ xbin, data = combo.meal, FUN = sum, na.rm = FALSE, na.action = 'na.pass')
+    j[is.na(j)] <- 0
+
+
+    super.size <- merge(df, j, by = "xbin")
+
+    super.size$std.bin <- super.size$std.bin.num / super.size$sum.lad
+
+    super.size$std.bin.squared <- (super.size$std.bin^2)
+
+    super.size[is.na(super.size)] <- 0
+
+    # std.std = mean(super.size$std.bin.squared)
+    std.std = mean(super.size$std.bin.squared)
+
+    # mean.std = mean(super.size$std.bin)
+    mean.std = mean(super.size$std.bin)
+
+    message("Square of leaf height variance (stdStd from old script)")
+    print(std.std)
+
+
+    message("Mean Standard deviation of leaf heights -- meanStd")
+    print(mean.std)
+
+    rugosity = (std.std - (mean.std * mean.std))^0.5
+    message("Canopy Rugosity")
+    print(rugosity)
+
+
+    jess.rugosity = stats::sd(df$max.ht)
+    message("Surface Rugosity--TopRugosity")
+    print(jess.rugosity)
+
+    variable.list <- list(plot = filename,
+                          mean.height.mean = mean.height.mean,
+                          height.2 = height.2,
+                          mean.height.median = mean.height.median,
+                          mean.height.var = mean.height.var,
+                          mean.height.rms = mean.height.rms,
+                          transect.length = transect.length,
+                          can.max.ht = can.max.ht,
+                          moch = moch,
+                          can.max.ht.median = can.max.ht.median,
+                          lad.mean = lad.mean,
+                          lad.sd = lad.sd,
+                          lad.median = lad.median,
+                          lad.column.max = lad.column.max,
+                          lad.max.ht.mean = lad.max.ht.mean,
+                          lad.max.ht.sd = lad.max.ht.sd,
+                          lad.max.ht.median = lad.max.ht.median,
+                          lad.max = lad.max,
+                          lad.mean.peak = lad.mean.peak,
+                          lad.peak.sd = lad.peak.sd,
+                          lad.peak.median = lad.peak.median,
+                          deep.gaps = deep.gaps,
+                          deep.gap.fraction = deep.gap.fraction,
+                          porosity = porosity,
+                          std.std = std.std,
+                          mean.std = mean.std,
+                          rugosity = rugosity,
+                          top.rugosity = jess.rugosity)
+
+
+    #now to write to csv
+    variable.list <- data.frame(variable.list)
+    return(variable.list)
+}
 
 }

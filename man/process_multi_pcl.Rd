@@ -7,6 +7,8 @@
 process_multi_pcl(
   data_dir,
   user_height,
+  method,
+  k,
   marker.spacing,
   max.vai,
   ht.thresh,
@@ -19,6 +21,10 @@ process_multi_pcl(
 \item{data_dir}{directory where PCL .csv files are stored}
 
 \item{user_height}{height of laser from ground based on user in meters}
+
+\item{method}{"MH" is MacArthur-Horn and "Bohrer" is the Bohrer method}
+
+\item{k}{correction coeff for MH method (default is 1)}
 
 \item{marker.spacing}{space between markers in the PCL data, in meters}
 

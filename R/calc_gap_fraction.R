@@ -47,4 +47,9 @@ calc_gap_fraction <- function(m){
   print(clump)
   return(clump)
 
+  gap.variables <- list(ci = clump,
+                        gap_fractiont = mean.gap.fraction)
+
+  return(gap.variables)
+
 }

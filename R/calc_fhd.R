@@ -7,16 +7,19 @@
 #'
 #'
 #' @param m matrix of light adjusted vai values.
+#' @param method "MH" is MacArthur-Horn and "Bohrer" is the Bohrer method
+#'
 #' @keywords statisitcs
 #' @export
 #' @return foliage height diveristy
 #' @examples
 #'
-#' calc_fhd(pcl_vai)
+#' calc_fhd(pcl_vai, method = "Bohrer")
 #'
 
-calc_fhd <- function(m) {
-  #
+calc_fhd <- function(m, method){
+
+  if(method == "Bohrer"){
   fhd <- NULL
   total.vai <- NULL
 
@@ -38,4 +41,27 @@ calc_fhd <- function(m) {
   print(fhd)
 
   return(fhd)
+  } else if(method == "MH" ){
+    fhd <- NULL
+    total.lad <- NULL
+
+    # Creates the total value of lad for the whole transect/plot
+    total.lad <- sum(m$lad)
+
+    # A new data fram of lad distributed at each height level
+    df.z <- stats::aggregate(lad ~ zbin, data = m, FUN = sum)
+
+    # A new column with the proportion of the lad in each height level to overall lad
+    df.z$ratio.lad <- df.z$lad / total.lad
+
+    # calculates the FHD
+    df.z$fhd <- df.z$ratio.lad * log(df.z$ratio.lad)
+
+    fhd <- (sum(df.z$fhd, na.rm = TRUE) * -1)
+
+    message("FHD!!!!!")
+    print(fhd)
+
+    return(fhd)
   }
+}
