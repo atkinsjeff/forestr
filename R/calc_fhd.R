@@ -41,6 +41,7 @@ calc_fhd <- function(m, method){
   print(fhd)
 
   return(fhd)
+
   } else if(method == "MH" ){
     fhd <- NULL
     total.lad <- NULL
@@ -48,7 +49,7 @@ calc_fhd <- function(m, method){
     # Creates the total value of lad for the whole transect/plot
     total.lad <- sum(m$lad)
 
-    # A new data fram of lad distributed at each height level
+    # A new data frame of lad distributed at each height level
     df.z <- stats::aggregate(lad ~ zbin, data = m, FUN = sum)
 
     # A new column with the proportion of the lad in each height level to overall lad

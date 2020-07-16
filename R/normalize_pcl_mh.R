@@ -76,6 +76,10 @@ normalize_pcl_mh <-  function(df, k) {
   q <- stats::setNames(stats::aggregate(lad ~ xbin, data = df, FUN = sum), c("xbin", "sum.lad"))
   df$sum.lad <- q$sum.lad[match(df$xbin, q$xbin)]
 
+  # remove NAs
+  df$lad[is.na(df$lad)] <- 0
+  df$lad[is.nan(df$lad)] <- 0
+
   return(df)
 
 }

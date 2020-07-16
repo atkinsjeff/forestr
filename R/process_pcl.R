@@ -181,7 +181,7 @@ process_pcl <- function(f, user_height, marker.spacing, max.vai, ht.thresh, pavd
   fhd <- calc_fhd(m5, method)
 
   # gini coefficient
-  gini <- calc_gini(m5)
+  gini <- calc_gini(m5, method)
 
   # effective number of layers
   enl <- calc_enl(m5, method)

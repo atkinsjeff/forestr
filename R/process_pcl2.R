@@ -205,10 +205,10 @@ process_pcl2 <- function(f, method, user_height, marker.spacing, max.vai, k, ht.
   variable.list <- calc_rugosity(summary.matrix, m5, filename, method)
 
       # foliage height diversity
-      fhd <- calc_fhd(m2, method)
+      fhd <- calc_fhd(m5, method)
 
       # gini coefficient
-      gini <- calc_gini(m5)
+      gini <- calc_gini(m5, method)
 
       # effective number of layers
       enl <- calc_enl(m5, method)
@@ -220,7 +220,7 @@ process_pcl2 <- function(f, method, user_height, marker.spacing, max.vai, k, ht.
       output.variables <- cbind(variable.list, csc.metrics, rumple,
                                 gap.variables, enl, fhd, gini, intensity_stats, quantiles2)
 
-
+if(method == "MH"){
       # label for plot
       lad.label =  expression(paste(LAD~(m^2 ~m^-3)))
 
@@ -246,11 +246,75 @@ process_pcl2 <- function(f, method, user_height, marker.spacing, max.vai, k, ht.
           axis.title.x = ggplot2::element_text(size = 20),
           axis.title.y = ggplot2::element_text(size = 20))+
       ggplot2::xlim(0,transect.length)+
-      ggplot2::ylim(0,41)+
+      ggplot2::ylim(0, max(m6$zbin))+
       ggplot2::xlab("Distance along transect (m)")+
       ggplot2::ylab("Height above ground (m)")+
       ggplot2::ggtitle(filename)+
       ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
 
+} else if (method == "Bohrer"){
+
+  # label for plot
+  vai.label =  expression(paste(VAI~(m^2 ~m^-2)))
+
+  #setting up VAI hit grid
+  m6 <- m5
+  m6$vai[m6$vai == 0] <- NA
+  message("No. of NA values in hit matrix")
+  print(sum(is.na(m6$vai)))
+  #x11(width = 8, height = 6)
+  hit.grid <- ggplot2::ggplot(m6, ggplot2::aes(x = xbin, y = zbin))+
+    ggplot2::geom_tile(ggplot2::aes(fill = vai))+
+    ggplot2::scale_fill_gradient(low="gray88", high="darkgreen",
+                                 na.value = "white",
+                                 limits=c(0, 8),
+                                 name=vai.label)+
+    #scale_y_continuous(breaks = seq(0, 20, 5))+
+    # scale_x_continuous(minor_breaks = seq(0, 40, 1))+
+    ggplot2::theme(axis.line = ggplot2::element_line(colour = "black"),
+                   panel.grid.major = ggplot2::element_blank(),
+                   panel.grid.minor = ggplot2::element_blank(),
+                   panel.background = ggplot2::element_blank(),
+                   axis.text.x = ggplot2::element_text(size = 14),
+                   axis.text.y = ggplot2::element_text(size = 14),
+                   axis.title.x = ggplot2::element_text(size = 20),
+                   axis.title.y = ggplot2::element_text(size = 20))+
+    ggplot2::xlim(0,transect.length)+
+    ggplot2::ylim(0, max(zbin))+
+    ggplot2::xlab("Distance along transect (m)")+
+    ggplot2::ylab("Height above ground (m)")+
+    ggplot2::ggtitle(filename)+
+    ggplot2::theme(plot.title = ggplot2::element_text(lineheight=.8, face="bold"))
+
+}
+
+      if(save_output == TRUE){
+        output_dir = "output"
+
+        #output procedure for variables
+        dir.create(output_dir, showWarnings = FALSE)
+        outputname = substr(filename,1,nchar(filename)-4)
+        outputname <- paste(outputname, "output", sep = "_")
+        output_directory <- paste("./",output_dir,"/", sep = "")
+        print(outputname)
+        print(output_directory)
+
+        write_pcl_to_csv(output.variables, outputname, output_directory)
+        write_summary_matrix_to_csv(summary.matrix, outputname, output_directory)
+        write_hit_matrix_to_csv(m5, outputname, output_directory)
+
+        #get filename first
+        plot.filename <- tools::file_path_sans_ext(filename)
+        plot.filename.full <- paste(plot.filename, "hit_grid", sep = "_")
+        plot.filename.pavd <- paste(plot.filename, "pavd", sep = "_")
+
+        plot.file.path.hg <- file.path(paste(output_directory, plot.filename.full, ".png", sep = ""))
+        plot.file.path.pavd <- file.path(paste(output_directory, plot.filename.pavd, ".png", sep = ""))
+
+
+        ggplot2::ggsave(plot.file.path.hg, hit.grid, width = 8, height = 6, units = c("in"))
+        #ggplot2::ggsave(plot.file.path.pavd, plot.pavd, width = 8, height = 6, units = c("in") )
+
+      }
 
 }

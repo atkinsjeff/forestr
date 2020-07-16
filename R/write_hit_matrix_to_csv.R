@@ -27,7 +27,7 @@
 
 write_hit_matrix_to_csv <- function(m, outputname, output_directory) {
   m.og <- m
-  m <- m[, c("xbin", "zbin", "vai", "dee", "phi")]
+  # m <- m[, c("xbin", "zbin", "vai", "dee", "phi")]
 
   #Write just thie hit matrix
   filename2 <- paste(outputname, "_hit_matrix.csv", sep="")
