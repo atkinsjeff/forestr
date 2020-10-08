@@ -50,7 +50,7 @@ process_multi_pcl <- function(data_dir, user_height, method, k, marker.spacing, 
   #for loop that moves through files in directory
   for(i in 1:length(file.names)){
     f <- file.names[i]
-
+  print(f)
     process_pcl2(f, method, user_height, marker.spacing, max.vai, k, ht.thresh, pavd, hist, save_output)
   }
 }

@@ -4,10 +4,12 @@
 \alias{calc_gini}
 \title{Gini coefficient}
 \usage{
-calc_gini(m)
+calc_gini(m, method)
 }
 \arguments{
 \item{m}{matrix of light adjusted vai values.}
+
+\item{method}{"MH" is MacArthur-Horn and "Bohrer" is the Bohrer method}
 }
 \value{
 gini coefficient
@@ -20,7 +22,7 @@ The \code{calc_gini} function calculates gini coefficient, a varialbe the descri
 }
 \examples{
 
-calc_gini(pcl_vai)
+calc_gini(pcl_vai, method = "Bohrer")
 
 }
 \keyword{statisitcs}
