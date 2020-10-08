@@ -115,7 +115,7 @@ process_pcl2 <- function(f, method, user_height, marker.spacing, max.vai, k, ht.
   if(is.character(f) == TRUE) {
 
     # Read in PCL transect.
-    df <- read_pcl(f, ht.thresh)
+    df <- read_pcl_multi(data_dir, f, ht.thresh)
 
 
     # Cuts off the directory info to give just the filename.
