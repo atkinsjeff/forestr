@@ -51,7 +51,7 @@ calc_tls_csc <- function(m, filename){
   print(mean.height)
 
 
-  height.2 <- stats::sd(m$height.bin, , na.rm = TRUE )
+  height.2 <- stats::sd(m$height.bin, na.rm = TRUE )
   message("Height2 (H[2]) - standard deviation of column mean leaf height")
   print(height.2)
 
