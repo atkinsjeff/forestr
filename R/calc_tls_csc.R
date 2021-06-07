@@ -46,48 +46,48 @@ calc_tls_csc <- function(m, filename){
   # HEIGHT VARIABLES
   message("HEIGHT METRICS")
 
-  mean.height = mean(m$height.bin)
+  mean.height = mean(m$height.bin, na.rm = TRUE)
   message("Mean Leaf Height (H) - plot mean of column mean leaf height")
   print(mean.height)
 
 
-  height.2 <- stats::sd(m$height.bin)
+  height.2 <- stats::sd(m$height.bin, na.rm = TRUE )
   message("Height2 (H[2]) - standard deviation of column mean leaf height")
   print(height.2)
 
-  mean.height.var = stats::var(m$height.bin)
+  mean.height.var = stats::var(m$height.bin, na.rm = TRUE)
   message("Mean Leaf Height variance (H[var]) - variance of column mean leaf height")
   print(mean.height.var)
 
-  mean.height.rms = sqrt(mean(m$height.bin^2))
+  mean.height.rms = sqrt(mean(m$height.bin^2, na.rm = TRUE))
   message("Root Mean Square Mean Leaf Height (H[rms]) - the root mean square or quadratic mean of column mean leaf height for the transect")
   print(mean.height.rms)
 
 
   message("AREA AND DENSITY METRICS")
 
-  mean.vai = mean(m$sum.vai)
+  mean.vai = mean(m$sum.vai, na.rm = TRUE)
   message("Mean VAI - mean VAI for entire transect")
   print(mean.vai)
 
-  mode.el = mean(m$max.vai.z)
+  mode.el = mean(m$max.vai.z, na.rm = TRUE)
   message("Mean Height of VAI[max] - modeEl")
   print(mode.el)
 
-  mode.2 <- stats::sd(m$max.vai.z)
+  mode.2 <- stats::sd(m$max.vai.z, na.rm = TRUE)
   message("Mode 2- The standard deviation of VAImax or MaxEl")
   print(mode.2)
 
-  max.el = max(m$max.vai)
+  max.el = max(m$max.vai, na.rm = TRUE)
   message("Maximum VAI for entire transect -- max el!")
   print(max.el)
 
-  mean.peak.vai = mean(m$max.vai)
+  mean.peak.vai = mean(m$max.vai, na.rm = TRUE)
   message("Mean Peak VAI for entire transect")
   print(mean.peak.vai)
 
   message("ARRANGEMENT METRICS")
-  porosity = sum(m$vai == 0) / length(m$vai)
+  porosity = sum(m$vai == 0, na.rm = TRUE) / length(m$vai)
   message("Canopy porosity")
   print(porosity)
 
