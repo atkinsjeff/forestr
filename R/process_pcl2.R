@@ -74,6 +74,7 @@ process_pcl2 <- function(f, method, user_height, marker.spacing, max.vai, k, ht.
   lad <- NULL
   key <- NULL
   value <- NULL
+  data_dir <- NULL
 
   # If missing user height default is 1 m.
   if(missing(user_height)){
