@@ -6,12 +6,12 @@
 \usage{
 process_multi_pcl(
   data_dir,
-  user_height,
-  method,
-  k,
-  marker.spacing,
-  max.vai,
-  ht.thresh,
+  user_height = NULL,
+  method = NULL,
+  k = NULL,
+  marker.spacing = NULL,
+  max.vai = NULL,
+  ht.thresh = NULL,
   pavd = FALSE,
   hist = FALSE,
   save_output = TRUE

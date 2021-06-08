@@ -65,7 +65,7 @@
 #'
 
 
-process_pcl <- function(f, user_height, marker.spacing, max.vai, ht.thresh, pavd = FALSE, hist = FALSE, save_output = TRUE){
+process_pcl <- function(f, user_height = NULL, marker.spacing = NULL, max.vai = NULL, ht.thresh = NULL, pavd = FALSE, hist = FALSE, save_output = TRUE){
   xbin <- NULL
   zbin <- NULL
   vai <- NULL
@@ -75,27 +75,27 @@ process_pcl <- function(f, user_height, marker.spacing, max.vai, ht.thresh, pavd
   # keep this until methods are merged
   method = "Bohrer"
   # If missing user height default is 1 m.
-  if(missing(user_height)){
+  if(is.null(user_height)){
     user_height = 1
   }
 
   # If missing marker.spacing, default is 10 m.
-  if(missing(marker.spacing)){
+  if(is.null(marker.spacing)){
     marker.spacing = 10
   }
 
   # If missing max.vai default is 8
-  if(missing(max.vai)){
+  if(is.null(max.vai)){
     max.vai = 8
   }
 
   # If missing ht.thresh default is 60
-  if(missing(ht.thresh)){
+  if(is.null(ht.thresh)){
     ht.thresh = 60
   }
 
   # If output directory name is missing, add it.
-  if(missing(save_output)){
+  if(is.null(save_output)){
     save_output == TRUE
     output_dir = "output"
   }

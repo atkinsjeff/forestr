@@ -1,19 +1,19 @@
 #' Process single PCL transects.
 #'
-#' \code{process_pcl} imports and processes a single PCL transect.
+#' \code{process_pcl2} imports and processes a single PCL transect.
 #'
 #' This function imports raw pcl data or existing data frames of pcl data and writes
 #' all data and analysis to a series of .csv files in an output directory (output)
 #' keeping nothing in the workspace.
 #'
-#' \code{process_pcl} uses a workflow that cuts the data into 1 meter segments with
+#' \code{process_pcl2} uses a workflow that cuts the data into 1 meter segments with
 #' z and x positions in coordinate space where x referes to distance along the ground
 #' and z refers to distance above the ground. Data are normalized based on
 #' light extinction assumptions from the Beer-Lambert Law to account for light saturation.
 #' Data are then summarized and metrics of canopy structure complexity are calculated.
 #'
-#' \code{process_pcl} will write multiple output files to disk in an output directory that
-#'  \code{process_pcl} creates within the work directing. These files include:
+#' \code{process_pcl2} will write multiple output files to disk in an output directory that
+#'  \code{process_pcl2} creates within the work directing. These files include:
 #'
 #' 1. an output variables file that contains a list of CSC variables and is
 #' written by the subfunction \code{write_pcl_to_csv}
@@ -57,61 +57,59 @@
 #' # Run process complete PCL transect without storing to disk
 #' uva.pcl <- system.file("extdata", "UVAX_A4_01W.csv", package = "forestr")
 #'
-#' process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05,
+#' process_pcl2(uva.pcl, marker.spacing = 10, user_height = 1.05,
 #' max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 #'
 #' # with data frame
-#' process_pcl(osbs, marker.spacing = 10, user_height = 1.05,
+#' process_pcl2(osbs, marker.spacing = 10, user_height = 1.05,
 #' max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 #'
 #'
 
 
-process_pcl2 <- function(f, method, user_height, marker.spacing, max.vai, k, ht.thresh, pavd = FALSE, hist = FALSE, save_output = TRUE){
+process_pcl2 <- function(f, user_height = NULL, method = NULL, k = NULL, marker.spacing = NULL, max.vai = NULL, ht.thresh = NULL, pavd = FALSE, hist = FALSE, save_output = TRUE){
   xbin <- NULL
   zbin <- NULL
   vai <- NULL
   lad <- NULL
   key <- NULL
   value <- NULL
-  data_dir <- NULL
 
   # If missing user height default is 1 m.
-  if(missing(user_height)){
+  if(is.null(user_height)){
     user_height = 1
   }
 
   # If missing user height default is 1 m.
-  if(missing(method)){
+  if(is.null(method)){
     method = "MH"
   }
 
   # If missing k default is 1 this is the coeff for the MacArthur-Horn
-  if(missing(k)){
+  if(is.null(k)){
     k = 1
   }
 
   # If missing marker.spacing, default is 10 m.
-  if(missing(marker.spacing)){
+  if(is.null(marker.spacing)){
     marker.spacing = 10
   }
 
   # If missing max.vai default is 8
-  if(missing(max.vai)){
+  if(is.null(max.vai)){
     max.vai = 8
   }
 
   # If missing ht.thresh default is 60
-  if(missing(ht.thresh)){
+  if(is.null(ht.thresh)){
     ht.thresh = 60
   }
 
   # If output directory name is missing, add it.
-  if(missing(save_output)){
+  if(is.null(save_output)){
     save_output == TRUE
     output_dir = "output"
   }
-
 
   if(is.character(f) == TRUE) {
 

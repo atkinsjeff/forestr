@@ -6,12 +6,12 @@
 \usage{
 process_pcl2(
   f,
-  method,
-  user_height,
-  marker.spacing,
-  max.vai,
-  k,
-  ht.thresh,
+  user_height = NULL,
+  method = NULL,
+  k = NULL,
+  marker.spacing = NULL,
+  max.vai = NULL,
+  ht.thresh = NULL,
   pavd = FALSE,
   hist = FALSE,
   save_output = TRUE
@@ -20,17 +20,17 @@ process_pcl2(
 \arguments{
 \item{f}{the name of the filename to input <character> or a data frame <data frame>.}
 
-\item{method}{"MH" is MacArthur-Horn and "Bohrer" is the Bohrer method}
-
 \item{user_height}{the height of the laser off the ground as mounted on the user
 in meters. default is 1 m}
+
+\item{method}{"MH" is MacArthur-Horn and "Bohrer" is the Bohrer method}
+
+\item{k}{correction coeff for MH method (default is 1)}
 
 \item{marker.spacing}{distance between markers, defaults is 10 m}
 
 \item{max.vai}{the maximum value of column VAI. The default is 8. Should be
 a max value, not a mean.}
-
-\item{k}{correction coeff for MH method (default is 1)}
 
 \item{ht.thresh}{the height at which to filter values below default is 60 m}
 
@@ -47,21 +47,21 @@ writes the hit matrix, summary matrix, and output variables to csv
 in an output folder, along with hit grid plot
 }
 \description{
-\code{process_pcl} imports and processes a single PCL transect.
+\code{process_pcl2} imports and processes a single PCL transect.
 }
 \details{
 This function imports raw pcl data or existing data frames of pcl data and writes
 all data and analysis to a series of .csv files in an output directory (output)
 keeping nothing in the workspace.
 
-\code{process_pcl} uses a workflow that cuts the data into 1 meter segments with
+\code{process_pcl2} uses a workflow that cuts the data into 1 meter segments with
 z and x positions in coordinate space where x referes to distance along the ground
 and z refers to distance above the ground. Data are normalized based on
 light extinction assumptions from the Beer-Lambert Law to account for light saturation.
 Data are then summarized and metrics of canopy structure complexity are calculated.
 
-\code{process_pcl} will write multiple output files to disk in an output directory that
- \code{process_pcl} creates within the work directing. These files include:
+\code{process_pcl2} will write multiple output files to disk in an output directory that
+ \code{process_pcl2} creates within the work directing. These files include:
 
 1. an output variables file that contains a list of CSC variables and is
 written by the subfunction \code{write_pcl_to_csv}
@@ -79,11 +79,11 @@ subfunction \code{write_hit_matrix_to_pcl}
 # Run process complete PCL transect without storing to disk
 uva.pcl <- system.file("extdata", "UVAX_A4_01W.csv", package = "forestr")
 
-process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05,
+process_pcl2(uva.pcl, marker.spacing = 10, user_height = 1.05,
 max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 
 # with data frame
-process_pcl(osbs, marker.spacing = 10, user_height = 1.05,
+process_pcl2(osbs, marker.spacing = 10, user_height = 1.05,
 max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 
 

@@ -6,10 +6,10 @@
 \usage{
 process_pcl(
   f,
-  user_height,
-  marker.spacing,
-  max.vai,
-  ht.thresh,
+  user_height = NULL,
+  marker.spacing = NULL,
+  max.vai = NULL,
+  ht.thresh = NULL,
   pavd = FALSE,
   hist = FALSE,
   save_output = TRUE

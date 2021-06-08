@@ -35,7 +35,7 @@
 #' max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 #' }
 #'
-process_multi_pcl <- function(data_dir, user_height, method, k, marker.spacing, max.vai, ht.thresh, pavd = FALSE, hist = FALSE, save_output = TRUE){
+process_multi_pcl <- function(data_dir, user_height = NULL, method = NULL, k = NULL, marker.spacing = NULL, max.vai = NULL, ht.thresh = NULL, pavd = FALSE, hist = FALSE, save_output = TRUE){
   #Global Variables
   output_directory <- NULL
 
@@ -47,12 +47,50 @@ process_multi_pcl <- function(data_dir, user_height, method, k, marker.spacing, 
 
 
 
+  # If missing user height default is 1 m.
+  if(is.null(user_height)){
+    user_height = 1
+  }
+
+  # If missing user height default is 1 m.
+  if(is.null(method)){
+    method = "MH"
+  }
+
+  # If missing k default is 1 this is the coeff for the MacArthur-Horn
+  if(is.null(k)){
+    k = 1
+  }
+
+  # If missing marker.spacing, default is 10 m.
+  if(is.null(marker.spacing)){
+    marker.spacing = 10
+  }
+
+  # If missing max.vai default is 8
+  if(is.null(max.vai)){
+    max.vai = 8
+  }
+
+  # If missing ht.thresh default is 60
+  if(is.null(ht.thresh)){
+    ht.thresh = 60
+  }
+
+  # If output directory name is missing, add it.
+  if(is.null(save_output)){
+    save_output == TRUE
+    output_dir = "output"
+  }
+
+
   #for loop that moves through files in directory
   for(i in 1:length(file.names)){
-    f <- file.names[i]
+    f <- paste(data_dir, file.names[i], sep = "")
   print(f)
     process_pcl2(f, method, user_height, marker.spacing, max.vai, k, ht.thresh, pavd, hist, save_output)
   }
+
 }
 
 
