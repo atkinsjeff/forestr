@@ -39,14 +39,6 @@ process_multi_pcl <- function(data_dir, user_height = NULL, method = NULL, k = N
   #Global Variables
   output_directory <- NULL
 
-  message("Transect Marker Spacing is:")
-  print(marker.spacing)
-
-
-  file.names <- dir(data_dir, pattern =".CSV", ignore.case = TRUE)
-
-
-
   # If missing user height default is 1 m.
   if(is.null(user_height)){
     user_height = 1
@@ -83,12 +75,18 @@ process_multi_pcl <- function(data_dir, user_height = NULL, method = NULL, k = N
     output_dir = "output"
   }
 
+  message("Transect Marker Spacing is:")
+  print(marker.spacing)
+
+
+  file.names <- dir(data_dir, pattern =".CSV", ignore.case = TRUE)
+
 
   #for loop that moves through files in directory
   for(i in 1:length(file.names)){
     f <- paste(data_dir, file.names[i], sep = "")
   print(f)
-    process_pcl2(f, method, user_height, marker.spacing, max.vai, k, ht.thresh, pavd, hist, save_output)
+    process_pcl(f, method, user_height, marker.spacing, max.vai, k, ht.thresh, pavd, hist, save_output)
   }
 
 }

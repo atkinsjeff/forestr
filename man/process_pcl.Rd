@@ -7,6 +7,8 @@
 process_pcl(
   f,
   user_height = NULL,
+  method = NULL,
+  k = NULL,
   marker.spacing = NULL,
   max.vai = NULL,
   ht.thresh = NULL,
@@ -20,6 +22,10 @@ process_pcl(
 
 \item{user_height}{the height of the laser off the ground as mounted on the user
 in meters. default is 1 m}
+
+\item{method}{"MH" is MacArthur-Horn and "Bohrer" is the Bohrer method}
+
+\item{k}{correction coeff for MH method (default is 1)}
 
 \item{marker.spacing}{distance between markers, defaults is 10 m}
 
@@ -73,11 +79,11 @@ subfunction \code{write_hit_matrix_to_pcl}
 # Run process complete PCL transect without storing to disk
 uva.pcl <- system.file("extdata", "UVAX_A4_01W.csv", package = "forestr")
 
-process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05,
+process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05, method = "MH", k = 1,
 max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 
 # with data frame
-process_pcl(osbs, marker.spacing = 10, user_height = 1.05,
+process_pcl(osbs, marker.spacing = 10, user_height = 1.05, method = "MH", k = 1,
 max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 
 
