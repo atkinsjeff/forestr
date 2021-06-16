@@ -1,4 +1,4 @@
-#' Cover and sky fraction estimates
+#' Canopy cover and sky fraction estimates
 #'
 #' \code{csc_metrics} creates first-order canopy structural metrics that
 #' do not require normalization
@@ -9,7 +9,7 @@
 #' Beer-Lambert Law). These metrics include:  mean return height of raw data, sd
 #' of raw canopy height returns, maximum measured canopy height, scan density (the
 #' average no. of LiDAR returns per linear meter), and both openness and cover
-#' fraction which are used for gap fraction calcuations.
+#' fraction which are used for gap fraction calculations.
 #'
 #'
 #' @param df data frame of uncorrected PCL data
@@ -44,13 +44,13 @@ csc_metrics <- function(df, filename, transect.length) {
   message("Mean Return Height (m) of raw data")
   print(mean.return.ht)
 
-  sd.ht = stats::sd(z$return_distance, na.rm = TRUE)
+  sd.return.ht = stats::sd(z$return_distance, na.rm = TRUE)
   message("Standard Deviation of raw  Canopy Height returns-- meanStd in old code")
-  print(sd.ht)
+  print(sd.return.ht)
 
-  median.ht = stats::median(z$return_distance, na.rm = TRUE)
+  median.return.ht = stats::median(z$return_distance, na.rm = TRUE)
   message("Median of raw  Canopy Height returns")
-  print(median.ht)
+  print(median.return.ht)
 
   max.ht = max(df$return_distance, na.rm = TRUE)
   message("Max Measured Canopy Height (m)")
@@ -62,21 +62,21 @@ csc_metrics <- function(df, filename, transect.length) {
 
   message("OPENNESS AND COVER METRICS")
   sky.fraction = (1 -  ( (length(which(df$can_hit == TRUE))) / (length(df$return_distance) - correction.coef) )) * 100
-  message("Sky Fraction (%)")
+  message("sky Fraction (%)")
   print(sky.fraction)
 
-  cover.fraction = 100 - sky.fraction
-  message("Cover Fraction (%)")
-  print(cover.fraction)
+  canopy.cover = 100 - sky.fraction
+  message("Canopy Cover (%)")
+  print(canopy.cover)
 
 
 
   csc.variable.list <- list(plot = filename,
                             mean.return.ht = mean.return.ht,
-                            sd.return.ht = sd.ht,
-                            median.ht = median.ht,
+                            sd.return.ht = sd.return.ht,
+                            median.return.ht = median.return.ht,
                             sky.fraction = sky.fraction,
-                            cover.fraction = cover.fraction,
+                            canopy.cover = canopy.cover,
                             max.ht = max.ht,
                             scan.density = scan.density)
 

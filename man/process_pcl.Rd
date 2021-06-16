@@ -6,9 +6,11 @@
 \usage{
 process_pcl(
   f,
-  user_height = NULL,
   method = NULL,
+  data.type = NULL,
+  user_height = NULL,
   k = NULL,
+  transect.length = NULL,
   marker.spacing = NULL,
   max.vai = NULL,
   ht.thresh = NULL,
@@ -20,12 +22,19 @@ process_pcl(
 \arguments{
 \item{f}{the name of the filename to input <character> or a data frame <data frame>.}
 
+\item{method}{"MH" is MacArthur-Horn and "Bohrer" is the Bohrer method}
+
+\item{data.type}{describes the type of data that is being feed into \code{process_pcl}
+the options are "continuous" for data without data markers (i.e. -99999999 but `forestr` is going
+to read any negative \code{return_distance} as a data marker), and "divided"
+data with data markers.}
+
 \item{user_height}{the height of the laser off the ground as mounted on the user
 in meters. default is 1 m}
 
-\item{method}{"MH" is MacArthur-Horn and "Bohrer" is the Bohrer method}
-
 \item{k}{correction coeff for MH method (default is 1)}
+
+\item{transect.length}{for 'continuous' data without markers, a total transect length is needed.}
 
 \item{marker.spacing}{distance between markers, defaults is 10 m}
 
@@ -55,7 +64,7 @@ all data and analysis to a series of .csv files in an output directory (output)
 keeping nothing in the workspace.
 
 \code{process_pcl} uses a workflow that cuts the data into 1 meter segments with
-z and x positions in coordinate space where x referes to distance along the ground
+z and x positions in coordinate space where x refers to distance along the ground
 and z refers to distance above the ground. Data are normalized based on
 light extinction assumptions from the Beer-Lambert Law to account for light saturation.
 Data are then summarized and metrics of canopy structure complexity are calculated.
@@ -79,11 +88,11 @@ subfunction \code{write_hit_matrix_to_pcl}
 # Run process complete PCL transect without storing to disk
 uva.pcl <- system.file("extdata", "UVAX_A4_01W.csv", package = "forestr")
 
-process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05, method = "MH", k = 1,
-max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
+process_pcl(uva.pcl, method = "MH", user_height = 1.05,
+k = 1, marker.spacing = 10, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 
 # with data frame
-process_pcl(osbs, marker.spacing = 10, user_height = 1.05, method = "MH", k = 1,
+process_pcl(osbs, marker.spacing = 10, user_height = 1.05, method = "Bohrer", k = 1,
 max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 
 

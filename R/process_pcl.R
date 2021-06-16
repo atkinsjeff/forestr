@@ -7,7 +7,7 @@
 #' keeping nothing in the workspace.
 #'
 #' \code{process_pcl} uses a workflow that cuts the data into 1 meter segments with
-#' z and x positions in coordinate space where x referes to distance along the ground
+#' z and x positions in coordinate space where x refers to distance along the ground
 #' and z refers to distance above the ground. Data are normalized based on
 #' light extinction assumptions from the Beer-Lambert Law to account for light saturation.
 #' Data are then summarized and metrics of canopy structure complexity are calculated.
@@ -28,9 +28,14 @@
 #'
 #'
 #' @param f  the name of the filename to input <character> or a data frame <data frame>.
+#' @param data.type  describes the type of data that is being feed into \code{process_pcl}
+#' the options are "continuous" for data without data markers (i.e. -99999999 but `forestr` is going
+#' to read any negative \code{return_distance} as a data marker), and "divided"
+#' data with data markers.
 #' @param user_height the height of the laser off the ground as mounted on the user
 #' in meters. default is 1 m
 #' @param marker.spacing distance between markers, defaults is 10 m
+#' @param transect.length for 'continuous' data without markers, a total transect length is needed.
 #' @param max.vai the maximum value of column VAI. The default is 8. Should be
 #' a max value, not a mean.
 #' @param method "MH" is MacArthur-Horn and "Bohrer" is the Bohrer method
@@ -57,17 +62,17 @@
 #' # Run process complete PCL transect without storing to disk
 #' uva.pcl <- system.file("extdata", "UVAX_A4_01W.csv", package = "forestr")
 #'
-#' process_pcl(uva.pcl, marker.spacing = 10, user_height = 1.05, method = "MH", k = 1,
-#' max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
+#' process_pcl(uva.pcl, method = "MH", user_height = 1.05,
+#' k = 1, marker.spacing = 10, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 #'
 #' # with data frame
-#' process_pcl(osbs, marker.spacing = 10, user_height = 1.05, method = "MH", k = 1,
+#' process_pcl(osbs, marker.spacing = 10, user_height = 1.05, method = "Bohrer", k = 1,
 #' max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
 #'
 #'
 
 
-process_pcl <- function(f, user_height = NULL, method = NULL, k = NULL, marker.spacing = NULL, max.vai = NULL, ht.thresh = NULL, pavd = FALSE, hist = FALSE, save_output = TRUE){
+process_pcl <- function(f, method = NULL, data.type = NULL, user_height = NULL, k = NULL, transect.length = NULL, marker.spacing = NULL, max.vai = NULL, ht.thresh = NULL, pavd = FALSE, hist = FALSE, save_output = TRUE){
   xbin <- NULL
   zbin <- NULL
   vai <- NULL
@@ -75,12 +80,13 @@ process_pcl <- function(f, user_height = NULL, method = NULL, k = NULL, marker.s
   key <- NULL
   value <- NULL
 
+  #### FILLING IN MISSING VALUES FOR INPUT
   # If missing user height default is 1 m.
   if(is.null(user_height)){
     user_height = 1
   }
 
-  # If missing user height default is 1 m.
+  # If missing the default method is MacArthur-Horn
   if(is.null(method)){
     method = "MH"
   }
@@ -111,6 +117,10 @@ process_pcl <- function(f, user_height = NULL, method = NULL, k = NULL, marker.s
     output_dir = "output"
   }
 
+
+
+
+  #### reading in pcl data and coding filename
   # This works through if f is a file name or a data frame
   if(is.character(f) == TRUE) {
 
@@ -128,22 +138,53 @@ process_pcl <- function(f, user_height = NULL, method = NULL, k = NULL, marker.s
     warning('These are not the data you are looking for')
   }
 
+
+
+  #### determing data type, spacing, and transect length
+  # If file is missing transect.length.
+  if(is.null(transect.length)){
+
   # Calculate transect length.
   transect.length <- get_transect_length(df, marker.spacing)
+  } else {
+  message("I am straigh up not havin' a good time bro")
+  }
 
   #error checking transect length
   message("Transect Length")
   print(transect.length)
+
+
+  # Codes data type to handle the presence or absence of data markers
+  if(is.null(data.type)){
+
+    min.x <- min(df$return_distance, na.rm = TRUE)
+
+    if(min.x < -1000){
+
+      # this sets data.type to divided, meaning it has markers in the data set
+      data.type = "divided"
+    } else {
+
+      # make continuous data
+      data.type = "continuous"
+    }
+
+  }
+
+
+
+
+  ##############################################
+  # Adjusts by the height of the  user to account for difference in laser height to
+  # ground in   meters==default is 1 m.
+  df <- adjust_by_user(df, user_height)
 
   # Desginates a LiDAR pulse as either a sky hit or a canopy hit
   df <- code_hits(df)
 
   message("Table of sky hits")
   print(table(df$sky_hit))
-
-  # Adjusts by the height of the  user to account for difference in laser height to
-  # ground in   meters==default is 1 m.
-  df <- adjust_by_user(df, user_height)
 
   # Calculate Statistics on Intensity Values
   intensity_stats <- calc_intensity(df, filename)
@@ -152,10 +193,36 @@ process_pcl <- function(f, user_height = NULL, method = NULL, k = NULL, marker.s
   csc.metrics <- csc_metrics(df, filename, transect.length)
 
 
-  # Splits transects from code into segments (distances between markers as designated by        marker.spacing
-  # and chunks (1 m chunks in each marker).
-  test.data.binned <- split_transects_from_pcl(df, transect.length, marker.spacing)
 
+  ############################
+  # splitting transects to x an z bins based on data type.
+  if(data.type == "continuous"){
+
+    # working with index values to make x position
+    dx = (transect.length / length(df$index))
+    df$x <- df$index * dx
+
+    # Code segment to create zbin and xbin
+    df$xbin <- ceiling(df$x)
+    df$zbin <- round(df$return_distance)
+    df$zbin[df$sky_hit == "TRUE"] <- 0
+
+    # creates binned data
+    test.data.binned <- df
+
+
+  } else if(data.type == "divided"){
+
+    # Splits transects from code into segments (distances between markers as designated by        marker.spacing
+    # and chunks (1 m chunks in each marker).
+    test.data.binned <- split_transects_from_pcl(df, transect.length, marker.spacing)
+
+  }
+
+
+
+
+  #########################
   # creates quantiles from raw data returns...should become it's own function at some point probably
   quantiles <- data.frame(stats::quantile(df$return_distance, probs = c(0.1, 0.25, 0.5, 0.75, 0.9), na.rm = TRUE))
   quantiles$key <- as.character(rownames(quantiles))
@@ -172,10 +239,10 @@ process_pcl <- function(f, user_height = NULL, method = NULL, k = NULL, marker.s
   # Makes matrix of z and x coordinated pcl data.
   m1 <- make_matrix(test.data.binned)
 
-  # Normalizes date by column based on assumptions of Beer-Lambert Law of light extinction vertically
-  # through the canopy.
-  m2 <- normalize_pcl(m1)
-
+  # # Normalizes date by column based on assumptions of Beer-Lambert Law of light extinction vertically
+  # # through the canopy.
+  # m2 <- normalize_pcl(m1)
+  #
 
   ################# This section is where the method matters.
   # Normalizes date by column based on assumptions of Beer-Lambert Law of light extinction vertically
@@ -212,6 +279,9 @@ process_pcl <- function(f, user_height = NULL, method = NULL, k = NULL, marker.s
   # foliage height diversity
   fhd <- calc_fhd(m5, method)
 
+  # entropy calculation similar to lidR package
+  entropy <- fhd * log(csc.metrics$max.ht)
+
   # gini coefficient
   gini <- calc_gini(m5, method)
 
@@ -222,7 +292,7 @@ process_pcl <- function(f, user_height = NULL, method = NULL, k = NULL, marker.s
   csc.metrics$plot <- NULL
   intensity_stats$plot <- NULL
 
-  output.variables <- cbind(variable.list, csc.metrics, rumple, gap.variables, enl, fhd, gini, intensity_stats, quantiles2)
+  output.variables <- cbind(variable.list, csc.metrics, rumple, gap.variables, enl, fhd, entropy, gini, intensity_stats, quantiles2)
 
 
   if(method == "MH"){
@@ -250,7 +320,7 @@ process_pcl <- function(f, user_height = NULL, method = NULL, k = NULL, marker.s
                      axis.text.y = ggplot2::element_text(size = 14),
                      axis.title.x = ggplot2::element_text(size = 20),
                      axis.title.y = ggplot2::element_text(size = 20))+
-      ggplot2::xlim(0,transect.length)+
+      ggplot2::xlim(0, transect.length)+
       ggplot2::ylim(0, max(m6$zbin))+
       ggplot2::xlab("Distance along transect (m)")+
       ggplot2::ylab("Height above ground (m)")+

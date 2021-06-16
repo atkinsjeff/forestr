@@ -2,7 +2,7 @@
 % Please edit documentation in R/csc_metrics.R
 \name{csc_metrics}
 \alias{csc_metrics}
-\title{Cover and sky fraction estimates}
+\title{Canopy cover and sky fraction estimates}
 \usage{
 csc_metrics(df, filename, transect.length)
 }
@@ -27,7 +27,7 @@ require normalization (i.e. correction for light saturation based on
 Beer-Lambert Law). These metrics include:  mean return height of raw data, sd
 of raw canopy height returns, maximum measured canopy height, scan density (the
 average no. of LiDAR returns per linear meter), and both openness and cover
-fraction which are used for gap fraction calcuations.
+fraction which are used for gap fraction calculations.
 }
 \examples{
 
