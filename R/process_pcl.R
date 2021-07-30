@@ -45,7 +45,7 @@
 #' if TRUE it is included, if FALSE, it is not.
 #' @param hist logical input to include histogram of VAI with PAVD plot, if
 #' TRUE it is included, if FALSE, it is not.
-#' @param save_output the name of the output folder where to write all the output fiels.
+#' @param save_output the name of the output folder where to write all the output fields.
 #'
 #' @return writes the hit matrix, summary matrix, and output variables to csv
 #' in an output folder, along with hit grid plot

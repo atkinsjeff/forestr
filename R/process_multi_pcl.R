@@ -1,6 +1,6 @@
-#' Process multiplie PCL transects.
+#' Process multiple PCL transects.
 #'
-#' \code{process_multi_pcl} imports and processes mutiple PCL transect.
+#' \code{process_multi_pcl} imports and processes multiple PCL transect.
 #'
 #' This is a specific function that works using the input of a data directory of .csv
 #' files where the function cycles through the files there and processes multiple
@@ -29,7 +29,8 @@
 #' # This function works on a directory of raw PCL data
 #' \dontrun{data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
 #' process_multi_pcl(data_directory, user_height = 1.05, marker.spacing = 10,
-#' max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
+#' max.vai = 8, ht.thresh = 60, pavd = FALSE, h
+#' ist = FALSE, save_output = FALSE)
 #'
 #' process_multi_pcl("./data/PCL_transects/", user_height = 1.05, marker.spacing = 10,
 #' max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)

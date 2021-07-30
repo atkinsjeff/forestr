@@ -49,7 +49,7 @@ if TRUE it is included, if FALSE, it is not.}
 \item{hist}{logical input to include histogram of VAI with PAVD plot, if
 TRUE it is included, if FALSE, it is not.}
 
-\item{save_output}{the name of the output folder where to write all the output fiels.}
+\item{save_output}{the name of the output folder where to write all the output fields.}
 }
 \value{
 writes the hit matrix, summary matrix, and output variables to csv

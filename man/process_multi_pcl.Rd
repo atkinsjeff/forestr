@@ -2,7 +2,7 @@
 % Please edit documentation in R/process_multi_pcl.R
 \name{process_multi_pcl}
 \alias{process_multi_pcl}
-\title{Process multiplie PCL transects.}
+\title{Process multiple PCL transects.}
 \usage{
 process_multi_pcl(
   data_dir,
@@ -42,7 +42,7 @@ process_multi_pcl(
 writes the hit matrix, summary matrix, and output variables to csv in an output folder, along with hit grid plot
 }
 \description{
-\code{process_multi_pcl} imports and processes mutiple PCL transect.
+\code{process_multi_pcl} imports and processes multiple PCL transect.
 }
 \details{
 This is a specific function that works using the input of a data directory of .csv
@@ -54,7 +54,8 @@ files, producing the same output files described in \code{process_pcl}
 # This function works on a directory of raw PCL data
 \dontrun{data_directory <- "./data/PCL_transects/"  #data directory containing PCL transects
 process_multi_pcl(data_directory, user_height = 1.05, marker.spacing = 10,
-max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
+max.vai = 8, ht.thresh = 60, pavd = FALSE, h
+ist = FALSE, save_output = FALSE)
 
 process_multi_pcl("./data/PCL_transects/", user_height = 1.05, marker.spacing = 10,
 max.vai = 8, ht.thresh = 60, pavd = FALSE, hist = FALSE, save_output = FALSE)
