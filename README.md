@@ -7,7 +7,7 @@ The forestr package calculates forest structure and canopy structure metrics fro
 Installation
 ------------
 
-To install version 1.0.1 which is on CRAN
+To install version 2.1.0 which is on CRAN
 
 ``` r
 install_packages("forestr")
